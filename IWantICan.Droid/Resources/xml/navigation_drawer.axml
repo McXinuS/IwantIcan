@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:local="http://schemas.android.com/apk/res-auto">
+  <group android:id="@+id/nav_items"
+         android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_all_offers"
+        android:icon="@drawable/ic_move_to_inbox_black_24dp"
+        android:checked="true"
+        android:title="@string/drawer_item_title_all" />
+    <item
+        android:id="@+id/nav_my_offers"
+        android:icon="@drawable/ic_inbox_black_24dp"
+        android:title="@string/drawer_item_title_my" />
+  </group>
+  <group android:id="@+id/nav_footer"
+         android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_account_box_black_24dp"
+        android:title="@string/drawer_item_title_edit_profile" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="@string/drawer_item_title_exit" />
+  </group>
+</menu>

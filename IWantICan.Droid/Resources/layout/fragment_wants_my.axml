@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text_very_huge"
+        android:padding="@dimen/element_padding_huge"
+        android:gravity="center"
+        android:background="@color/light_gray"
+        android:text="@string/activity_my_menu_empty_want"
+        local:MvxBind="Visibility IsEmpty, Converter=Visibility" />
+    <MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
+        android:id="@+id/refresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        local:layout_behavior="@string/appbar_scrolling_view_behavior"
+        local:MvxBind="Refreshing IsRefreshing; RefreshCommand ReloadCommand">
+        <MvxRecyclerView
+            android:id="@+id/my_recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            local:MvxItemTemplate="@layout/listitem_offer_my"
+            local:MvxBind="ItemsSource Wants; ItemClick ItemSelectedCommand" />
+    </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+</FrameLayout>

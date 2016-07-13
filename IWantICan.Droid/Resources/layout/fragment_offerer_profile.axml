@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/full_width_image_height">
+        <Mvx.MvxImageView
+            android:id="@+id/avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            local:MvxBind="ImageUrl User.avatar" />
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/element_padding_small"
+            android:paddingTop="@dimen/element_padding_small"
+            android:src="@drawable/ic_arrow_back_white_24dp" />
+        <TextView
+            android:id="@+id/fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/element_margin_huge"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="@dimen/element_margin_medium"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/white"
+            android:maxLines="2"
+            local:MvxBind="Text User.name+' '+User.surname" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_gray"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/layoutContacts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/element_padding_medium"
+                android:layout_marginBottom="@dimen/element_margin_small"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/layoutPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/imagePhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/element_margin_medium"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_call_black_24dp" />
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:linksClickable="true"
+                        android:autoLink="phone"
+                        android:textColorLink="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_toRightOf="@id/imagePhone"
+                        local:MvxBind="Text User.phone, FallbackValue='Phone number is hidden.'" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_gray"
+                        android:layout_toRightOf="@id/imagePhone"
+                        android:layout_below="@id/phone"
+                        android:singleLine="true"
+                        android:text="@string/profile_mobile" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layoutEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/imageEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/element_margin_medium"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_email_black_24dp" />
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:linksClickable="true"
+                        android:autoLink="email"
+                        android:textColorLink="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_toRightOf="@id/imageEmail"
+                        local:MvxBind="Text User.email, FallbackValue='Email is hidden.'" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_gray"
+                        android:layout_toRightOf="@id/imageEmail"
+                        android:layout_below="@id/email"
+                        android:singleLine="true"
+                        android:text="@string/profile_email" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layoutVk"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/imageVk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/element_margin_medium"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_vk_black_24dp" />
+                    <TextView
+                        android:id="@+id/vk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:linksClickable="true"
+                        android:autoLink="web"
+                        android:textColorLink="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_toRightOf="@id/imageVk"
+                        local:MvxBind="Text User.vkLink, FallbackValue='Vk profile is hidden.'" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_gray"
+                        android:layout_toRightOf="@id/imageVk"
+                        android:layout_below="@id/vk"
+                        android:singleLine="true"
+                        android:text="@string/profile_vk" />
+                </RelativeLayout>
+            <!--View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray" /-->
+            </LinearLayout>
+        <!--ExpandableListView
+                android:id="@+id/offers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/element_padding_medium"
+                android:background="@color/white" /-->
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

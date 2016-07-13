@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/full_width_image_height">
+        <Mvx.MvxImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@drawable/image_placeholder"
+            local:MvxBind="ImageUrl Imgurl" />
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/element_padding_small"
+            android:paddingTop="@dimen/element_padding_small"
+            android:src="@drawable/ic_arrow_back_white_24dp" />
+    <!--marginLeft = 2*16 + fab.width-->
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/element_margin_huge"
+            android:layout_marginRight="132dp"
+            android:layout_marginBottom="@dimen/element_margin_medium"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/white"
+            android:maxLines="3"
+            local:MvxBind="Text Name" />
+    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_below="@id/rel"
+        android:id="@+id/goMessage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="-29dp"
+        android:layout_marginRight="@dimen/element_margin_medium"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_call_white_24dp"
+        local:MvxBind="Click ShowContactsCommand"
+        local:borderWidth="0dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/element_padding_medium"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                local:MvxBind="Click GoProfileViewCommand">
+                <refractored.controls.CircleImageView
+                    android:id="@+id/profileAvatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="@dimen/element_margin_medium" />
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_large"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/profileAvatar"
+                    local:MvxBind="Text User.name+' '+User.surname, FallbackValue='Нет данных о имени'" />
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_toRightOf="@id/profileAvatar"
+                    android:layout_below="@id/userName"
+                    android:singleLine="true"
+                    local:MvxBind="Text CreatedAt, Converter=TimeAgo" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/element_margin_small"
+                android:textColor="@color/black"
+                local:MvxBind="Text Description, FallbackValue='Нет описания.'" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

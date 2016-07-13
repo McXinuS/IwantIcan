@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/element_padding_medium"
+            android:paddingRight="@dimen/element_padding_medium">
+            <ImageView
+                android:src="@drawable/logo_login"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/element_margin_medium"
+                android:scaleType="fitCenter" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layoutEditLogin"
+                android:layout_below="@id/imageLogo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/element_margin_medium">
+                <EditText
+                    android:id="@+id/editLogin"
+                    style="@style/EditTextTheme"
+                    android:hint="@string/profile_login"
+                    android:inputType="text"
+                    local:MvxBind="Text Login; Error ErrorLogin" />
+            </android.support.design.widget.TextInputLayout>
+            <RelativeLayout
+                android:id="@+id/relLayoutEditPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutEditLogin"
+                android:layout_marginBottom="@dimen/element_margin_medium">
+                <EditText
+                    style="@style/EditTextTheme"
+                    android:id="@+id/editPassword"
+                    android:hint="@string/profile_password"
+                    android:inputType="textPassword"
+                    android:paddingRight="35dp"
+                    local:MvxBind="Text Password; Error ErrorPassword" />
+                <CheckBox
+                    android:id="@+id/showPasswordCb"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <Button
+                style="@style/ButtonPrimaryRoundCorners"
+                android:id="@+id/buttonLogin"
+                android:layout_below="@id/relLayoutEditPassword"
+                android:text="@string/activity_login_button"
+                local:MvxBind="Click TryLoginCommand" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_login_height"
+                android:id="@+id/buttonSingup"
+                android:layout_below="@id/buttonLogin"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/activity_register_button"
+                local:MvxBind="Click GoSignupViewCommand" />
+        </RelativeLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray_semi_transparent"
+        local:MvxBind="Visibility IsLoading, Converter=Visibility">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/ctrlActivityIndicator"
+            android:indeterminateOnly="true" />
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,44 @@
+<resources>
+    <style name="AppTheme" parent="AppTheme.Base"></style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/med_gray</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">false</item>
+
+        <item name="android:windowBackground">@color/white</item>
+      
+      <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+      <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+  <!-- ELEMENTS -->
+  
+  <style name="EditTextTheme">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/gray</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textSize">@dimen/text_large</item>
+    <item name="android:paddingBottom">@dimen/element_padding_medium</item>
+    <item name="android:layout_marginTop">@dimen/element_margin_medium</item>
+  </style>
+
+  <style name="ButtonPrimary">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/button_login_height</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:background">@color/colorPrimary</item>
+  </style>
+  <style name="ButtonPrimaryRoundCorners" parent="ButtonPrimary">
+    <item name="android:background">@drawable/rounded_corners_button</item>
+  </style>
+</resources>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- General strings -->
+  <string name="ApplicationName">ХочуМогу</string>
+  <string name="drawer_open">Open navigation drawer</string>
+  <string name="drawer_close">Close navigation drawer</string>
+
+	<!-- Activity start strings -->
+		<string name="activity_start_title">ХочуМогу</string>
+		<string name="activity_start_description">ХочуМогу предназначено для 
+			поиска людей, которые помогут вам или которым можете помочь вы освоить  
+			или сделать что-то </string>
+
+	<!--  Activity login strings -->	
+		<string name="activity_login_button">Войти</string>
+		<string name="activity_register_button">Зарегистрироваться</string>
+		<string name="activity_login_warning">Данного логина не 
+			существует</string>
+		<string name="activity_password_warning">Пароль введен неверно</string>
+		<string name="activity_password_forgot">Забыли?</string>
+		
+	<!-- Activity register strings -->
+		<string name="activity_register_profile_card">Профиль</string>
+		<string name="activity_register_personal_card">Личные данные</string>
+		<string name="activity_register_warning_empty_name">Имя является обязательным</string>
+		<string name="activity_register_warning_empty_surname">Фамилия является обязательной</string>
+		<string name="activity_register_warning_password">Пароль должен содержать не менее 6 символов</string>
+		<string name="activity_register_show_password">Показать</string>
+		<string name="activity_register_hide_password">Скрыть</string>
+		<string name="activity_register_warning_login">Допустимы символы \'A-Z\', \'0-9\' и \'_\'</string>
+		<string name="activity_register_warning_login_exist">Данный логин уже существует</string>
+		<string name="activity_register_warning_empty_password">Пароль является обязательным</string>
+		<string name="activity_register_warning_empty_login">Логин является обязательным</string>
+		<string name="activity_register_warning_incorrect_email">Неверный формат электронной почты</string>
+
+	<!-- Activity filter strings -->
+		<string name="activity_filter_title">Фильтр</string>
+		<string name="activity_filter_description">Выберите категории, которые вас интересуют</string>
+		<string name="activity_filter_empty">Не удалось получить список категорий</string>
+	
+	<!-- Activity my strings -->	
+		<string name="activity_my_menu_edit">Редактировать</string>
+		<string name="activity_my_menu_delete">Удалить</string>
+		<string name="activity_my_menu_empty_can">Здесь будет показан список услуг, 
+			которые вы можете оказать другим</string>
+		<string name="activity_my_menu_empty_want">Здесь будет показан список услуг, 
+			которые вы хотите получить</string>
+
+	<!-- Activity creation & edit strings -->	
+		<string name="activity_creation_title">Название</string>
+		<string name="activity_creation_description">Описание</string>
+		<string name="activity_creation_category">Категория</string>
+		<string name="activity_creation_dialog_category">Выберите категорию</string>
+		<string name="activity_creation_dialog_cancel">Отмена</string>
+		<string name="activity_creation_dialog_choose">Выбрать</string>
+		<string name="activity_creation_dialog_subcategory">Выберите подкатегорию</string>	
+		<string name="activity_creation_dialog_back">Назад</string>
+
+	<!-- Activity profile strings -->	
+		<string name="activity_profile_card_contacts">Контакты</string>
+		<string name="activity_profile_card_change_password">Смена пароля</string>
+
+	<!-- Drawer items & heads titles -->
+		<string name="drawer_item_title_all">Все предложения</string>
+		<string name="drawer_item_title_my">Мои предложения</string>
+		<string name="drawer_item_title_edit_profile">Изменить профиль</string>
+		<string name="drawer_item_title_exit">Выйти</string>
+		
+	<!-- Dialog connect -->
+		<string name="dialog_connect_title">Связаться</string>
+		<string name="dialog_connect_empty_field">Нет данных</string>
+		<string name="dialog_connect_cancel">Отмена</string>
+
+	<!-- Toolbar titles -->
+		<string name="toolbar_title_all">Все предложения</string>
+		<string name="toolbar_title_my">Мои предложения</string>
+		<string name="toolbar_title_change_profile">Изменить профиль</string>
+		<string name="toolbar_title_edit">Редактировать</string>
+		<string name="toolbar_title_create">Создать</string>
+		<string name="toolbar_title_register">Регистрация</string>
+
+	<!-- Main profile strings -->
+		<string name="profile_login">Логин</string>
+		<string name="profile_password">Пароль</string>
+		<string name="profile_name">Имя</string>
+		<string name="profile_surname">Фамилия</string>
+		<string name="profile_mobile">Телефон</string>
+		<string name="profile_email">Email</string>
+		<string name="profile_vk">ВКонтакте</string>
+
+	<!-- Toolbar tabs -->
+		<string name="toolbar_tab_they_want">Хотят</string>
+		<string name="toolbar_tab_they_can">Могут</string>
+		<string name="toolbar_tab_i_want">Хочу</string>
+		<string name="toolbar_tab_I_can">Могу</string>
+</resources>
