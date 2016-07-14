@@ -107,7 +107,7 @@ namespace IWantICan.Droid.Services
         private bool[] IntArrayToBool(int[] values, int size)
         {
             if (values == null || size == 0)
-                return null;
+                return new bool[0];
 
             var selectedBool = new bool[size];
             for (var i = 0; i < size; i++)
@@ -122,7 +122,7 @@ namespace IWantICan.Droid.Services
         private int[] BoolArrayToInt(bool[] values, int size)
         {
             if (values == null || size == 0)
-                return null;
+                return new int[0];
 
             var selectedInt = new List<int>();
             for (var i = 0; i < size; i++)
