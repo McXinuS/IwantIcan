@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using IWantICan.Core.Models;
 
 namespace IWantICan.Core.Interfaces
@@ -15,6 +14,9 @@ namespace IWantICan.Core.Interfaces
 
         /// <summary>Alerts the user with a simple OK dialog with an action on close and provides a <paramref name="message"/>.</summary>
         void Alert(string message, string title, string okbtnText, Action callback);
+
+        /// <summary>Alerts the user with a cancellable choice dialog.</summary>
+        void Alert(string message, string title, string okbtnText, string cancelbtnText, Action callback);
 
         /// <summary>
         /// Shows a dialog with single choice filter (RadioButton).

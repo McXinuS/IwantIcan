@@ -19,11 +19,10 @@ namespace IWantICan.Core.Services
         {
             return await _restManager.AddWantAsync(want);
         }
-
-        // TODO allow multiple categories
+        
         public async Task<List<WantModel>> GetWantList(int[] catIds)
         {
-            return await _restManager.GetWantListByCategoryAsync(catIds[0]);
+            return await _restManager.GetWantListByCategoryAsync(catIds);
         }
 
         public async Task<List<WantModel>> GetWantListByUser(int userId)
@@ -41,6 +40,16 @@ namespace IWantICan.Core.Services
         public async Task<WantModel> GetWant(int id)
         {
             return await _restManager.GetWantAsync(id);
+        }
+
+        public async Task<bool> UpdateWant(WantModel want)
+        {
+            return await _restManager.UpdateWantAsync(want);
+        }
+
+        public async Task<bool> DeleteWant(int id)
+        {
+            return await _restManager.DeleteWantAsync(id);
         }
     }
 }

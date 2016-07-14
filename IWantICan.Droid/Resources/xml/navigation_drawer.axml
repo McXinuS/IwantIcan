@@ -10,7 +10,7 @@ xmlns:local="http://schemas.android.com/apk/res-auto">
         android:title="@string/drawer_item_title_all" />
     <item
         android:id="@+id/nav_my_offers"
-        android:icon="@drawable/ic_inbox_black_24dp"
+        android:icon="@drawable/ic_star_black"
         android:title="@string/drawer_item_title_my" />
   </group>
   <group android:id="@+id/nav_footer"

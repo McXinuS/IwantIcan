@@ -28,7 +28,7 @@
                     style="@style/EditTextTheme"
                     android:hint="@string/activity_creation_title"
                     android:inputType="text"
-                    local:MvxBind="Text Name" />
+                    local:MvxBind="Text Name; Error Errors[Name]" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layoutEditDesc"
@@ -40,7 +40,7 @@
                     style="@style/EditTextTheme"
                     android:hint="@string/activity_creation_description"
                     android:inputType="text"
-                    local:MvxBind="Text Description" />
+                    local:MvxBind="Text Description; Error Errors[Description]" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layoutEditName"
@@ -53,7 +53,7 @@
                     style="@style/EditTextTheme"
                     android:hint="@string/activity_creation_category"
                     android:focusable="false"
-                    local:MvxBind="Text Category, Converter=CategoryName; Click ShowFilterCommand" />
+                    local:MvxBind="Text Category, Converter=CategoryName; Click ShowFilterCommand; Error Errors[Category]" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </ScrollView>

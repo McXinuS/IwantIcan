@@ -11,7 +11,7 @@
         android:padding="@dimen/element_padding_huge"
         android:gravity="center"
         android:background="@color/light_gray"
-        android:text="@string/activity_my_menu_empty_can"
+        android:text="@string/activity_their_menu_empty_can"
         local:MvxBind="Visibility IsEmpty, Converter=Visibility" />
     <MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
         android:id="@+id/refresher"

@@ -40,11 +40,14 @@
     <Compile Include="App.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Converters\CategoryNameConverter.cs" />
-    <Compile Include="Converters\TimeAgoConverter.cs" />
+    <Compile Include="Converters\ContactsFallbackValueConverter.cs" />
     <Compile Include="Converters\StringLengthConverter.cs" />
+    <Compile Include="Helpers\ObservableDictionary.cs" />
     <Compile Include="Helpers\Serialization.cs" />
     <Compile Include="Helpers\UpdateAvatarFromVk.cs" />
     <Compile Include="Helpers\ValidatorHelper.cs" />
+    <Compile Include="Services\Messenger\IFilterMessengerService.cs" />
+    <Compile Include="Services\Messenger\FilterDoneMessage.cs" />
     <Compile Include="Models\CanModelWithToken.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\OfferType.cs" />
@@ -54,6 +57,8 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\Interfaces\ICategoryService.cs" />
     <Compile Include="Services\Interfaces\IDialogService.cs" />
+    <Compile Include="Services\Messenger\FilterMessengerService.cs" />
+    <Compile Include="Services\Messenger\OfferActionSuccessMessage.cs" />
     <Compile Include="Services\RestManager.cs" />
     <Compile Include="Services\Interfaces\ICanService.cs" />
     <Compile Include="Models\CanModel.cs" />
@@ -73,6 +78,7 @@
     <Compile Include="Services\WantService.cs" />
     <Compile Include="ViewModels\Base\BaseOfferViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Main\EditOfferViewModel.cs" />
     <Compile Include="ViewModels\Containers\MainViewModel.cs" />
     <Compile Include="ViewModels\Containers\OfferItemContainerViewModel.cs" />
     <Compile Include="ViewModels\Main\CreateOfferViewModel.cs" />
@@ -109,7 +115,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.4.2.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Platform.4.2.2\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.DownloadCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -122,6 +128,10 @@
     </Reference>
     <Reference Include="MvvmCross.Plugins.JsonLocalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.JsonLocalization.4.2.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.JsonLocalization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.Messenger, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.Messenger.4.2.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.Messenger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.ResourceLoader, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

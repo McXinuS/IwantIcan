@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -179,6 +180,32 @@ namespace IWantICan.Core.Services.Api
             return null;
         }
 
+        public async Task<List<CanModel>> GetCanListAll(string token)
+        {
+            var uri = new Uri(Constants.CanUrl);
+            try
+            {
+                using (var client = NewHttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("token", token);
+                    HttpResponseMessage response = await client.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var contentResp = await response.Content.ReadAsStringAsync();
+
+                        List<CanModel> list = JsonConvert.DeserializeObject<List<CanModel>>(contentResp);
+                        return list;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+
+            return new List<CanModel>();
+        }
+
         public async Task<List<CanModel>> GetCanListByCategoryAsync(int catId, string token)
         {
             // DEBUG
@@ -254,7 +281,7 @@ namespace IWantICan.Core.Services.Api
         {
             var json = JsonConvert.SerializeObject(can);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var uri = new Uri(Constants.CanUrl);
+            var uri = new Uri(Constants.CanUrl + "/" + can.id);
             try
             {
                 using (var client = NewHttpClient())
@@ -340,17 +367,34 @@ namespace IWantICan.Core.Services.Api
             return null;
         }
 
-        public async Task<List<WantModel>> GetWantListByCategoryAsync(int id, string token)
+        public async Task<List<WantModel>> GetWantListAllAsync(string token)
         {
-            /*var l = new List<WantModel>();
-
-            for (var i = 1; i <= 20; i++)
+            var uri = new Uri(Constants.WantUrl);
+            try
             {
-                l.Add(GetDummyWant(i));
+                using (var client = NewHttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("token", token);
+                    HttpResponseMessage response = await client.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var contentResp = await response.Content.ReadAsStringAsync();
+
+                        List<WantModel> list = JsonConvert.DeserializeObject<List<WantModel>>(contentResp);
+                        return list;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
 
-            return l;*/
+            return new List<WantModel>();
+        }
 
+        public async Task<List<WantModel>> GetWantListByCategoryAsync(int id, string token)
+        {
             var uri = new Uri(Constants.WantListUrl + "/" + id);
             try
             {
@@ -414,7 +458,7 @@ namespace IWantICan.Core.Services.Api
         {
             var json = JsonConvert.SerializeObject(want);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var uri = new Uri(Constants.WantUrl);
+            var uri = new Uri(Constants.WantUrl + "/" + want.id);
             try
             {
                 using (var client = NewHttpClient())

@@ -23,5 +23,12 @@ namespace IWantICan.Core.Services
         /// Current selected category.
         /// </summary>
         int[] Selected { get; set; }
+
+        /// <summary>
+        /// Get index of category in the categories list.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Index of category of -1 if the category cannot be found.</returns>
+        int IndexOf(int id);
     }
 }

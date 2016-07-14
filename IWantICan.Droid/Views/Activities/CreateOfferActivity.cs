@@ -5,7 +5,7 @@ using IWantICan.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
-namespace IWantICan.Droid.Acrivities
+namespace IWantICan.Droid.Activities
 {
     [Activity(
         Label = "@string/toolbar_title_create",

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services.Api;
@@ -14,16 +15,16 @@ namespace IWantICan.Core.Services
         {
             get
             {
-                if (_categories == null)
-                {
-                    _restManager = new RestManager();
-                    _categories = Task.Run(() => _restManager.GetCategoryListAsync()).Result;
-                }
+                if (_categories?.Count > 0)
+                    return _categories;
+
+                _restManager = new RestManager();
+                _categories = Task.Run(() => _restManager.GetCategoryListAsync()).Result;
                 return _categories;
             }
         }
 
-        public int[] Selected { get; set; } = {1};
+        public int[] Selected { get; set; } = {};
 
         public List<CategoryModel> GetCategoryList()
         {
@@ -32,13 +33,18 @@ namespace IWantICan.Core.Services
 
         public CategoryModel GetCategory(int id)
         {
-            if (Categories == null) return null;
+            return Categories?.FirstOrDefault(t => t.id == id);
+        }
 
+        public int IndexOf(int id)
+        {
             for (var i = 0; i < Categories.Count; i++)
+            {
                 if (Categories[i].id == id)
-                    return Categories[i];
+                    return i;
+            }
 
-            return null;
+            return -1;
         }
     }
 }

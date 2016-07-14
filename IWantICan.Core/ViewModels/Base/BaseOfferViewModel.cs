@@ -1,16 +1,18 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using Android.Widget;
 using MvvmCross.Core.ViewModels;
 using IWantICan.Core.Helpers;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Services;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace IWantICan.Core.ViewModels
 {
     public abstract class BaseOfferViewModel : BaseViewModel
     {
+        private readonly MvxSubscriptionToken _token;
+
         ICategoryService _categoryService;
         protected int[] SelectedCategory { get { return _categoryService.Selected; } }
 
@@ -19,6 +21,9 @@ namespace IWantICan.Core.ViewModels
 
         protected BaseOfferViewModel()
         {
+            var messenger = Mvx.Resolve<IMvxMessenger>();
+            _token = messenger.Subscribe<FilterDoneMessage>(ReloadCommand.Execute);
+
             IsEmpty = true;
             _categoryService = Mvx.Resolve<ICategoryService>();
         }
@@ -46,6 +51,22 @@ namespace IWantICan.Core.ViewModels
 	        }
 
             ShowViewModel<OfferItemContainerViewModel>(new
+            {
+                offer = item.Serialize(),
+                type = typeof(T).Name
+            });
+        }
+		
+        protected void GoEdit<T>(T item)
+        {
+			// bad offer
+	        if (item == null)
+	        {
+				Mvx.Resolve<IDialogService>().Alert("Произошла внутренняя ошибка. Повторите запрос позже", "Ошибка", "ОК");
+		        return;
+	        }
+
+            ShowViewModel<EditOfferViewModel>(new
             {
                 offer = item.Serialize(),
                 type = typeof(T).Name

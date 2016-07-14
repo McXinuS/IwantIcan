@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using IWantICan.Core.Models;
+using Java.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -15,9 +17,10 @@ namespace IWantICan.Core.Helpers
         /// </summary>
         public static async Task<UserModel> UpdateAvatar(this UserModel user)
         {
+            if (!ValidatorHelper.IsValid(user.vkLink, ValidationType.Vk))
+                return user;
+
             var userNew = user;
-            if (!userNew.vkLink.IsValidVkLink())
-                return userNew;
 
             try
             {
@@ -45,21 +48,6 @@ namespace IWantICan.Core.Helpers
                 // ignored
             }
             return user;
-        }
-
-        /// <summary>
-        /// Shows whether the link is a valid Vk profile link.
-        /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        public static bool IsValidVkLink(this string source)
-        {
-            var link = source.ToLower();
-            return !string.IsNullOrWhiteSpace(link)
-                   && (link.StartsWith("http://vk.com/")
-                   || link.StartsWith("https://vk.com/")
-                   || link.StartsWith("vk.com/")
-                   || link.Split('/').Length==1);
         }
 
         private static HttpClient NewHttpClient()

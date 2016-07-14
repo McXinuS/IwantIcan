@@ -41,6 +41,20 @@ namespace IWantICan.Droid.Services
             adb.Create().Show();
         }
 
+        public void Alert(string message, string title, string okbtnText, string cancelbtnText, Action callback)
+        {
+            var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
+            var act = top.Activity;
+
+            var adb = new AlertDialog.Builder(act);
+            adb.SetTitle(title);
+            adb.SetMessage(message);
+            adb.SetIcon(Resource.Drawable.logo);
+            adb.SetPositiveButton(okbtnText, (sender, args) => { callback(); });
+            adb.SetNegativeButton(cancelbtnText, (sender, args) => { });
+            adb.Create().Show();
+        }
+
         public void Filter(string[] categories, int selected, Func<int, int> callback)
         {
             AlertDialog ad = null;

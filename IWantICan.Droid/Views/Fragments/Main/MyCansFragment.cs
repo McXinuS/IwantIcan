@@ -8,6 +8,11 @@ namespace IWantICan.Droid.Fragments
     [Register("iwantican.droid.fragments.MyCansFragment")]
     public class MyCansFragment : BaseOfferMyFragment<MyCansViewModel>
     {
+        public MyCansFragment()
+            : base()
+        {
+        }
+
         protected override int FragmentId => Resource.Layout.fragment_cans_my;
     }
 }

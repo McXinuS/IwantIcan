@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Globalization;
+using Android.App;
 using MvvmCross.Platform.Converters;
+using Android.Text.Format;
 
-namespace IWantICan.Core.Converters
+namespace IWantICan.Droid.Converters
 {
     public class TimeAgoConverter
         : MvxValueConverter<DateTime>
     {
         protected override object Convert(DateTime when, Type targetType, object parameter, CultureInfo culture)
         {
+            /*var whenMillis = (long)TimeSpan.FromTicks(when.Ticks).TotalMilliseconds;
+            var nowMillis = (long)TimeSpan.FromTicks(DateTime.Now.Ticks).TotalMilliseconds;
+            return DateUtils.GetRelativeTimeSpanString(whenMillis,
+                  nowMillis,
+                  DateUtils.SecondInMillis,
+                  FormatStyleFlags.AbbrevRelative);*/
+
             var difference = (DateTime.UtcNow - when).TotalSeconds;
             string whichFormat;
             int valueToFormat;

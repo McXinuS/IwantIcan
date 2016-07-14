@@ -1,5 +1,4 @@
-﻿using IWantICan.Core.Models;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 
 namespace IWantICan.Core.ViewModels
 {

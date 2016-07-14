@@ -38,7 +38,7 @@
                         android:id="@+id/editName"
                         style="@style/EditTextTheme"
                         android:inputType="text"
-                        local:MvxBind="Text User.name; Error ErrorName" />
+                        local:MvxBind="Text User.name; Error Errors[Name]" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layoutEditSurname"
@@ -50,7 +50,7 @@
                         android:id="@+id/editSurname"
                         style="@style/EditTextTheme"
                         android:inputType="text"
-                        local:MvxBind="Text User.surname; Error ErrorSurname" />
+                        local:MvxBind="Text User.surname; Error Errors[Surname]" />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
             <android.support.design.widget.TextInputLayout
@@ -62,7 +62,7 @@
                     style="@style/EditTextTheme"
                     android:hint="@string/profile_mobile"
                     android:inputType="phone"
-                    local:MvxBind="Text User.phone; Error ErrorPhone" />
+                    local:MvxBind="Text User.phone; Error Errors[Phone]" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layoutEditMail"
@@ -73,7 +73,7 @@
                     style="@style/EditTextTheme"
                     android:hint="@string/profile_email"
                     android:inputType="textEmailAddress"
-                    local:MvxBind="Text User.email; Error ErrorEmail" />
+                    local:MvxBind="Text User.email; Error Errors[Email]" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layoutEditVkLink"
@@ -84,7 +84,7 @@
                     style="@style/EditTextTheme"
                     android:hint="@string/profile_vk"
                     android:inputType="textUri"
-                    local:MvxBind="Text User.vkLink; Error ErrorVkLink" />
+                    local:MvxBind="Text User.vkLink; Error Errors[Vk]" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </ScrollView>

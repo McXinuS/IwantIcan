@@ -19,11 +19,10 @@ namespace IWantICan.Core.Services.Offers
         {
             return await _restManager.AddCanAsync(can);
         }
-
-        // TODO allow multiple categories
+        
         public async Task<List<CanModel>> GetCanList(int[] catIds)
         {
-            return await _restManager.GetCanListByCategoryAsync(catIds[0]);
+            return await _restManager.GetCanListByCategoryAsync(catIds);
         }
 
         public async Task<List<CanModel>> GetCanListByUser(int userId)
@@ -46,6 +45,11 @@ namespace IWantICan.Core.Services.Offers
         public async Task<bool> UpdateCan(CanModel can)
         {
             return await _restManager.UpdateCanAsync(can);
+        }
+
+        public async Task<bool> DeleteCan(int id)
+        {
+            return await _restManager.DeleteCanAsync(id);
         }
     }
 }

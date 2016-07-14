@@ -6,6 +6,7 @@ using IWantICan.Core.Models;
 using IWantICan.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace IWantICan.Core.ViewModels
 {
@@ -13,35 +14,29 @@ namespace IWantICan.Core.ViewModels
     {
         ICategoryService _categoryService;
         IDialogService _dialogService = Mvx.Resolve<IDialogService>();
+        IFilterMessengerService _fmService;
 
-
-        private List<CategoryModel> _categories;
-
-        public AllOffersViewModel(ICategoryService dategoryService, IDialogService dialogService)
+        public AllOffersViewModel(ICategoryService dategoryService,
+            IDialogService dialogService,
+            IFilterMessengerService fmService)
         {
             _categoryService = dategoryService;
             _dialogService = dialogService;
-
-            Task t = new Task(LoadCategories);
-            t.Start();
-        }
-
-        async void LoadCategories()
-        {
-            Categories = _categoryService.GetCategoryList();
+            _fmService = fmService;
         }
 
         public List<CategoryModel> Categories
         {
-            get { return _categories; }
-            set { _categories = value; RaisePropertyChanged(() => Categories); }
+            get { return _categoryService.GetCategoryList(); }
         }
-
-        // TODO tell viewmodels to refresh
+        
         public int[] FilterSelection
         {
             get { return _categoryService.Selected; }
-            set { _categoryService.Selected = value; }
+            set
+            {
+                _categoryService.Selected = value;
+            }
         }
 
         public IMvxCommand ShowFilterCommand
@@ -49,10 +44,34 @@ namespace IWantICan.Core.ViewModels
             get { return new MvxCommand(ShowFilter); }
         }
 
-        private async void ShowFilter()
+        private void ShowFilter()
         {
+            if (Categories == null)
+                return;
             var categories = Categories.Select(c => c.name).ToArray();
-            _dialogService.Filter(categories, FilterSelection, s => FilterSelection = s);
+            _dialogService.Filter(categories, IndexesFromSelection(FilterSelection), SelectionFromIndex);
+        }
+
+        private int[] IndexesFromSelection(int[] sel)
+        {
+            var indexes = new int[sel.Length];
+
+            for (var i = 0; i < sel.Length; i++)
+                indexes[i] = _categoryService.IndexOf(sel[i])+1;
+
+            return indexes;
+        }
+
+        private int[] SelectionFromIndex(int[] indexes)
+        {
+            FilterSelection = new int[indexes.Length];
+
+            for (var i = 0; i < indexes.Length; i++)
+                FilterSelection[i] = Categories[indexes[i]-1].id;
+
+            _fmService.SendFilterDoneMessage(this);
+
+            return FilterSelection;
         }
     }
 }

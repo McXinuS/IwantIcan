@@ -25,6 +25,11 @@ namespace IWantICan.Core.ViewModels
             get { return new MvxCommand<CanModel>(item => GoDetails(item)); }
         }
 
+        public ICommand ItemEditCommand
+        {
+            get { return new MvxCommand<CanModel>(item => GoEdit(item)); }
+        }
+
         public List<CanModel> Cans
         {
             get { return _cans; }

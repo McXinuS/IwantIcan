@@ -38,11 +38,11 @@ namespace IWantICan.Core.ViewModels
         {
             IsRefreshing = true;
 
-            if (SelectedCategory?.Length == 0)
+            /*if (SelectedCategory?.Length == 0)
             {
                 _dialogService.Alert(Constants.DialogFilterFailed, Constants.DialogTitleError, "ОК");
                 return;
-            }
+            }*/
 
             Cans = await _canService.GetCanList(SelectedCategory);
             IsEmpty = Cans.Count == 0;

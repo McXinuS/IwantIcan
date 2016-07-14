@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IWantICan.Core.Models;
 using MvvmCross.Platform;
+using System.Linq;
 
 namespace IWantICan.Core.Services.Api
 {
@@ -109,12 +110,34 @@ namespace IWantICan.Core.Services.Api
         }
 
         /// <summary>
+        /// Get a list of all cans.
+        /// </summary>
+        /// <returns>The list of cans or null if error.</returns>
+        public async Task<List<CanModel>> GetCanListAll()
+        {
+            var list = await ApiService.GetCanListAll(Token);
+            list = list.OrderByDescending(o => o.createdAt).ToList();
+            return list;
+        }
+
+        /// <summary>
         /// Get a list of cans by categotyId.
         /// </summary>
         /// <returns>The list of cans or null if error.</returns>
-        public async Task<List<CanModel>> GetCanListByCategoryAsync(int catid)
+        public async Task<List<CanModel>> GetCanListByCategoryAsync(int[] catIds)
         {
-            return await ApiService.GetCanListByCategoryAsync(catid, Token);
+            if (catIds == null || catIds.Length == 0)
+                return await GetCanListAll();
+
+            List<CanModel> list = new List<CanModel>();
+            foreach (int t in catIds)
+            {
+                var tempList = await ApiService.GetCanListByCategoryAsync(t, Token);
+                list.AddRange(tempList);
+            }
+            list = list.OrderByDescending(o => o.createdAt).ToList();
+
+            return list;
         }
 
         /// <summary>
@@ -123,7 +146,9 @@ namespace IWantICan.Core.Services.Api
         /// <returns>The list of cans or null if error.</returns>
         public async Task<List<CanModel>> GetCanListByUserAsync(int userId)
         {
-            return await ApiService.GetCanListByUserAsync(userId, Token);
+            var list = await ApiService.GetCanListByUserAsync(userId, Token);
+            list = list.OrderByDescending(o => o.createdAt).ToList();
+            return list;
         }
 
         /// <summary>
@@ -175,12 +200,34 @@ namespace IWantICan.Core.Services.Api
         }
 
         /// <summary>
+        /// Get a list of all wants.
+        /// </summary>
+        /// <returns>The list of wants or null if error.</returns>
+        public async Task<List<WantModel>> GetWantListAll()
+        {
+            var list = await ApiService.GetWantListAllAsync(Token);
+            list = list.OrderByDescending(o => o.createdAt).ToList();
+            return list;
+        }
+
+        /// <summary>
         /// Get a list of wants by categotyId.
         /// </summary>
         /// <returns>The list of wants or empty list if error.</returns>
-        public async Task<List<WantModel>> GetWantListByCategoryAsync(int catid)
+        public async Task<List<WantModel>> GetWantListByCategoryAsync(int[] catIds)
         {
-            return await ApiService.GetWantListByCategoryAsync(catid, Token);
+            if (catIds == null || catIds.Length == 0)
+                return await GetWantListAll();
+
+            List<WantModel> list = new List<WantModel>();
+            foreach (int t in catIds)
+            {
+                var tempList = await ApiService.GetWantListByCategoryAsync(t, Token);
+                list.AddRange(tempList);
+            }
+            list = list.OrderByDescending(o => o.createdAt).ToList();
+
+            return list;
         }
 
         /// <summary>
@@ -189,7 +236,9 @@ namespace IWantICan.Core.Services.Api
         /// <returns>The list of wants or null if error.</returns>
         public async Task<List<WantModel>> GetWantListByUserAsync(int userId)
         {
-            return await ApiService.GetWantListByUserAsync(userId, Token);
+            var list = await ApiService.GetWantListByUserAsync(userId, Token);
+            list = list.OrderByDescending(o => o.createdAt).ToList();
+            return list;
         }
 
         /// <summary>
@@ -225,5 +274,5 @@ namespace IWantICan.Core.Services.Api
         {
             return await ApiService.GetCategoryListAsync();
         }
-    }
+	}
 }

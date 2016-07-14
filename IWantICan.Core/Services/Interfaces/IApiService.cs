@@ -49,6 +49,12 @@ namespace IWantICan.Core.Services.Api
 	    Task<CanModel> GetCanAsync(int id, string token);
 
         /// <summary>
+        /// Get all cans.
+        /// </summary>
+        /// <returns>A list of cans or null.</returns>
+        Task<List<CanModel>> GetCanListAll(string token);
+
+        /// <summary>
         /// Get cans from DB by category ID.
         /// </summary>
         /// <returns>A list of cans or null.</returns>
@@ -97,6 +103,12 @@ namespace IWantICan.Core.Services.Api
         /// </summary>
         /// <returns>A list of wants or null.</returns>
 	    Task<List<WantModel>> GetWantListByUserAsync(int id, string token);
+
+        /// <summary>
+        /// Get all wants.
+        /// </summary>
+        /// <returns>A list of wants or null.</returns>
+        Task<List<WantModel>> GetWantListAllAsync(string token);
 
         /// <summary>
         /// Update the want on DB.

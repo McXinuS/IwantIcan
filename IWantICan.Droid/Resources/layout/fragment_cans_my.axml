@@ -25,6 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             local:MvxItemTemplate="@layout/listitem_offer_my"
-            local:MvxBind="ItemsSource Cans; ItemClick ItemSelectedCommand" />
+            local:MvxBind="ItemsSource Cans; ItemClick ItemSelectedCommand; ItemLongClick ItemEditCommand" />
     </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
 </FrameLayout>

@@ -2223,76 +2223,85 @@ namespace IWantICan.Droid
 			public const int ic_delete_black_24dp = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int ic_done_white_24dp = 2130837597;
+			public const int ic_delete_white_24dp = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int ic_email_black_24dp = 2130837598;
+			public const int ic_done_white_24dp = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int ic_exit_to_app_black_24dp = 2130837599;
+			public const int ic_email_black_24dp = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int ic_exit_to_app_blue = 2130837600;
+			public const int ic_exit_to_app_black_24dp = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int ic_eye = 2130837601;
+			public const int ic_exit_to_app_blue = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int ic_eye_strike = 2130837602;
+			public const int ic_eye = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int ic_filter_list_white_24dp = 2130837603;
+			public const int ic_eye_strike = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int ic_inbox_black_24dp = 2130837604;
+			public const int ic_filter_list_white_24dp = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int ic_inbox_blue = 2130837605;
+			public const int ic_inbox_black_24dp = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int ic_keyboard_arrow_down_black_24dp = 2130837606;
+			public const int ic_inbox_blue = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int ic_keyboard_arrow_up_black_24dp = 2130837607;
+			public const int ic_keyboard_arrow_down_black_24dp = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int ic_menu_white_24dp = 2130837608;
+			public const int ic_keyboard_arrow_up_black_24dp = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int ic_mode_edit_black_24dp = 2130837609;
+			public const int ic_menu_white_24dp = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int ic_more_vert_black_24dp = 2130837610;
+			public const int ic_mode_edit_black_24dp = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int ic_move_to_inbox_black_24dp = 2130837611;
+			public const int ic_more_vert_black_24dp = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int ic_search_white_24dp = 2130837612;
+			public const int ic_move_to_inbox_black_24dp = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int ic_vk_black_24dp = 2130837613;
+			public const int ic_search_white_24dp = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int image_placeholder = 2130837614;
+			public const int ic_star_black = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int logo = 2130837615;
+			public const int ic_vk_black_24dp = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int logo_loading = 2130837616;
+			public const int image_placeholder = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int logo_login = 2130837617;
-			
-			// aapt resource value: 0x7f020074
-			public const int notification_template_icon_bg = 2130837620;
+			public const int line_divider = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int preference_list_divider_material = 2130837618;
+			public const int logo = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int rounded_corners_button = 2130837619;
+			public const int logo_loading = 2130837619;
+			
+			// aapt resource value: 0x7f020074
+			public const int logo_login = 2130837620;
+			
+			// aapt resource value: 0x7f020077
+			public const int notification_template_icon_bg = 2130837623;
+			
+			// aapt resource value: 0x7f020075
+			public const int preference_list_divider_material = 2130837621;
+			
+			// aapt resource value: 0x7f020076
+			public const int rounded_corners_button = 2130837622;
 			
 			static Drawable()
 			{
@@ -2343,14 +2352,17 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f07005d
 			public const int action_context_bar = 2131165277;
 			
+			// aapt resource value: 0x7f0700d0
+			public const int action_delete = 2131165392;
+			
 			// aapt resource value: 0x7f0700c0
 			public const int action_divider = 2131165376;
 			
-			// aapt resource value: 0x7f0700d7
-			public const int action_edit = 2131165399;
+			// aapt resource value: 0x7f0700d8
+			public const int action_edit = 2131165400;
 			
-			// aapt resource value: 0x7f0700d0
-			public const int action_filter = 2131165392;
+			// aapt resource value: 0x7f0700d1
+			public const int action_filter = 2131165393;
 			
 			// aapt resource value: 0x7f070003
 			public const int action_menu_divider = 2131165187;
@@ -2367,8 +2379,8 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f07003e
 			public const int action_mode_close_button = 2131165246;
 			
-			// aapt resource value: 0x7f0700d8
-			public const int action_remove = 2131165400;
+			// aapt resource value: 0x7f0700d9
+			public const int action_remove = 2131165401;
 			
 			// aapt resource value: 0x7f07003f
 			public const int activity_chooser_view_content = 2131165247;
@@ -2688,23 +2700,23 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f07009b
 			public const int name = 2131165339;
 			
-			// aapt resource value: 0x7f0700d2
-			public const int nav_all_offers = 2131165394;
-			
-			// aapt resource value: 0x7f0700d4
-			public const int nav_footer = 2131165396;
-			
-			// aapt resource value: 0x7f0700d1
-			public const int nav_items = 2131165393;
-			
-			// aapt resource value: 0x7f0700d6
-			public const int nav_logout = 2131165398;
-			
 			// aapt resource value: 0x7f0700d3
-			public const int nav_my_offers = 2131165395;
+			public const int nav_all_offers = 2131165395;
 			
 			// aapt resource value: 0x7f0700d5
-			public const int nav_profile = 2131165397;
+			public const int nav_footer = 2131165397;
+			
+			// aapt resource value: 0x7f0700d2
+			public const int nav_items = 2131165394;
+			
+			// aapt resource value: 0x7f0700d7
+			public const int nav_logout = 2131165399;
+			
+			// aapt resource value: 0x7f0700d4
+			public const int nav_my_offers = 2131165396;
+			
+			// aapt resource value: 0x7f0700d6
+			public const int nav_profile = 2131165398;
 			
 			// aapt resource value: 0x7f07006f
 			public const int navigation_frame = 2131165295;
@@ -3330,29 +3342,29 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f090014
 			public const int abc_toolbar_collapse_description = 2131296276;
 			
-			// aapt resource value: 0x7f090038
-			public const int activity_creation_category = 2131296312;
-			
-			// aapt resource value: 0x7f090037
-			public const int activity_creation_description = 2131296311;
-			
-			// aapt resource value: 0x7f09003d
-			public const int activity_creation_dialog_back = 2131296317;
-			
 			// aapt resource value: 0x7f09003a
-			public const int activity_creation_dialog_cancel = 2131296314;
+			public const int activity_creation_category = 2131296314;
 			
 			// aapt resource value: 0x7f090039
-			public const int activity_creation_dialog_category = 2131296313;
+			public const int activity_creation_description = 2131296313;
 			
-			// aapt resource value: 0x7f09003b
-			public const int activity_creation_dialog_choose = 2131296315;
+			// aapt resource value: 0x7f09003f
+			public const int activity_creation_dialog_back = 2131296319;
 			
 			// aapt resource value: 0x7f09003c
-			public const int activity_creation_dialog_subcategory = 2131296316;
+			public const int activity_creation_dialog_cancel = 2131296316;
 			
-			// aapt resource value: 0x7f090036
-			public const int activity_creation_title = 2131296310;
+			// aapt resource value: 0x7f09003b
+			public const int activity_creation_dialog_category = 2131296315;
+			
+			// aapt resource value: 0x7f09003d
+			public const int activity_creation_dialog_choose = 2131296317;
+			
+			// aapt resource value: 0x7f09003e
+			public const int activity_creation_dialog_subcategory = 2131296318;
+			
+			// aapt resource value: 0x7f090038
+			public const int activity_creation_title = 2131296312;
 			
 			// aapt resource value: 0x7f090030
 			public const int activity_filter_description = 2131296304;
@@ -3387,11 +3399,11 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f090021
 			public const int activity_password_warning = 2131296289;
 			
-			// aapt resource value: 0x7f09003f
-			public const int activity_profile_card_change_password = 2131296319;
+			// aapt resource value: 0x7f090041
+			public const int activity_profile_card_change_password = 2131296321;
 			
-			// aapt resource value: 0x7f09003e
-			public const int activity_profile_card_contacts = 2131296318;
+			// aapt resource value: 0x7f090040
+			public const int activity_profile_card_contacts = 2131296320;
 			
 			// aapt resource value: 0x7f09001f
 			public const int activity_register_button = 2131296287;
@@ -3438,6 +3450,12 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f09001c
 			public const int activity_start_title = 2131296284;
 			
+			// aapt resource value: 0x7f090036
+			public const int activity_their_menu_empty_can = 2131296310;
+			
+			// aapt resource value: 0x7f090037
+			public const int activity_their_menu_empty_want = 2131296311;
+			
 			// aapt resource value: 0x7f090016
 			public const int appbar_scrolling_view_behavior = 2131296278;
 			
@@ -3447,86 +3465,86 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f090018
 			public const int character_counter_pattern = 2131296280;
 			
+			// aapt resource value: 0x7f090048
+			public const int dialog_connect_cancel = 2131296328;
+			
+			// aapt resource value: 0x7f090047
+			public const int dialog_connect_empty_field = 2131296327;
+			
 			// aapt resource value: 0x7f090046
-			public const int dialog_connect_cancel = 2131296326;
-			
-			// aapt resource value: 0x7f090045
-			public const int dialog_connect_empty_field = 2131296325;
-			
-			// aapt resource value: 0x7f090044
-			public const int dialog_connect_title = 2131296324;
+			public const int dialog_connect_title = 2131296326;
 			
 			// aapt resource value: 0x7f09001b
 			public const int drawer_close = 2131296283;
 			
-			// aapt resource value: 0x7f090040
-			public const int drawer_item_title_all = 2131296320;
-			
 			// aapt resource value: 0x7f090042
-			public const int drawer_item_title_edit_profile = 2131296322;
+			public const int drawer_item_title_all = 2131296322;
+			
+			// aapt resource value: 0x7f090044
+			public const int drawer_item_title_edit_profile = 2131296324;
+			
+			// aapt resource value: 0x7f090045
+			public const int drawer_item_title_exit = 2131296325;
 			
 			// aapt resource value: 0x7f090043
-			public const int drawer_item_title_exit = 2131296323;
-			
-			// aapt resource value: 0x7f090041
-			public const int drawer_item_title_my = 2131296321;
+			public const int drawer_item_title_my = 2131296323;
 			
 			// aapt resource value: 0x7f09001a
 			public const int drawer_open = 2131296282;
 			
-			// aapt resource value: 0x7f090052
-			public const int profile_email = 2131296338;
-			
-			// aapt resource value: 0x7f09004d
-			public const int profile_login = 2131296333;
-			
-			// aapt resource value: 0x7f090051
-			public const int profile_mobile = 2131296337;
+			// aapt resource value: 0x7f090054
+			public const int profile_email = 2131296340;
 			
 			// aapt resource value: 0x7f09004f
-			public const int profile_name = 2131296335;
-			
-			// aapt resource value: 0x7f09004e
-			public const int profile_password = 2131296334;
-			
-			// aapt resource value: 0x7f090050
-			public const int profile_surname = 2131296336;
+			public const int profile_login = 2131296335;
 			
 			// aapt resource value: 0x7f090053
-			public const int profile_vk = 2131296339;
+			public const int profile_mobile = 2131296339;
+			
+			// aapt resource value: 0x7f090051
+			public const int profile_name = 2131296337;
+			
+			// aapt resource value: 0x7f090050
+			public const int profile_password = 2131296336;
+			
+			// aapt resource value: 0x7f090052
+			public const int profile_surname = 2131296338;
+			
+			// aapt resource value: 0x7f090055
+			public const int profile_vk = 2131296341;
 			
 			// aapt resource value: 0x7f090015
 			public const int status_bar_notification_info_overflow = 2131296277;
 			
+			// aapt resource value: 0x7f090059
+			public const int toolbar_tab_I_can = 2131296345;
+			
+			// aapt resource value: 0x7f090058
+			public const int toolbar_tab_i_want = 2131296344;
+			
 			// aapt resource value: 0x7f090057
-			public const int toolbar_tab_I_can = 2131296343;
+			public const int toolbar_tab_they_can = 2131296343;
 			
 			// aapt resource value: 0x7f090056
-			public const int toolbar_tab_i_want = 2131296342;
-			
-			// aapt resource value: 0x7f090055
-			public const int toolbar_tab_they_can = 2131296341;
-			
-			// aapt resource value: 0x7f090054
-			public const int toolbar_tab_they_want = 2131296340;
-			
-			// aapt resource value: 0x7f090047
-			public const int toolbar_title_all = 2131296327;
+			public const int toolbar_tab_they_want = 2131296342;
 			
 			// aapt resource value: 0x7f090049
-			public const int toolbar_title_change_profile = 2131296329;
+			public const int toolbar_title_all = 2131296329;
 			
 			// aapt resource value: 0x7f09004b
-			public const int toolbar_title_create = 2131296331;
+			public const int toolbar_title_change_profile = 2131296331;
 			
-			// aapt resource value: 0x7f09004a
-			public const int toolbar_title_edit = 2131296330;
-			
-			// aapt resource value: 0x7f090048
-			public const int toolbar_title_my = 2131296328;
+			// aapt resource value: 0x7f09004d
+			public const int toolbar_title_create = 2131296333;
 			
 			// aapt resource value: 0x7f09004c
-			public const int toolbar_title_register = 2131296332;
+			public const int toolbar_title_edit = 2131296332;
+			
+			// aapt resource value: 0x7f09004a
+			public const int toolbar_title_my = 2131296330;
+			
+			// aapt resource value: 0x7f09004e
+			public const int toolbar_title_register = 2131296334;
 			
 			// aapt resource value: 0x7f090000
 			public const int v7_preference_off = 2131296256;
@@ -4689,19 +4707,22 @@ namespace IWantICan.Droid
 			public const int menu_create_offer = 2131034112;
 			
 			// aapt resource value: 0x7f050001
-			public const int menu_offers = 2131034113;
+			public const int menu_edit_offer = 2131034113;
 			
 			// aapt resource value: 0x7f050002
-			public const int menu_profile = 2131034114;
+			public const int menu_offers = 2131034114;
 			
 			// aapt resource value: 0x7f050003
-			public const int menu_signup = 2131034115;
+			public const int menu_profile = 2131034115;
 			
 			// aapt resource value: 0x7f050004
-			public const int navigation_drawer = 2131034116;
+			public const int menu_signup = 2131034116;
 			
 			// aapt resource value: 0x7f050005
-			public const int popupmenu_offer = 2131034117;
+			public const int navigation_drawer = 2131034117;
+			
+			// aapt resource value: 0x7f050006
+			public const int popupmenu_offer = 2131034118;
 			
 			static Xml()
 			{

@@ -36,5 +36,17 @@ namespace IWantICan.Core.Services
         /// <param name="id">ID of the want.</param>
         /// <returns>The want.</returns>
         Task<WantModel> GetWant(int id);
+
+        /// <summary>
+        /// Update want item.
+        /// </summary>
+        /// <returns>True is the want has been updated, false otherwse.</returns>
+        Task<bool> UpdateWant(WantModel want);
+
+        /// <summary>
+        /// Delete want item.
+        /// </summary>
+        /// <returns>True is the want has been deleted, false otherwse.</returns>
+        Task<bool> DeleteWant(int id);
     }
 }

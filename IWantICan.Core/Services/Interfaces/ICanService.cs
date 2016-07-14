@@ -42,5 +42,11 @@ namespace IWantICan.Core.Services
         /// </summary>
         /// <returns>True is the can has been updated, false otherwse.</returns>
         Task<bool> UpdateCan(CanModel can);
+
+        /// <summary>
+        /// Delete can item.
+        /// </summary>
+        /// <returns>True is the can has been deleted, false otherwse.</returns>
+        Task<bool> DeleteCan(int id);
     }
 }

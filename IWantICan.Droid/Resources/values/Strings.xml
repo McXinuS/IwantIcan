@@ -42,9 +42,13 @@
 		<string name="activity_my_menu_edit">Редактировать</string>
 		<string name="activity_my_menu_delete">Удалить</string>
 		<string name="activity_my_menu_empty_can">Здесь будет показан список услуг, 
-			которые вы можете оказать другим</string>
+			которые Вы можете оказать другим</string>
 		<string name="activity_my_menu_empty_want">Здесь будет показан список услуг, 
-			которые вы хотите получить</string>
+			которые Вы хотите получить</string>
+		<string name="activity_their_menu_empty_can">Здесь будет показан список услуг, 
+			которые Вам могут оказать другие</string>
+		<string name="activity_their_menu_empty_want">Здесь будет показан список услуг, 
+			которые хотят получить другие</string>
 
 	<!-- Activity creation & edit strings -->	
 		<string name="activity_creation_title">Название</string>

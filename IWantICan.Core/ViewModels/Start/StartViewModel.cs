@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
+using IWantICan.Core.Helpers;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -13,21 +15,11 @@ namespace IWantICan.Core.ViewModels
 
         string _login;
         string _password;
-        string _errorLogin;
-        string _errorPassword;
-
+        private ObservableDictionary<string, string> _errors = new ObservableDictionary<string, string>();
+        
         bool _isLoading;
         bool _isLogged;
 
-        // Result of login/password validation
-        [Flags] enum ValidationStatus
-        {
-            Ok,
-            LoginEmpty,
-            LoginNotValid,
-            PasswordEmpty,
-            PasswordTooShort
-        }
 
         public StartViewModel(ISharedPreferencesService sharedPreferencesService,
             IAuthService AuthService,
@@ -42,13 +34,18 @@ namespace IWantICan.Core.ViewModels
 
         public ICommand TryLoginCommand
         {
-            get { return new MvxCommand(() => DoTryLoginCommand()); }
+            get { return new MvxCommand(() => DoLoginCommand()); }
         }
 
-        public async void DoTryLoginCommand()
+        public async void DoLoginCommand()
         {
-            var status = ValidateInput();
-            if (status.Equals(ValidationStatus.Ok))
+            var toCheck = new List<Tuple<string, string, ValidationType>>
+            {
+                new Tuple<string,  string,ValidationType>(Login, "Login", ValidationType.Login),
+                new Tuple<string,  string,ValidationType>(Password, "Password", ValidationType.Password)
+            };
+            var validated = ValidatorHelper.Validate(toCheck, ref _errors);
+            if (validated)
             {
                 IsLoading = true;
                 var ok = await _authService.Login(Login, Password);
@@ -63,72 +60,12 @@ namespace IWantICan.Core.ViewModels
                 }
                 else
                 {
-                    _dialogService.Alert(Constants.LoginOrRegisterFailed, "Ошибка", "ОК");
-                    ErrorLogin = Constants.LoginWarning;
-                    ErrorPassword = Constants.LoginWarning;
+                    _dialogService.Alert(Constants.OperationFailedFailed, "Ошибка", "ОК");
+                    Errors["Login"] = Constants.LoginOrPasswordWarning;
+                    Errors["Password"] = Constants.LoginOrPasswordWarning;
                     return;
                 }
             }
-
-            if (status.HasFlag(ValidationStatus.LoginEmpty))
-                ErrorLogin = Constants.LoginRequired;
-
-            if (status.HasFlag(ValidationStatus.LoginNotValid))
-                ErrorLogin = Constants.LoginNotValid;
-
-            if (status.HasFlag(ValidationStatus.PasswordEmpty))
-                ErrorPassword = Constants.PasswordRequired;
-
-            if (status.HasFlag(ValidationStatus.LoginNotValid))
-                ErrorPassword = Constants.PasswordShort;
-        }
-
-        // indicates whether login with current
-        // parameters is possible
-        private bool CanLogin()
-        {
-            if (ValidateInput() == ValidationStatus.Ok)
-                return true;
-            return false;
-        }
-
-        /*
-         * Login:
-         * - not empty/whitespaces
-         * - only has latin/numeric/'_'
-         * Password:
-         * - not empty/whitespaces
-         * - has not less than Constants.PasswordMinLength length
-        */
-        private ValidationStatus ValidateInput()
-        {
-            ValidationStatus st = 0;
-
-            // check login
-            if (string.IsNullOrWhiteSpace(Login))
-                st |= ValidationStatus.LoginEmpty;
-            else
-                foreach (var c in Login)
-                {
-                    if (!((c >= 'a' && c <= 'z')
-                        || (c >= 'A' && c <= 'Z')
-                        || c == '_'
-                        || (c >= '0' && c <= '9')
-                       ))
-                    {
-                        // TODO check why 'testloginx' fails validation
-                        //st |= ValidationStatus.LoginNotValid;
-                        break;
-                    }
-                }
-
-            // check password
-            if (string.IsNullOrWhiteSpace(Password))
-                st |= ValidationStatus.PasswordEmpty;
-            else if (Password.Length < Constants.PasswordMinLength)
-                st |= ValidationStatus.PasswordTooShort;
-
-            return (st == 0) ? ValidationStatus.Ok : st;
         }
 
         public ICommand GoSignupViewCommand
@@ -176,24 +113,10 @@ namespace IWantICan.Core.ViewModels
             }
         }
 
-        public string ErrorLogin
+        public ObservableDictionary<string, string> Errors
         {
-            get { return _errorLogin; }
-            set
-            {
-                _errorLogin = value;
-                RaisePropertyChanged(() => ErrorLogin);
-            }
-        }
-
-        public string ErrorPassword
-        {
-            get { return _errorPassword; }
-            set
-            {
-                _errorPassword = value;
-                RaisePropertyChanged(() => ErrorPassword);
-            }
+            get { return _errors; }
+            set { _errors = value; RaisePropertyChanged(() => Errors); }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace IWantICan.Droid.Fragments
         {
             //InitAdapter();
         }
-
+        
         // TODO
         /*public async void InitAdapter()
         {
