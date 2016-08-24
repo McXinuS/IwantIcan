@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace IWantICan.Core.Helpers
@@ -155,26 +156,17 @@ namespace IWantICan.Core.Helpers
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
-
-        /// <summary>
-        /// Shows whether the string is a valid Vk profile link.
-        /// </summary>
+		
         private static ValidationStatus ValidateLogin(string source)
         {
-            foreach (var c in source)
-            {
-                if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_' || (c >= '0' && c <= '9')))
-                {
-                    return ValidationStatus.LoginInvalid;
-                }
-            }
-
-            return ValidationStatus.Ok;
+	        return source.Cast<char>().Any(
+				c => !((c >= 'a' && c <= 'z') 
+				|| (c >= 'A' && c <= 'Z') 
+				|| c == '_' 
+				|| (c >= '0' && c <= '9'))
+				) ? ValidationStatus.LoginInvalid : ValidationStatus.Ok;
         }
-
-        /// <summary>
-        /// Shows whether the string is a valid Vk profile link.
-        /// </summary>
+		
         private static ValidationStatus ValidatePassword(string source)
         {
             if (source.Length < Constants.PasswordMinLength)
@@ -202,10 +194,7 @@ namespace IWantICan.Core.Helpers
                 return ValidationStatus.EmailInvalid;
             return ValidationStatus.Ok;
         }
-
-        /// <summary>
-        /// Shows whether the link is a valid Vk profile link.
-        /// </summary>
+		
         private static ValidationStatus ValidateVkLink(string source)
         {
             var linkLower = source.ToLower();
@@ -214,7 +203,7 @@ namespace IWantICan.Core.Helpers
                 || !(linkLower.StartsWith("http://vk.com/")
                      || linkLower.StartsWith("https://vk.com/")
                      || linkLower.StartsWith("vk.com/")
-                     || linkLower.Split('/').Length == 1))
+                     || linkLower.Split('/').Length == 2))
             {
                 return ValidationStatus.VkLinkInvalid;
             }

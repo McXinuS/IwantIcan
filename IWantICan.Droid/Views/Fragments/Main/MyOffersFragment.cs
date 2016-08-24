@@ -52,6 +52,6 @@ namespace IWantICan.Droid.Fragments
             return view;
         }
 
-        protected override int FragmentId => Resource.Layout.fragment_offers_my;
+        protected override int FragmentId => Resource.Layout.fragment_viewpager_offers_my;
     }
 }

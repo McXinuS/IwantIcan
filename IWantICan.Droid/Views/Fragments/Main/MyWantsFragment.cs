@@ -8,6 +8,7 @@ namespace IWantICan.Droid.Fragments
     [Register("iwantican.droid.fragments.MyWantsFragment")]
     public class MyWantsFragment : BaseOfferMyFragment<MyWantsViewModel>
     {
-        protected override int FragmentId => Resource.Layout.fragment_wants_my;
-    }
+        protected override int FragmentId => Resource.Layout.fragment_offers_my;
+		protected override string EmptyListMessage => Context.Resources.GetString(Resource.String.activity_my_empty_want);
+	}
 }

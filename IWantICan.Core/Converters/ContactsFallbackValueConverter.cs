@@ -8,7 +8,7 @@ namespace IWantICan.Core.Converters
     {
         protected override object Convert(string value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value ?? Constants.FallbackContacts;
+            return !string.IsNullOrWhiteSpace(value) ? value : Constants.FallbackContacts;
         }
     }
 }

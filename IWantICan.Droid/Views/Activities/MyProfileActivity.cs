@@ -7,19 +7,16 @@ using IWantICan.Droid.Helpers;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using Refractored.Controls;
-using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace IWantICan.Droid.Activities
 {
     [Activity(
         Label = "@string/toolbar_title_change_profile",
-        Theme = "@style/AppTheme",
-        Name = "iwantican.droid.activities.MyProfileActivity"
+        Theme = "@style/AppTheme.ProfileMy",
+		WindowSoftInputMode = SoftInput.StateAlwaysHidden
         )]
     public class MyProfileActivity : MvxAppCompatActivity<MyProfileViewModel>
     {
-        protected Toolbar toolbar { get; private set; }
-
         private CircleImageView avatarView;
 
         private UserModel _user;
@@ -36,15 +33,11 @@ namespace IWantICan.Droid.Activities
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.activity_my_profile);
-
-            toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			SetContentView(Resource.Layout.activity_my_profile);
 
             avatarView = FindViewById<CircleImageView>(Resource.Id.avatar);
-
-            // TODO create an image loader
+			
             if (ViewModel.User != null)
                 // if viewmodel's property has been updated before the bind
                 // can be applied then update from viewmodel's property
@@ -80,6 +73,6 @@ namespace IWantICan.Droid.Activities
                     return true;
             }
             return base.OnOptionsItemSelected(item);
-        }
-    }
+		}
+	}
 }

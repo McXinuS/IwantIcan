@@ -71,7 +71,7 @@ namespace IWantICan.Core.ViewModels
                 }
                 else
                 {
-                    _dialogService.Alert(Constants.OperationFailedFailed, "Ошибка", "ОК");
+                    _dialogService.Alert(Constants.OperationFailed, "Ошибка", "ОК");
                 }
             }
 

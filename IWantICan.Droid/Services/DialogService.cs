@@ -15,13 +15,15 @@ namespace IWantICan.Droid.Services
 {
     public class DialogService : IDialogService
     {
-        public void Alert(string message, string title, string okbtnText)
+	    const int _alertDialogThemeId = Resource.Style.AlertDialogStyle;
+
+		public void Alert(string message, string title, string okbtnText)
         {
             var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
             var act = top.Activity;
 
-            var adb = new AlertDialog.Builder(act);
-            adb.SetTitle(title);
+			var adb = new AlertDialog.Builder(act, _alertDialogThemeId);
+			adb.SetTitle(title);
             adb.SetMessage(message);
             adb.SetIcon(Resource.Drawable.logo);
             adb.SetPositiveButton(okbtnText, (sender, args) => { });
@@ -33,8 +35,8 @@ namespace IWantICan.Droid.Services
             var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
             var act = top.Activity;
 
-            var adb = new AlertDialog.Builder(act);
-            adb.SetTitle(title);
+			var adb = new AlertDialog.Builder(act, _alertDialogThemeId);
+			adb.SetTitle(title);
             adb.SetMessage(message);
             adb.SetIcon(Resource.Drawable.logo);
             adb.SetPositiveButton(okbtnText, (sender, args) => { callback(); });
@@ -46,8 +48,9 @@ namespace IWantICan.Droid.Services
             var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
             var act = top.Activity;
 
-            var adb = new AlertDialog.Builder(act);
-            adb.SetTitle(title);
+            var adb = new AlertDialog.Builder(act, _alertDialogThemeId);
+
+			adb.SetTitle(title);
             adb.SetMessage(message);
             adb.SetIcon(Resource.Drawable.logo);
             adb.SetPositiveButton(okbtnText, (sender, args) => { callback(); });
@@ -63,8 +66,8 @@ namespace IWantICan.Droid.Services
             var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
             var act = top.Activity;
 
-            var adb = new AlertDialog.Builder(act);
-            adb.SetCancelable(true);
+			var adb = new AlertDialog.Builder(act, _alertDialogThemeId);
+			adb.SetCancelable(true);
             adb.SetTitle(Resource.String.activity_filter_title);
 
             if (categories.Length == 0)
@@ -94,8 +97,8 @@ namespace IWantICan.Droid.Services
             var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
             var act = top.Activity;
 
-            var adb = new AlertDialog.Builder(act);
-            adb.SetCancelable(true);
+			var adb = new AlertDialog.Builder(act, _alertDialogThemeId);
+			adb.SetCancelable(true);
             adb.SetTitle(Resource.String.activity_filter_title);
 
             if (categories.Length == 0)

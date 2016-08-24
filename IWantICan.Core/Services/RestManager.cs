@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using IWantICan.Core.Models;
 using MvvmCross.Platform;
 using System.Linq;
+using MvvmCross.Platform.Core;
 
 namespace IWantICan.Core.Services.Api
 {
@@ -90,12 +91,12 @@ namespace IWantICan.Core.Services.Api
         /// Create a new can item.
         /// </summary>
         /// <returns>True if the can is created.</returns>
-        public async Task<bool> AddCanAsync(CanModel can)
+        public async Task<bool> AddCanAsync(OfferModel can)
         {
             if (can == null)
                 return false;
 
-            CanModelWithToken tokenedModel = can.ToTokenedModel(Token);
+            OfferModelWithToken tokenedModel = can.ToTokenedModel(Token);
 
             return await ApiService.AddCanAsync(tokenedModel);
         }
@@ -104,19 +105,27 @@ namespace IWantICan.Core.Services.Api
         /// Get a can by ID.
         /// </summary>
         /// <returns>The can or null if error.</returns>
-	    public async Task<CanModel> GetCanAsync(int id)
+	    public async Task<OfferModel> GetCanAsync(int id)
         {
-            return await ApiService.GetCanAsync(id, Token);
+			var can = await ApiService.GetCanAsync(id, Token);
+			can.type = OfferType.Can;
+
+	        return can;
         }
 
         /// <summary>
         /// Get a list of all cans.
         /// </summary>
         /// <returns>The list of cans or null if error.</returns>
-        public async Task<List<CanModel>> GetCanListAll()
+        public async Task<List<OfferModel>> GetCanListAll()
         {
             var list = await ApiService.GetCanListAll(Token);
-            list = list.OrderByDescending(o => o.createdAt).ToList();
+
+            list = list
+				.OrderByDescending(o => o.createdAt)
+				.Select(c => { c.type = OfferType.Can; return c; })
+				.ToList();
+
             return list;
         }
 
@@ -124,18 +133,37 @@ namespace IWantICan.Core.Services.Api
         /// Get a list of cans by categotyId.
         /// </summary>
         /// <returns>The list of cans or null if error.</returns>
-        public async Task<List<CanModel>> GetCanListByCategoryAsync(int[] catIds)
+        public async Task<List<OfferModel>> GetCanListByCategoryAsync(int[] catIds)
         {
             if (catIds == null || catIds.Length == 0)
                 return await GetCanListAll();
 
-            List<CanModel> list = new List<CanModel>();
-            foreach (int t in catIds)
-            {
-                var tempList = await ApiService.GetCanListByCategoryAsync(t, Token);
-                list.AddRange(tempList);
-            }
-            list = list.OrderByDescending(o => o.createdAt).ToList();
+	        var size = catIds.Length;
+
+			// load items asyncroniously
+			Task[] tasks = new Task[size];
+
+	        var results = new List<OfferModel>[size];
+
+			for (var i = 0; i < size; i++)
+			{
+				var index = i;
+
+				var task = Task.Run(async () =>
+				{
+					var tempList = await ApiService.GetCanListByCategoryAsync(catIds[index], Token);
+					results[index] = tempList;
+				});
+				tasks[index] = task;
+			}
+
+			await Task.WhenAll(tasks);
+
+	        var list = results.SelectMany(x => x).ToList();
+			list = list
+				.OrderByDescending(o => o.createdAt)
+				.Select(c => { c.type = OfferType.Can; return c; })
+				.ToList();
 
             return list;
         }
@@ -144,10 +172,15 @@ namespace IWantICan.Core.Services.Api
         /// Get a list of cans by userId.
         /// </summary>
         /// <returns>The list of cans or null if error.</returns>
-        public async Task<List<CanModel>> GetCanListByUserAsync(int userId)
+        public async Task<List<OfferModel>> GetCanListByUserAsync(int userId)
         {
             var list = await ApiService.GetCanListByUserAsync(userId, Token);
-            list = list.OrderByDescending(o => o.createdAt).ToList();
+
+            list = list
+				.OrderByDescending(o => o.createdAt)
+				.Select(c => { c.type = OfferType.Can; return c; })
+				.ToList();
+
             return list;
         }
 
@@ -155,12 +188,12 @@ namespace IWantICan.Core.Services.Api
         /// Update the can.
         /// </summary>
         /// <returns>True if the can is updated.</returns>
-        public async Task<bool> UpdateCanAsync(CanModel can)
+        public async Task<bool> UpdateCanAsync(OfferModel can)
         {
             if (can == null)
                 return false;
 
-            CanModelWithToken tokenedModel = can.ToTokenedModel(Token);
+            OfferModelWithToken tokenedModel = can.ToTokenedModel(Token);
 
             return await ApiService.UpdateCanAsync(tokenedModel);
         }
@@ -180,12 +213,12 @@ namespace IWantICan.Core.Services.Api
         /// Create a new want item.
         /// </summary>
         /// <returns>True if the want is created.</returns>
-        public async Task<bool> AddWantAsync(WantModel want)
+        public async Task<bool> AddWantAsync(OfferModel want)
         {
             if (want == null)
                 return false;
 
-            WantModelWithToken tokenedModel = want.ToTokenedModel(Token);
+			OfferModelWithToken tokenedModel = want.ToTokenedModel(Token);
 
             return await ApiService.AddWantAsync(tokenedModel);
         }
@@ -194,63 +227,93 @@ namespace IWantICan.Core.Services.Api
         /// Get a want by ID.
         /// </summary>
         /// <returns>The want or null if error.</returns>
-	    public async Task<WantModel> GetWantAsync(int id)
+	    public async Task<OfferModel> GetWantAsync(int id)
         {
-            return await ApiService.GetWantAsync(id, Token);
+            var want =  await ApiService.GetWantAsync(id, Token);
+			want.type = OfferType.Want;
+	        return want;
         }
 
         /// <summary>
         /// Get a list of all wants.
         /// </summary>
         /// <returns>The list of wants or null if error.</returns>
-        public async Task<List<WantModel>> GetWantListAll()
+        public async Task<List<OfferModel>> GetWantListAll()
         {
             var list = await ApiService.GetWantListAllAsync(Token);
-            list = list.OrderByDescending(o => o.createdAt).ToList();
-            return list;
+
+            list = list
+				.OrderByDescending(o => o.createdAt)
+				.Select(c => { c.type = OfferType.Want; return c; })
+				.ToList();
+			
+			return list;
         }
 
         /// <summary>
         /// Get a list of wants by categotyId.
         /// </summary>
         /// <returns>The list of wants or empty list if error.</returns>
-        public async Task<List<WantModel>> GetWantListByCategoryAsync(int[] catIds)
-        {
-            if (catIds == null || catIds.Length == 0)
-                return await GetWantListAll();
+        public async Task<List<OfferModel>> GetWantListByCategoryAsync(int[] catIds)
+		{
+			if (catIds == null || catIds.Length == 0)
+				return await GetWantListAll();
 
-            List<WantModel> list = new List<WantModel>();
-            foreach (int t in catIds)
-            {
-                var tempList = await ApiService.GetWantListByCategoryAsync(t, Token);
-                list.AddRange(tempList);
-            }
-            list = list.OrderByDescending(o => o.createdAt).ToList();
+			var size = catIds.Length;
 
-            return list;
-        }
+			// load items asyncroniously
+			Task[] tasks = new Task[size];
+
+			List<OfferModel> list = new List<OfferModel>();
+
+			for (var i = 0; i < size; i++)
+			{
+				var index = i;
+
+				var task = Task.Run(async () =>
+				{
+					var tempList = await ApiService.GetWantListByCategoryAsync(catIds[index], Token);
+
+					MvxMainThreadDispatcher.Instance.RequestMainThreadAction(() => { list.AddRange(tempList); });
+				});
+				tasks[index] = task;
+			}
+
+			await Task.WhenAll(tasks);
+			list = list
+				.OrderByDescending(o => o.createdAt)
+				.Select(c => { c.type = OfferType.Want; return c; })
+				.ToList();
+
+			return list;
+		}
 
         /// <summary>
         /// Get a list of wants by userId.
         /// </summary>
         /// <returns>The list of wants or null if error.</returns>
-        public async Task<List<WantModel>> GetWantListByUserAsync(int userId)
+        public async Task<List<OfferModel>> GetWantListByUserAsync(int userId)
         {
             var list = await ApiService.GetWantListByUserAsync(userId, Token);
-            list = list.OrderByDescending(o => o.createdAt).ToList();
-            return list;
+
+			list = list
+				.OrderByDescending(o => o.createdAt)
+				.Select(c => { c.type = OfferType.Want; return c; })
+				.ToList();
+
+			return list;
         }
 
         /// <summary>
         /// Update the want.
         /// </summary>
         /// <returns>True if the want is updated.</returns>
-        public async Task<bool> UpdateWantAsync(WantModel want)
+        public async Task<bool> UpdateWantAsync(OfferModel want)
         {
             if (want == null)
                 return false;
 
-            WantModelWithToken tokenedModel = want.ToTokenedModel(Token);
+			OfferModelWithToken tokenedModel = want.ToTokenedModel(Token);
 
             return await ApiService.UpdateWantAsync(tokenedModel);
         }

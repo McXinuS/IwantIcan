@@ -68,5 +68,12 @@ namespace IWantICan.Droid
             Mvx.RegisterSingleton<IDialogService>(new DialogService());
             base.InitializeFirstChance();
         }
+
+        protected override void InitializeLastChance()
+        {
+            base.InitializeLastChance();
+			MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+			MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+		}
     }
 }

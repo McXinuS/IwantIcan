@@ -40,37 +40,37 @@ namespace IWantICan.Core.Services.Api
         /// Add the can to DB.
         /// </summary>
         /// <returns>True if the can has been added successfully.</returns>
-	    Task<bool> AddCanAsync(CanModelWithToken can);
+	    Task<bool> AddCanAsync(OfferModelWithToken can);
 
         /// <summary>
         /// Get the information about the can from DB by ID.
         /// </summary>
         /// <returns>The can or null.</returns>
-	    Task<CanModel> GetCanAsync(int id, string token);
+	    Task<OfferModel> GetCanAsync(int id, string token);
 
         /// <summary>
         /// Get all cans.
         /// </summary>
         /// <returns>A list of cans or null.</returns>
-        Task<List<CanModel>> GetCanListAll(string token);
+        Task<List<OfferModel>> GetCanListAll(string token);
 
         /// <summary>
         /// Get cans from DB by category ID.
         /// </summary>
         /// <returns>A list of cans or null.</returns>
-	    Task<List<CanModel>> GetCanListByCategoryAsync(int catId, string token);
+	    Task<List<OfferModel>> GetCanListByCategoryAsync(int catId, string token);
 
         /// <summary>
         /// Get cans from DB by user ID.
         /// </summary>
         /// <returns>A list of cans or null.</returns>
-	    Task<List<CanModel>> GetCanListByUserAsync(int catId, string token);
+	    Task<List<OfferModel>> GetCanListByUserAsync(int catId, string token);
 
         /// <summary>
         /// Update the can on DB.
         /// </summary>
         /// <returns>True if the can has been added successfully.</returns>
-        Task<bool> UpdateCanAsync(CanModelWithToken can);
+        Task<bool> UpdateCanAsync(OfferModelWithToken can);
 
         /// <summary>
         /// Removes the can from DB.
@@ -84,37 +84,37 @@ namespace IWantICan.Core.Services.Api
         /// Add the want to DB.
         /// </summary>
         /// <returns>True if the want has been added successfully.</returns>
-        Task<bool> AddWantAsync(WantModelWithToken want);
+        Task<bool> AddWantAsync(OfferModelWithToken want);
 
         /// <summary>
         /// Get the information about the want from DB by ID.
         /// </summary>
         /// <returns>The want or null.</returns>
-	    Task<WantModel> GetWantAsync(int id, string token);
+	    Task<OfferModel> GetWantAsync(int id, string token);
 
         /// <summary>
         /// Get wants from DB by category ID.
         /// </summary>
         /// <returns>A list of wants or null.</returns>
-	    Task<List<WantModel>> GetWantListByCategoryAsync(int id, string token);
+	    Task<List<OfferModel>> GetWantListByCategoryAsync(int id, string token);
 
         /// <summary>
         /// Get wants from DB by user ID.
         /// </summary>
         /// <returns>A list of wants or null.</returns>
-	    Task<List<WantModel>> GetWantListByUserAsync(int id, string token);
+	    Task<List<OfferModel>> GetWantListByUserAsync(int id, string token);
 
         /// <summary>
         /// Get all wants.
         /// </summary>
         /// <returns>A list of wants or null.</returns>
-        Task<List<WantModel>> GetWantListAllAsync(string token);
+        Task<List<OfferModel>> GetWantListAllAsync(string token);
 
         /// <summary>
         /// Update the want on DB.
         /// </summary>
         /// <returns>True if the want has been added successfully.</returns>
-        Task<bool> UpdateWantAsync(WantModelWithToken want);
+        Task<bool> UpdateWantAsync(OfferModelWithToken want);
 
         /// <summary>
         /// Removes the want from DB.

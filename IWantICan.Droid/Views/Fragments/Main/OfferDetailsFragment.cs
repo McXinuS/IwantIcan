@@ -12,9 +12,9 @@ using Square.Picasso;
 
 namespace IWantICan.Droid.Fragments
 {
-	[MvxFragment(typeof(OfferItemContainerViewModel), Resource.Id.main_frame, true)]
-	[Register("iwantican.droid.fragments.OfferItemFragment")]
-	public class OfferItemFragment : BaseOfferItemFragment<OfferItemViewModel>
+	[MvxFragment(typeof(OfferDetailsContainerViewModel), Resource.Id.main_frame, true)]
+	[Register("iwantican.droid.fragments.OfferDetailsFragment")]
+	public class OfferDetailsFragment : BaseOfferDetailsFragment<OfferDetailsViewModel>
 	{
 		private CircleImageView avatarView;
 
@@ -32,19 +32,15 @@ namespace IWantICan.Droid.Fragments
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			var view = base.OnCreateView(inflater, container, savedInstanceState);
-
-			var backArrow = view.FindViewById<ImageView>(Resource.Id.backArrow);
-			backArrow.Click += (sender, args) => { Activity.OnBackPressed(); };
-
+			
 			avatarView = view.FindViewById<CircleImageView>(Resource.Id.profileAvatar);
-            
 			if (ViewModel.User != null)
 				// if viewmodel's property has been updated before the bind
 				// can be applied then update from viewmodel's property
 				UpdateAvatar(ViewModel.User?.avatar);
 			else
 			{
-				var set = this.CreateBindingSet<OfferItemFragment, OfferItemViewModel>();
+				var set = this.CreateBindingSet<OfferDetailsFragment, OfferDetailsViewModel>();
 				set.Bind(this).For(p => p.User).To(vm => vm.User);
 				set.Apply();
 			}

@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 using IWantICan.Core.Helpers;
 using IWantICan.Core.Interfaces;
+using IWantICan.Core.Models;
 using IWantICan.Core.Services;
 using MvvmCross.Platform;
 using MvvmCross.Plugins.Messenger;
@@ -11,22 +13,36 @@ namespace IWantICan.Core.ViewModels
 {
     public abstract class BaseOfferViewModel : BaseViewModel
     {
-        private readonly MvxSubscriptionToken _token;
+	    readonly IMvxMessenger _messenger;
+		private readonly MvxSubscriptionToken _token;
 
-        ICategoryService _categoryService;
+	    readonly ICategoryService _categoryService;
         protected int[] SelectedCategory { get { return _categoryService.Selected; } }
 
         private bool _isRefreshing;
         private bool _isEmpty;
+		private List<OfferModel> _offers;
+
+		protected int MyId;
 
         protected BaseOfferViewModel()
         {
-            var messenger = Mvx.Resolve<IMvxMessenger>();
-            _token = messenger.Subscribe<FilterDoneMessage>(ReloadCommand.Execute);
-
-            IsEmpty = true;
             _categoryService = Mvx.Resolve<ICategoryService>();
+
+			_messenger = Mvx.Resolve<IMvxMessenger>();
+            _token = _messenger.Subscribe<FilterDoneMessage>(ReloadCommand.Execute);
+
+			Task.Run(LoadUserId);
+
+			IsEmpty = true;
         }
+
+	    private async Task LoadUserId()
+		{
+			var us = Mvx.Resolve<IUserService>();
+			var curUser = await us.GetCurrentUser();
+			MyId = curUser.id;
+		}
 
         protected abstract void LoadData();
         public ICommand ReloadCommand
@@ -39,58 +55,55 @@ namespace IWantICan.Core.ViewModels
                     t.Start();
                 });
             }
-        }
-		
-        protected void GoDetails<T>(T item)
-        {
-			// bad offer
-	        if (item == null)
-	        {
-				Mvx.Resolve<IDialogService>().Alert("Произошла внутренняя ошибка. Повторите запрос позже", "Ошибка", "ОК");
-		        return;
-	        }
+		}
 
-            ShowViewModel<OfferItemContainerViewModel>(new
-            {
-                offer = item.Serialize(),
-                type = typeof(T).Name
-            });
-        }
-		
-        protected void GoEdit<T>(T item)
+		public ICommand ItemSelectedCommand
+		{
+			get { return new MvxCommand<OfferModel>(item => GoDetails(item)); }
+		}
+		protected void GoDetails(OfferModel item)
         {
-			// bad offer
 	        if (item == null)
-	        {
-				Mvx.Resolve<IDialogService>().Alert("Произошла внутренняя ошибка. Повторите запрос позже", "Ошибка", "ОК");
 		        return;
-	        }
+			
+			var param = new { offer = item.Serialize() };
+			ShowViewModel<OfferDetailsContainerViewModel>(param);
+        }
 
-            ShowViewModel<EditOfferViewModel>(new
-            {
-                offer = item.Serialize(),
-                type = typeof(T).Name
-            });
+		public ICommand ItemEditCommand
+		{
+			get { return new MvxCommand<OfferModel>(item => GoEdit(item)); }
+		}
+		protected void GoEdit(OfferModel item)
+		{
+			if (item?.UserModelId != MyId)
+				return;
+
+			var param = new {offer = item.Serialize()};
+			ShowViewModel<EditOfferViewModel>(param);
         }
 
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
-            set
-            {
-                _isRefreshing = value;
-                RaisePropertyChanged(() => IsRefreshing);
-            }
-        }
+            set { _isRefreshing = value; RaisePropertyChanged(() => IsRefreshing); }
+		}
 
         public bool IsEmpty
         {
             get { return _isEmpty; }
-            set
-            {
-                _isEmpty = value;
-                RaisePropertyChanged(() => IsEmpty);
-            }
+            set { _isEmpty = value; RaisePropertyChanged(() => IsEmpty); }
         }
-    }
+
+		public List<OfferModel> Offers
+		{
+			get { return _offers; }
+			set { _offers = value; RaisePropertyChanged(() => Offers); }
+		}
+
+		public ICommand MessengerUnsibscribeCommand
+		{
+			get { return new MvxCommand(() => _messenger.Unsubscribe<FilterDoneMessage>(_token)); }
+		}
+	}
 }

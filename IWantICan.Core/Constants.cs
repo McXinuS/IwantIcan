@@ -34,27 +34,41 @@
 
         public const string LoginOrPasswordWarning = "Имя или пароль введены неверно";
         public const string FieldWarning = "Проверьте это поле неверно";
-        public const string OperationFailedFailed = "Произошла ошибка. Проверьте введенные данные и попробуйте еще раз.";
+        public const string OperationFailed = "Произошла ошибка. Проверьте введенные данные и попробуйте еще раз.";
 
         // Categories
         public const string UnknownCategory = "Неизвестно";
 
-        // Dialogs
-        public const string DialogFilterFailed = "Не удалось получить предложения. Выберите категории";
-        public const string DialogSaveSuccess = "Изменения успешно сохранены.";
+		// Dialogs
+		public const string DialogTitleConfirm = "Подтвердите действие";
+		public const string DialogTitleSuccess = "Успешно";
+		public const string DialogTitleError = "Ошибка";
+		public const string DialogButtonOk = "ОК";
+		public const string DialogButtonCancel = "ОТМЕНА";
+
+		public const string DialogSaveSuccess = "Изменения успешно сохранены.";
         public const string DialogSaveFailed = "Произошла ошибка, проверьте введенные данные.";
 
-        public const string DialogDeleteConfirm = "Подтвердите действие.";
-        public const string DialogTitleDeleteConfirm = "Вы уверены, что хотите удалить эту карточку?";
+		public const string DialogNoNetwork = "Не удалось подключиться к серверу. Повторите попытку позже";
+		public const string DialogFilterNoNetwork = "Не удалось получить предложения. Выберите категории";
+
+		public const string DialogDeleteConfirm = "Вы уверены, что хотите удалить эту карточку?";
         public const string DialogDeleteSuccess = "Карточка успешно удалена.";
         public const string DialogDeleteFailed = "Произошла ошибка. Попробуйте удалить карточку позже.";
-        public const string DialogTitleSuccess = "Успешно";
-        public const string DialogTitleError = "Ошибка";
 
         // FallbackValues
         public const string FallbackPhone = "Номер не указан";
         public const string FallbackEmail = "Адрес почты не указан";
         public const string FallbackVk = "Профиль Вконтакте не указан";
         public const string FallbackContacts = "Не указано";
+
+		// Contacts
+		public const string ProfileLogin = "Логин";
+		public const string ProfilePassword = "Пароль";
+		public const string ProfileName = "Имя";
+		public const string ProfileSurname = "Фамилия";
+		public const string ProfileMobile = "Телефон";
+		public const string ProfileEmail = "Email";
+		public const string ProfileVk = "ВКонтакте";
 	}
 }

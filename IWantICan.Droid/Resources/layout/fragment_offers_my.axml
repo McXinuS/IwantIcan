@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <TextView
+        android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+        android:textSize="@dimen/text_very_huge"
+        android:padding="@dimen/element_padding_huge"
+        android:gravity="center"
+        android:background="@color/light_gray"
+        local:MvxBind="Visibility IsEmpty, Converter=Visibility" />
+    <MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
+        android:id="@+id/refresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        local:layout_behavior="@string/appbar_scrolling_view_behavior"
+        local:MvxBind="Refreshing IsRefreshing; RefreshCommand ReloadCommand">
+        <MvxRecyclerView
+            android:id="@+id/my_recycler_view"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            local:tabGravity="fill"
-            local:tabTextColor="@color/light_gray"
-            local:tabSelectedTextColor="@color/white" />
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent" />
-    </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabCan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        local:MvxBind="Click CreateOfferCommand"
-        android:layout_margin="@dimen/margin_medium"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_add_white_24dp" />
-</android.support.design.widget.CoordinatorLayout>
+            android:layout_height="match_parent"
+            local:MvxItemTemplate="@layout/listitem_offer_my"
+            local:MvxBind="ItemsSource Offers; ItemClick ItemSelectedCommand; ItemLongClick ItemEditCommand" />
+    </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+</FrameLayout>

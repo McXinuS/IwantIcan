@@ -2,12 +2,13 @@
 <resources>
 
   <!-- General colors -->
-  <color name="colorPrimary">#ff1976d2</color>
-  <color name="colorPrimaryDark">#ff2196f3</color>
+  <color name="colorPrimary">#ff2196f3</color>
+  <color name="colorPrimaryDark">#ff1976d2</color>
   <color name="colorAccent">#ffff3d00</color>
 
   <!-- White to Black -->
   <color name="white">#ffffffff</color>
+  <color name="white_semi_transparent">#aaffffff</color>
   <color name="light_gray">#EAEAEA</color>
   <color name="light_gray_semi_transparent">#AAEAEAEA</color>
   <color name="med_gray">#C7D2DC</color>

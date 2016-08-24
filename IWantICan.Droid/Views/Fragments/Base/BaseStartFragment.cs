@@ -2,6 +2,7 @@ using Android.OS;
 using Android.Support.V4.Content.Res;
 using Android.Text.Method;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -40,6 +41,8 @@ namespace IWantICan.Droid.Fragments
 				};
 			}
 
+			HideSoftKeyboard();
+
 			return view;
 		}
 
@@ -57,6 +60,18 @@ namespace IWantICan.Droid.Fragments
 				Resource.Drawable.ic_eye_strike,
 				Activity.Theme));
 			mEtPwd.TransformationMethod = HideReturnsTransformationMethod.Instance;
+		}
+
+		protected void HideSoftKeyboard()
+		{
+			var currentFocus = Activity.CurrentFocus;
+
+			if (currentFocus == null) return;
+
+			InputMethodManager inputMethodManager = (InputMethodManager)Activity.GetSystemService(Android.Content.Context.InputMethodService);
+			inputMethodManager.HideSoftInputFromWindow(currentFocus.WindowToken, 0);
+
+			currentFocus.ClearFocus();
 		}
 
 		protected abstract int FragmentId { get; }

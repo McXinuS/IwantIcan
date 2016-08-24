@@ -9,24 +9,15 @@ namespace IWantICan.Droid.Activities
 {
     [Activity(
         Label = "@string/toolbar_title_create",
-        Theme = "@style/AppTheme",
-        Name = "iwantican.droid.activities.CreateOfferActivity"
+        Theme = "@style/AppTheme.OfferCreate"
         )]
     public class CreateOfferActivity : MvxAppCompatActivity<CreateOfferViewModel>
     {
-        protected Toolbar toolbar { get; private set; }
-        
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SetContentView(Resource.Layout.activity_offer_create);
-
-            toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-
-            //EditText et = FindViewById<EditText>(Resource.Id.editCat);
-            //et.SetOnKeyListener(null);
         }
         
         public override bool OnCreateOptionsMenu(IMenu menu)

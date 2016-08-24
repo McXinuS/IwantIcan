@@ -131,7 +131,7 @@ namespace IWantICan.Core.Services.Api
             return false;
         }
 
-        public async Task<bool> AddCanAsync(CanModelWithToken can)
+        public async Task<bool> AddCanAsync(OfferModelWithToken can)
         {
             var json = JsonConvert.SerializeObject(can);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -152,7 +152,7 @@ namespace IWantICan.Core.Services.Api
             return false;
         }
 
-        public async Task<CanModel> GetCanAsync(int id, string token)
+        public async Task<OfferModel> GetCanAsync(int id, string token)
         {
             //return GetDummyCan(id);
 
@@ -167,7 +167,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        CanModel result = JsonConvert.DeserializeObject<CanModel>(contentResp);
+                        OfferModel result = JsonConvert.DeserializeObject<OfferModel>(contentResp);
                         return result;
                     }
                 }
@@ -180,7 +180,7 @@ namespace IWantICan.Core.Services.Api
             return null;
         }
 
-        public async Task<List<CanModel>> GetCanListAll(string token)
+        public async Task<List<OfferModel>> GetCanListAll(string token)
         {
             var uri = new Uri(Constants.CanUrl);
             try
@@ -193,7 +193,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        List<CanModel> list = JsonConvert.DeserializeObject<List<CanModel>>(contentResp);
+                        List<OfferModel> list = JsonConvert.DeserializeObject<List<OfferModel>>(contentResp);
                         return list;
                     }
                 }
@@ -203,10 +203,10 @@ namespace IWantICan.Core.Services.Api
                 // ignored
             }
 
-            return new List<CanModel>();
+            return new List<OfferModel>();
         }
 
-        public async Task<List<CanModel>> GetCanListByCategoryAsync(int catId, string token)
+        public async Task<List<OfferModel>> GetCanListByCategoryAsync(int catId, string token)
         {
             // DEBUG
             /*var l = new List<CanModel>();
@@ -229,7 +229,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        List<CanModel> list = JsonConvert.DeserializeObject<List<CanModel>>(contentResp);
+                        List<OfferModel> list = JsonConvert.DeserializeObject<List<OfferModel>>(contentResp);
                         return list;
                     }
                 }
@@ -239,10 +239,10 @@ namespace IWantICan.Core.Services.Api
                 // ignored
             }
 
-            return new List<CanModel>();
+            return new List<OfferModel>();
         }
 
-        public async Task<List<CanModel>> GetCanListByUserAsync(int userId, string token)
+        public async Task<List<OfferModel>> GetCanListByUserAsync(int userId, string token)
         {
             /*var l = new List<CanModel>();
 
@@ -264,7 +264,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        List<CanModel> list = JsonConvert.DeserializeObject<List<CanModel>>(contentResp);
+                        List<OfferModel> list = JsonConvert.DeserializeObject<List<OfferModel>>(contentResp);
                         return list;
                     }
                 }
@@ -274,10 +274,10 @@ namespace IWantICan.Core.Services.Api
                 // ignored
             }
 
-            return new List<CanModel>();
+            return new List<OfferModel>();
         }
 
-        public async Task<bool> UpdateCanAsync(CanModelWithToken can)
+        public async Task<bool> UpdateCanAsync(OfferModelWithToken can)
         {
             var json = JsonConvert.SerializeObject(can);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -318,7 +318,7 @@ namespace IWantICan.Core.Services.Api
             return false;
         }
 
-        public async Task<bool> AddWantAsync(WantModelWithToken want)
+        public async Task<bool> AddWantAsync(OfferModelWithToken want)
         {
             var json = JsonConvert.SerializeObject(want);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -339,7 +339,7 @@ namespace IWantICan.Core.Services.Api
             return false;
         }
 
-        public async Task<WantModel> GetWantAsync(int id, string token)
+        public async Task<OfferModel> GetWantAsync(int id, string token)
         {
             //return GetDummyWant(id);
 
@@ -354,7 +354,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        WantModel result = JsonConvert.DeserializeObject<WantModel>(contentResp);
+						OfferModel result = JsonConvert.DeserializeObject<OfferModel>(contentResp);
                         return result;
                     }
                 }
@@ -367,7 +367,7 @@ namespace IWantICan.Core.Services.Api
             return null;
         }
 
-        public async Task<List<WantModel>> GetWantListAllAsync(string token)
+        public async Task<List<OfferModel>> GetWantListAllAsync(string token)
         {
             var uri = new Uri(Constants.WantUrl);
             try
@@ -380,7 +380,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        List<WantModel> list = JsonConvert.DeserializeObject<List<WantModel>>(contentResp);
+                        List<OfferModel> list = JsonConvert.DeserializeObject<List<OfferModel>>(contentResp);
                         return list;
                     }
                 }
@@ -390,10 +390,10 @@ namespace IWantICan.Core.Services.Api
                 // ignored
             }
 
-            return new List<WantModel>();
+            return new List<OfferModel>();
         }
 
-        public async Task<List<WantModel>> GetWantListByCategoryAsync(int id, string token)
+        public async Task<List<OfferModel>> GetWantListByCategoryAsync(int id, string token)
         {
             var uri = new Uri(Constants.WantListUrl + "/" + id);
             try
@@ -406,7 +406,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        List<WantModel> list = JsonConvert.DeserializeObject<List<WantModel>>(contentResp);
+                        List<OfferModel> list = JsonConvert.DeserializeObject<List<OfferModel>>(contentResp);
                         return list;
                     }
                 }
@@ -416,10 +416,10 @@ namespace IWantICan.Core.Services.Api
                 // ignored
             }
 
-            return new List<WantModel>();
+            return new List<OfferModel>();
         }
 
-        public async Task<List<WantModel>> GetWantListByUserAsync(int userId, string token)
+        public async Task<List<OfferModel>> GetWantListByUserAsync(int userId, string token)
         {
             /*var l = new List<WantModel>();
 
@@ -441,7 +441,7 @@ namespace IWantICan.Core.Services.Api
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
 
-                        List<WantModel> list = JsonConvert.DeserializeObject<List<WantModel>>(contentResp);
+                        List<OfferModel> list = JsonConvert.DeserializeObject<List<OfferModel>>(contentResp);
                         return list;
                     }
                 }
@@ -451,10 +451,10 @@ namespace IWantICan.Core.Services.Api
                 // ignored
             }
 
-            return new List<WantModel>();
+            return new List<OfferModel>();
         }
 
-        public async Task<bool> UpdateWantAsync(WantModelWithToken want)
+        public async Task<bool> UpdateWantAsync(OfferModelWithToken want)
         {
             var json = JsonConvert.SerializeObject(want);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -556,7 +556,7 @@ namespace IWantICan.Core.Services.Api
             };
         }
 
-        private CanModel GetDummyCan(int seed, bool my = false)
+        private OfferModel GetDummyCan(int seed, bool my = false)
         {
             var rnd = new Random(seed);
             var desc = "";
@@ -564,7 +564,7 @@ namespace IWantICan.Core.Services.Api
                 desc = "[My can] ";
             desc += Task.Run(() => GetFromYandex(100)).Result;
 
-            return new CanModel
+            return new OfferModel
             {
                 subCategoryModelId = seed,
                 UserModelId = seed,
@@ -580,7 +580,7 @@ namespace IWantICan.Core.Services.Api
             };
         }
 
-        private WantModel GetDummyWant(int seed, bool my = false)
+        private OfferModel GetDummyWant(int seed, bool my = false)
         {
             var rnd = new Random(seed);
             var desc = "";
@@ -588,8 +588,8 @@ namespace IWantICan.Core.Services.Api
                 desc = "[My want] ";
             desc += Task.Run(() => GetFromYandex(100)).Result;
 
-            return new WantModel
-            {
+            return new OfferModel
+			{
                 subCategoryModelId = seed,
                 UserModelId = seed,
                 description = desc,

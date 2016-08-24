@@ -1,5 +1,6 @@
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using IWantICan.Core.ViewModels;
@@ -12,21 +13,22 @@ namespace IWantICan.Droid.Fragments
     [Register("iwantican.droid.fragments.SignupFragment")]
     public class SignupFragment : BaseStartFragment<SignupViewModel>
     {
-        protected Toolbar toolbar { get; private set; }
+	    string oldTitle;
+	    StartContainerActivity activity;
+		ActionBar actionBar;
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
 	        HasOptionsMenu = true;
 
-            toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
+			activity = Activity as StartContainerActivity;
+			oldTitle = activity.Title;
+			activity.SetTitle(Resource.String.toolbar_title_register);
 
-            toolbar.SetTitle(Resource.String.toolbar_title_register);
-
-            var mainActivity = Activity as StartContainerActivity;
-            mainActivity?.SetSupportActionBar(toolbar);
-            mainActivity?.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			actionBar = activity.SupportActionBar;
+			actionBar.SetDisplayHomeAsUpEnabled(true);
 
             return view;
         }
@@ -50,8 +52,15 @@ namespace IWantICan.Droid.Fragments
             }
 
             return base.OnOptionsItemSelected(item);
-        }
+		}
 
-        protected override int FragmentId => Resource.Layout.fragment_signup;
+		public override void OnDestroyView()
+		{
+			activity.Title = oldTitle;
+			actionBar.Hide();
+			base.OnDestroyView();
+		}
+
+		protected override int FragmentId => Resource.Layout.fragment_signup;
     }
 }

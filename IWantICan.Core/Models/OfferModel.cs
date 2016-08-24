@@ -1,8 +1,9 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace IWantICan.Core.Models
 {
-    public class WantModel
+    public class OfferModel
     {
         public int id { get; set; }
         public int UserModelId { get; set; }
@@ -13,10 +14,12 @@ namespace IWantICan.Core.Models
         public string description { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
+		[JsonIgnore]
+		public OfferType type { get; set; }
 
-        public WantModelWithToken ToTokenedModel(string token)
+        public OfferModelWithToken ToTokenedModel(string token)
         {
-            return new WantModelWithToken
+            return new OfferModelWithToken
             {
                 id = id,
                 UserModelId = UserModelId,
@@ -27,6 +30,7 @@ namespace IWantICan.Core.Models
                 description = description,
                 createdAt = createdAt,
                 updatedAt = updatedAt,
+				type = type,
 
                 token = token
             };

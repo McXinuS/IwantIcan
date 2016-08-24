@@ -13,13 +13,11 @@ namespace IWantICan.Droid.Activities
 {
     [Activity(
         Label = "Offers",
-        Theme = "@style/AppTheme",
-        LaunchMode = LaunchMode.SingleTop,
-        Name = "iwantican.droid.activities.MainActivity"
+        Theme = "@style/AppTheme.Main",
+        LaunchMode = LaunchMode.SingleTop
         )]
     public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>
     {
-        protected Toolbar toolbar { get; private set; }
         public MvxActionBarDrawerToggle drawerToggle;
         public DrawerLayout drawerLayout;
 
@@ -44,9 +42,8 @@ namespace IWantICan.Droid.Activities
 
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
-            toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+	        SupportActionBar.Elevation = 0;
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             drawerToggle = new MvxActionBarDrawerToggle(
                 this,                           // host Activity

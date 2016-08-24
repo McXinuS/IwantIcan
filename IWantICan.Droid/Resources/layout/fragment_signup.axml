@@ -2,20 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/layout_start"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-        <include
-            android:id="@+id/toolbar_signup"
-            layout="@layout/toolbar_actionbar" />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_below="@id/toolbar_signup">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -146,8 +134,6 @@
                         local:MvxBind="Click SignupCommand" />
                 </LinearLayout>
             </ScrollView>
-        </FrameLayout>
-    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

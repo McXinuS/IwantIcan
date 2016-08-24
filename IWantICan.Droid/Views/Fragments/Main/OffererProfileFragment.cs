@@ -1,35 +1,38 @@
-using System.Collections.Generic;
+using System;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 using IWantICan.Core.ViewModels;
-using MvvmCross.Binding.Droid.Views;
+using IWantICan.Droid.Utilities;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 
 namespace IWantICan.Droid.Fragments
 {
-    [MvxFragment(typeof(OfferItemContainerViewModel), Resource.Id.main_frame, true)]
+    [MvxFragment(typeof(OfferDetailsContainerViewModel), Resource.Id.main_frame, true)]
     [Register("iwantican.droid.fragments.OffererProfileFragment")]
-    public class OffererProfileFragment : BaseOfferItemFragment<OffererProfileViewModel>
+    public class OffererProfileFragment : BaseOfferDetailsFragment<OffererProfileViewModel>
     {
-        //private readonly string[] _groups = new string[] { "Хочет", "Может" };
-
-        //private string[] _cans = { "Декабрь", "Январь", "Февраль" };
-        //private string[] _wants = { "Март", "Апрель", "Май" };
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = base.OnCreateView(inflater, container, savedInstanceState);
+			
+	        var contactsRecView = view.FindViewById<MvxRecyclerView>(Resource.Id.contactsRecycler);
 
-            var backArrow = view.FindViewById<ImageView>(Resource.Id.backArrow);
-            backArrow.Click += (sender, args) => { Activity.OnBackPressed(); };
+			//contactsRecView.Click += ContactsRecViewOnClick;
+			contactsRecView.HasFixedSize = true;
+			var layoutManager = new LinearLayoutManager(Activity);
+			contactsRecView.SetLayoutManager(layoutManager);
 
-            // TODO intent web/phone/mailto action on corresponding layout click
+			/*
+			string[] _groups = new string[] { "Хочет", "Может" };
+			string[] _cans = { "Декабрь", "Январь", "Февраль" };
+			string[] _wants = { "Март", "Апрель", "Май" };
 
-            /*IDictionary<string, object> map;
-
+			IDictionary<string, object> map;
+			
             var groupDataList = new List<IDictionary<string, object>>();
             foreach (var group in _groups)
             {
@@ -66,21 +69,23 @@ namespace IWantICan.Droid.Fragments
             string[] childFrom = { "monthName" };
             int[] childTo = { Android.Resource.Id.Text1 };
 
-            SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(
+            MvxExpandableListAdapter adapter = new MvxExpandableListAdapter(
                     Application.Context, groupDataList,
                     Android.Resource.Layout.SimpleExpandableListItem1, groupFrom,
                     groupTo, сhildDataList, Android.Resource.Layout.SimpleListItem1,
                     childFrom, childTo);
             
-            var elv = view.FindViewById<ExpandableListView>(Resource.Id.offers);
+            var elv = view.FindViewById<MvxExpandableListView>(Resource.Id.offers);
             elv.SetAdapter(adapter);*/
 
-            //MvxExpandableListView mvxElv = view. FindViewById<MvxExpandableListView>(Resource.Id.offers);
-            //mvxElv.GroupTemplateId
-
-            return view;
+			return view;
         }
 
-        protected override int FragmentId => Resource.Layout.fragment_offerer_profile;
+	    private void ContactsRecViewOnClick(object sender, EventArgs eventArgs)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    protected override int FragmentId => Resource.Layout.fragment_offerer_profile;
     }
 }

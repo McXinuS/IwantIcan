@@ -15,34 +15,34 @@ namespace IWantICan.Core.Services
             _restManager = new RestManager();
         }
 
-        public async Task<bool> CreateWant(WantModel want)
+        public async Task<bool> CreateWant(OfferModel want)
         {
             return await _restManager.AddWantAsync(want);
         }
         
-        public async Task<List<WantModel>> GetWantList(int[] catIds)
+        public async Task<List<OfferModel>> GetWantList(int[] catIds)
         {
             return await _restManager.GetWantListByCategoryAsync(catIds);
         }
 
-        public async Task<List<WantModel>> GetWantListByUser(int userId)
+        public async Task<List<OfferModel>> GetWantListByUser(int userId)
         {
             return await _restManager.GetWantListByUserAsync(userId);
         }
 
-        public async Task<List<WantModel>> GetMyWantList()
+        public async Task<List<OfferModel>> GetMyWantList()
         {
             var sp = Mvx.Resolve<ISharedPreferencesService>();
             var myId = sp.UserId;
             return await _restManager.GetWantListByUserAsync(myId);
         }
 
-        public async Task<WantModel> GetWant(int id)
+        public async Task<OfferModel> GetWant(int id)
         {
             return await _restManager.GetWantAsync(id);
         }
 
-        public async Task<bool> UpdateWant(WantModel want)
+        public async Task<bool> UpdateWant(OfferModel want)
         {
             return await _restManager.UpdateWantAsync(want);
         }

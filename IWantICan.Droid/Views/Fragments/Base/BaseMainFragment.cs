@@ -1,12 +1,10 @@
 using Android.Content.Res;
 using Android.OS;
-using Android.Support.V7.Widget;
 using Android.Views;
 using IWantICan.Droid.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IWantICan.Droid.Fragments
 {
@@ -47,8 +45,8 @@ namespace IWantICan.Droid.Fragments
         {
             base.OnActivityCreated(savedInstanceState);
             _mainActivity.drawerToggle?.SyncState();
-        }
-    }
+		}
+	}
 
     public abstract class BaseMainFragment<TViewModel> : BaseMainFragment where TViewModel : class, IMvxViewModel
     {

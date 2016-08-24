@@ -20,13 +20,13 @@ namespace IWantICan.Core.ViewModels
         private ICategoryService _categoryService;
         private List<CategoryModel> _categories;
 
-        private int _id;
-        private string _name;
-        private string _description;
-        private int _category;
-        private string _imgUrl;
+	    private OfferModel _offer;
 
-        private string _type;
+	    public OfferModel Offer
+	    {
+		    get { return _offer; }
+			set { _offer = value; RaisePropertyChanged(() => Offer); }
+	    }
 
         public EditOfferViewModel(ICanService canService,
             IWantService wantService,
@@ -39,60 +39,11 @@ namespace IWantICan.Core.ViewModels
             _dialogService = dialogService;
 
             Categories = categoryService.GetCategoryList();
-            Category = Categories[0].id;
         }
 
-        public void Init(string offer, string type)
+        public void Init(string offer)
         {
-            _type = type;
-            Task t = new Task(() => LoadData(offer, type));
-            t.Start();
-        }
-
-        private void LoadData(string offer, string type)
-        {
-            if (type.Contains("CanModel"))
-            {
-                var Can = offer.Deserialize<CanModel>();
-                if (Can != null)
-                {
-                    _id = Can.id;
-                    Name = Can.name;
-                    Description = Can.description;
-                    Category = (int)Can.subCategoryModelId;
-                    _imgUrl = Can.imgurl;
-                }
-            }
-            else
-            {
-                var Want = offer.Deserialize<WantModel>();
-                if (Want != null)
-                {
-                    _id = Want.id;
-                    Name = Want.name;
-                    Description = Want.description;
-                    Category = Want.subCategoryModelId;
-                    _imgUrl = Want.imgurl;
-                }
-            }
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; RaisePropertyChanged(() => Name); }
-        }
-
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; RaisePropertyChanged(() => Description); }
-        }
-
-        public int Category
-        {
-            get { return _category; }
-            set { _category = value; RaisePropertyChanged(() => Category); }
+			Offer = offer.Deserialize<OfferModel>();
         }
 
         public IMvxCommand SaveCommand
@@ -106,39 +57,21 @@ namespace IWantICan.Core.ViewModels
                 return;
 
             bool ok;
-            if (_type.Contains("CanModel"))
-            {
-                // update can model
-                CanModel can = new CanModel
-                {
-                    id = _id,
-                    name = Name,
-                    description = Description,
-                    subCategoryModelId = Category,
-                    imgurl = _imgUrl
-                };
-                ok = await _canService.UpdateCan(can);
-            }
+
+            if (Offer.type == OfferType.Can)
+                ok = await _canService.UpdateCan(Offer);
             else
-            {
-                // update want model
-                WantModel want = new WantModel
-                {
-                    id = _id,
-                    name = Name,
-                    description = Description,
-                    subCategoryModelId = Category,
-                    imgurl = _imgUrl
-                };
-                ok = await _wantService.UpdateWant(want);
-            }
+                ok = await _wantService.UpdateWant(Offer);
+
             if (ok)
-                _dialogService.Alert(Constants.DialogSaveSuccess,
+                _dialogService.Alert(
+					Constants.DialogSaveSuccess,
                     Constants.DialogTitleSuccess,
                     "ОК",
                     () => Close(this));
             else
-                _dialogService.Alert(Constants.DialogSaveFailed,
+                _dialogService.Alert(
+					Constants.DialogSaveFailed,
                     Constants.DialogTitleError,
                     "ОК");
         }
@@ -147,8 +80,8 @@ namespace IWantICan.Core.ViewModels
         {
             var toCheck = new List<Tuple<string, string, ValidationType>>
             {
-                new Tuple<string, string, ValidationType> (Name, "Name", ValidationType.Common),
-                new Tuple<string, string, ValidationType> (Description, "Description", ValidationType.Common)
+                new Tuple<string, string, ValidationType> (Offer.name, "Name", ValidationType.Common),
+                new Tuple<string, string, ValidationType> (Offer.description, "Description", ValidationType.Common)
             };
             return ValidatorHelper.Validate(toCheck, ref _errors);
         }
@@ -160,18 +93,24 @@ namespace IWantICan.Core.ViewModels
 
         private void DoDeleteCommand()
         {
-            _dialogService.Alert(Constants.DialogDeleteConfirm, Constants.DialogTitleDeleteConfirm,
-                "OK", "ОТМЕНА", Delete);
+            _dialogService.Alert(
+				Constants.DialogDeleteConfirm,
+				Constants.DialogTitleConfirm,
+				Constants.DialogButtonOk,
+				Constants.DialogButtonCancel, 
+				Delete);
         }
 
         private async void Delete()
         {
             bool ok;
-            if (_type.Contains("CanModel"))
-                ok = await _canService.DeleteCan(_id);
+
+			if (Offer.type == OfferType.Can)
+				ok = await _canService.DeleteCan(Offer.id);
             else
-                ok = await _wantService.DeleteWant(_id);
-            if (ok)
+                ok = await _wantService.DeleteWant(Offer.id);
+
+			if (ok)
                 _dialogService.Alert(Constants.DialogDeleteSuccess,
                     Constants.DialogTitleSuccess,
                     "ОК",
@@ -190,7 +129,10 @@ namespace IWantICan.Core.ViewModels
         private void ShowFilter()
         {
             var categories = Categories.Select(c => c.name).ToArray();
-            _dialogService.Filter(categories, _categoryService.IndexOf(Category) + 1, s => Category = Categories[s - 1].id);
+            _dialogService.Filter(
+				categories,
+				_categoryService.IndexOf(Offer.subCategoryModelId) + 1,
+				s => Offer.subCategoryModelId = Categories[s - 1].id);
         }
 
         public List<CategoryModel> Categories

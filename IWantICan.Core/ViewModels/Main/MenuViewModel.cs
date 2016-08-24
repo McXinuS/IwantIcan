@@ -47,17 +47,13 @@ namespace IWantICan.Core.ViewModels
             get { return new MvxCommand(DoLogoutCommand); }
         }
 
-        private MvxPresentationHint popToRootHint = Mvx.Resolve<MvxPresentationHint>();
-
         private async void DoLogoutCommand()
         {
             var ok = await _authService.Logout();
             if (ok)
             {
-                // TODO fix ChangePresentation
-                ChangePresentation(popToRootHint);
-                Close(this);
                 ShowViewModel<StartContainerViewModel>();
+                Close(this);
             }
         }
 

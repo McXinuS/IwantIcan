@@ -10,38 +10,38 @@ namespace IWantICan.Core.Services
         /// Create want item.
         /// </summary>
         /// <returns>True is the want has been created, false otherwse.</returns>
-        Task<bool> CreateWant(WantModel want);
+        Task<bool> CreateWant(OfferModel want);
 
         /// <summary>
         /// Get a list of wants.
         /// </summary>
         /// <returns>A list of wants.</returns>
-        Task<List<WantModel>> GetWantList(int[] catIds);
+        Task<List<OfferModel>> GetWantList(int[] catIds);
 
         /// <summary>
         /// Get a list of wants of a user.
         /// </summary>
         /// <returns>A list of wants.</returns>
-        Task<List<WantModel>> GetWantListByUser(int userId);
+        Task<List<OfferModel>> GetWantListByUser(int userId);
 
         /// <summary>
         /// Get a list of wants of the current user.
         /// </summary>
         /// <returns>A list of wants.</returns>
-        Task<List<WantModel>> GetMyWantList();
+        Task<List<OfferModel>> GetMyWantList();
 
         /// <summary>
         /// Get the information about the want by its ID.
         /// </summary>
         /// <param name="id">ID of the want.</param>
         /// <returns>The want.</returns>
-        Task<WantModel> GetWant(int id);
+        Task<OfferModel> GetWant(int id);
 
         /// <summary>
         /// Update want item.
         /// </summary>
         /// <returns>True is the want has been updated, false otherwse.</returns>
-        Task<bool> UpdateWant(WantModel want);
+        Task<bool> UpdateWant(OfferModel want);
 
         /// <summary>
         /// Delete want item.

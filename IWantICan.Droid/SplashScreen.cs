@@ -4,8 +4,8 @@ using MvvmCross.Droid.Views;
 
 namespace IWantICan.Droid
 {
-    [Activity(Label = "I Want! I Can!",
-        Theme = "@style/AppTheme",
+    [Activity(Label = "I Want I Can",
+        Theme = "@style/AppTheme.Splash",
         MainLauncher = true,
         NoHistory = true)]
     public class SplashScreenView : MvxSplashScreenActivity

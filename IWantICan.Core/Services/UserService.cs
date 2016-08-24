@@ -10,9 +10,9 @@ namespace IWantICan.Core.Services
     {
         RestManager _restManager;
 
-        UserModel _currentUser;
+        private UserModel _currentUser;
 
-        public UserService()
+		public UserService()
         {
             _restManager = new RestManager();
             _currentUser = null;
@@ -51,16 +51,34 @@ namespace IWantICan.Core.Services
 
         public async Task<UserModel> GetCurrentUser()
         {
-            if (_currentUser != null)
-                return _currentUser;
+			// get user info
+	        if (_currentUser == null)
+			{
+				var sharedPref = Mvx.Resolve<ISharedPreferencesService>();
+				var id = sharedPref.UserId;
+				if (id < 0)
+					return null;
+				_currentUser = await _restManager.GetUserAsync(id);
+			}
 
-            var sharedPref = Mvx.Resolve<ISharedPreferencesService>();
-            var id = sharedPref.UserId;
-            if (id < 0)
-                return null;
+			// clone loaded user
+			if (_currentUser != null)
+			{
+				return new UserModel
+				{
+					avatar = _currentUser.avatar,
+					email = _currentUser.email,
+					id = _currentUser.id,
+					login = _currentUser.login,
+					name = _currentUser.name,
+					password = _currentUser.password,
+					phone = _currentUser.phone,
+					surname = _currentUser.surname,
+					vkLink = _currentUser.vkLink
+				};
+			}
 
-            _currentUser = await _restManager.GetUserAsync(id);
-            return _currentUser;
+			return null;
         }
     }
 }

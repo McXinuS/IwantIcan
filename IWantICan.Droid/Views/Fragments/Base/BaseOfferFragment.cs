@@ -1,10 +1,10 @@
 using Android.App;
-using Android.Content;
-using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
+using IWantICan.Core.ViewModels;
+using IWantICan.Droid.Utilities;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 
@@ -14,7 +14,9 @@ namespace IWantICan.Droid.Fragments
     {
         protected MvxRecyclerView RecyclerView;
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		protected abstract string EmptyListMessage { get; }
+
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
@@ -30,7 +32,13 @@ namespace IWantICan.Droid.Fragments
                 RecyclerView.AddItemDecoration(new SimpleDividerItemDecoration(Application.Context));
             }
 
-            // TODO find an answer to why it has been here? :D
+			if (!string.IsNullOrWhiteSpace(EmptyListMessage) && RecyclerView != null)
+			{
+				var tb = view.FindViewById<TextView>(Resource.Id.empty_view);
+				tb.Text = EmptyListMessage;
+			}
+
+			// TODO
             /*
             var swipeToRefresh = view.FindViewById<MvxSwipeRefreshLayout>(Resource.Id.refresher);
             var appBar = Activity.FindViewById<AppBarLayout>(Resource.Id.appbar);
@@ -43,35 +51,11 @@ namespace IWantICan.Droid.Fragments
             return view;
         }
 
-        public class SimpleDividerItemDecoration : RecyclerView.ItemDecoration
-        {
-            private Drawable mDivider;
-
-            public SimpleDividerItemDecoration(Context context)
-            {
-                mDivider = context.Resources.GetDrawable(Resource.Drawable.line_divider);
-            }
-            
-            public override void OnDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state)
-            {
-                int left = parent.PaddingLeft;
-                int right = parent.Width - parent.PaddingRight;
-
-                int childCount = parent.ChildCount;
-                for (int i = 0; i < childCount; i++)
-                {
-                    View child = parent.GetChildAt(i);
-
-                    Android.Support.V7.Widget.RecyclerView.LayoutParams lParams = (RecyclerView.LayoutParams)child.LayoutParameters;
-
-                    int top = child.Bottom + lParams.BottomMargin;
-                    int bottom = top + mDivider.IntrinsicHeight;
-
-                    mDivider.SetBounds(left, top, right, bottom);
-                    mDivider.Draw(c);
-                }
-            }
-        }
+	    public override void OnDestroyView()
+	    {
+			(ViewModel as BaseOfferViewModel)?.MessengerUnsibscribeCommand.Execute(null);
+		    base.OnDestroyView();
+	    }
     }
 
     public abstract class BaseOfferFragment<TViewModel> : BaseOfferFragment where TViewModel : class, IMvxViewModel

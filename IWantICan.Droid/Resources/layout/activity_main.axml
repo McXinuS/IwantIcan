@@ -5,19 +5,10 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:fitsSystemWindows="true">
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include
-            android:id="@+id/toolbar_main"
-            layout="@layout/toolbar_actionbar" />
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar_main" />
-    </RelativeLayout>
+        android:layout_height="match_parent" />
     <FrameLayout
         android:id="@+id/navigation_frame"
         android:layout_height="match_parent"

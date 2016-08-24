@@ -3,27 +3,21 @@ using Android.OS;
 using Android.Views;
 using IWantICan.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace IWantICan.Droid.Activities
 {
     [Activity(
         Label = "@string/toolbar_title_edit",
-        Theme = "@style/AppTheme",
-        Name = "iwantican.droid.activities.EditOfferActivity"
-        )]
+        Theme = "@style/AppTheme.OfferEdit",
+		WindowSoftInputMode = SoftInput.StateAlwaysHidden
+		)]
     public class EditOfferActivity : MvxAppCompatActivity<EditOfferViewModel>
     {
-        protected Toolbar toolbar { get; private set; }
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.activity_offer_create);
-
-            toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			SetContentView(Resource.Layout.activity_offer_create);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
