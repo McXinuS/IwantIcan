@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:paddingTop="@dimen/element_padding_small"
-    android:paddingBottom="@dimen/element_padding_small" >
+    android:paddingBottom="@dimen/element_padding_small"
+    android:paddingLeft="@dimen/element_padding_medium"
+    android:paddingRight="@dimen/element_padding_medium" >
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

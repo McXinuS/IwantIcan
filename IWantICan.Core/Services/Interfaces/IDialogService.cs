@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IWantICan.Core.Models;
 
 namespace IWantICan.Core.Interfaces
@@ -28,9 +29,9 @@ namespace IWantICan.Core.Interfaces
         /// </summary>
         void Filter(string[] categories, int[] selected, Func<int[], int[]> callback);
 
-        /// <summary>
-        /// Shows a dialog with contact information of the user.
-        /// </summary>
-        void ContactDialog(UserModel user);
-    }
+		/// <summary>
+		/// Shows a dialog with contact information of the user.
+		/// </summary>
+		void ContactDialog(List<ContactsEntry> contacts);
+	}
 }

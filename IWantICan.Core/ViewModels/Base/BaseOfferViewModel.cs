@@ -98,7 +98,12 @@ namespace IWantICan.Core.ViewModels
 		public List<OfferModel> Offers
 		{
 			get { return _offers; }
-			set { _offers = value; RaisePropertyChanged(() => Offers); }
+			set
+			{
+				_offers = value;
+				RaisePropertyChanged(() => Offers);
+				IsEmpty = Offers.Count == 0;
+			}
 		}
 
 		public ICommand MessengerUnsibscribeCommand

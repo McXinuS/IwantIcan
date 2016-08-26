@@ -11,8 +11,10 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"        
+            local:tabMaxWidth="0dp"
             local:tabGravity="fill"
+            local:tabMode="fixed"
             local:tabBackground="@color/colorPrimary"
             local:tabTextColor="@color/white_semi_transparent"
             local:tabSelectedTextColor="@color/white" />

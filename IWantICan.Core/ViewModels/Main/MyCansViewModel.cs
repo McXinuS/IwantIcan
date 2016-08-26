@@ -20,7 +20,6 @@ namespace IWantICan.Core.ViewModels
             IsRefreshing = true;
 
 			Offers = await _canService.GetMyCanList();
-            IsEmpty = Offers.Count == 0;
 
             IsRefreshing = false;
         }

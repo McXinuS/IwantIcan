@@ -7,6 +7,7 @@ using IWantICan.Core.Models;
 using IWantICan.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 
 namespace IWantICan.Core.ViewModels
 {
@@ -36,6 +37,21 @@ namespace IWantICan.Core.ViewModels
 			_dialogService = dialogService;
 
 			Categories = categoryService.GetCategoryList();
+
+			if (Categories == null || Categories.Count == 0)
+			{
+				var mtDispatcher = Mvx.Resolve<IMvxMainThreadDispatcher>();
+				mtDispatcher.RequestMainThreadAction(() =>
+				{
+					_dialogService.Alert(
+						Constants.DialogNoNetwork,
+						Constants.DialogTitleError,
+						Constants.DialogButtonOk,
+						() => Close(this));
+				});
+				return;
+			}
+
 			Category = Categories[0].id;
 		}
 

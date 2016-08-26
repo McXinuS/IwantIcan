@@ -50,24 +50,18 @@ namespace IWantICan.Droid.Fragments
 
             avatarView = _navigationView.GetHeaderView(0).FindViewById<CircleImageView>(Resource.Id.avatar);
             
-			if (ViewModel.User != null)
-				// if viewmodel's property has been updated before the bind
-				// can be applied then update from viewmodel's property
-				UpdateAvatar(ViewModel.User?.avatar);
-			else
+			var set = this.CreateBindingSet<MenuFragment, MenuViewModel>();
+			set.Bind(this).For(p => p.User).To(vm => vm.User);
+			set.Apply();
+
+			// if viewmodel's property has been updated before the bind
+			// applied, try to update manually from viewmodel
+			if (User == null)
 			{
-				var set = this.CreateBindingSet<MenuFragment, MenuViewModel>();
-				set.Bind(this).For(p => p.User).To(vm => vm.User);
-				set.Apply();
+				User = ViewModel.User;
 			}
 
 			return view;
-        }
-
-        public override void OnResume()
-        {
-            ViewModel.ReloadUserCommand.Execute();
-            base.OnResume();
         }
 
         private void UpdateAvatar(string url)

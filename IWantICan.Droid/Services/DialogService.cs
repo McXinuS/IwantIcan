@@ -8,6 +8,10 @@ using Android.Content.Res;
 using Android.Widget;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Models;
+using IWantICan.Core.ViewModels;
+using IWantICan.Droid.Fragments;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
@@ -16,7 +20,7 @@ namespace IWantICan.Droid.Services
     public class DialogService : IDialogService
     {
 	    const int _alertDialogThemeId = Resource.Style.AlertDialogStyle;
-
+		
 		public void Alert(string message, string title, string okbtnText)
         {
             var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
@@ -151,35 +155,27 @@ namespace IWantICan.Droid.Services
             return selectedInt.ToArray();
         }
 
-        public void ContactDialog(UserModel user)
-        {
-            if (user == null)
-                return;
+		public void ContactDialog(List<ContactsEntry> contacts)
+		{
+			if (contacts == null)
+				return;
 
-            var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
-            var act = top.Activity;
+			var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
+			var act = top.Activity;
 
-            var adb = new Dialog(act);
-            // adb.SetTitle($"Связаться с {user.name} {user.surname}"); // layout width issue
-            adb.SetTitle("Связаться");
-            adb.SetCancelable(true);
-            adb.SetContentView(Resource.Layout.dialog_contact);
+			var adb = new Dialog(act);
+			// adb.SetTitle($"Связаться с {user.name} {user.surname}"); // layout width issue
+			adb.SetTitle("Связаться");
+			adb.SetCancelable(true);
+			adb.SetContentView(Resource.Layout.dialog_contact);
 
-            //var title = (TextView) adb.FindViewById(Resource.Id.title);
+			var contactsRecycler = (MvxRecyclerView)adb.FindViewById(Resource.Id.contactsRecycler);
+			//contactsRecycler.ItemsSource = contacts;
 
-            var titlePhone = (TextView)adb.FindViewById(Resource.Id.titlePhone);
-            var titleEmail = (TextView)adb.FindViewById(Resource.Id.titleEmail);
-            var titleVk = (TextView)adb.FindViewById(Resource.Id.titleVk);
-            
-            var errorMessage = act.Resources.GetString(Resource.String.dialog_connect_empty_field);
-            titlePhone.Text = !string.IsNullOrWhiteSpace(user.phone) ? user.phone : errorMessage;
-            titleEmail.Text = !string.IsNullOrWhiteSpace(user.email) ? user.email : errorMessage;
-            titleVk.Text = !string.IsNullOrWhiteSpace(user.vkLink) ? user.vkLink : errorMessage;
+			// close button
+			((Button)adb.FindViewById(Resource.Id.closeButton)).Click += (sender, args) => { adb.Dismiss(); };
 
-            // close button
-            ((Button)adb.FindViewById(Resource.Id.closeButton)).Click += (sender, args) => { adb.Dismiss(); };
-
-            adb.Show();
-        }
-    }
+			adb.Show();
+		}
+	}
 }

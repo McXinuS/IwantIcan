@@ -47,6 +47,7 @@
     <Compile Include="Helpers\UpdateAvatarFromVk.cs" />
     <Compile Include="Helpers\ValidatorHelper.cs" />
     <Compile Include="Models\ContactsEntry.cs" />
+    <Compile Include="Models\OfferersOfferList.cs" />
     <Compile Include="Services\Messenger\IFilterMessengerService.cs" />
     <Compile Include="Services\Messenger\FilterDoneMessage.cs" />
     <Compile Include="Models\OfferModelWithToken.cs" />

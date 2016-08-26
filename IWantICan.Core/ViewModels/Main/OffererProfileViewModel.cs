@@ -16,7 +16,7 @@ namespace IWantICan.Core.ViewModels
 	{
 		private UserModel _user;
 		private List<ContactsEntry> _contacts;
-        private List<List<OfferModel>> _offers;
+        private List<OfferersOfferList> _offers;
 		
 		public UserModel User
 		{
@@ -24,7 +24,7 @@ namespace IWantICan.Core.ViewModels
 			set { _user = value; RaisePropertyChanged(() => User); }
 		}
 
-		public List<List<OfferModel>> Offers
+		public List<OfferersOfferList> Offers
         {
             get { return _offers; }
             set { _offers = value; RaisePropertyChanged(() => Offers); }
@@ -63,19 +63,22 @@ namespace IWantICan.Core.ViewModels
 					Constants.ProfileVk)
 			};
 
+
 			ICanService canService = Mvx.Resolve<ICanService>();
             IWantService wantService = Mvx.Resolve<IWantService>();
+			
+		    var canList = new OfferersOfferList { Header = "Может" };
+	        var userCans = await canService.GetCanListByUser(User.id);
+		    canList.AddRange(userCans);
 
-	        var cans = await canService.GetCanListByUser(User.id);
-	        var wants = await wantService.GetWantListByUser(User.id);
-
-            //var canNames = cans.Select(t => t.name).ToList();
-            //var wantNames = wants.Select(t => t.name).ToList();
-
-	        Offers = new List<List<OfferModel>>
+			var wantList = new OfferersOfferList { Header = "Хочет" };
+	        var userWants = await wantService.GetWantListByUser(User.id);
+			wantList.AddRange(userWants);
+			
+			Offers = new List<OfferersOfferList>
             {
-				cans,
-				wants
+				canList,
+				wantList
 			};
 		}
 

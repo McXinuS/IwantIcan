@@ -17,7 +17,8 @@
         public static string WantListUrl    = string.Format(Constants.RestUrl, "/user/userwants/bySubCategory");
 
         // VK
-        public static string VkApiGetAvatarUrl  = "http://api.vkontakte.ru/method/users.get?uids={0}&fields=photo_max_orig";
+        public static string VkApiAvatarQuality = "photo_max_orig";
+        public static string VkApiGetAvatarUrl  = "http://api.vkontakte.ru/method/users.get?uids={0}&fields="+VkApiAvatarQuality;
 
         // Placeholders
 	    public static string ImagePlaceholderUrl = "https://unsplash.it/800/480/?image=";

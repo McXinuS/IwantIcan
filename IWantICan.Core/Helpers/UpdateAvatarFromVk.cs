@@ -20,6 +20,7 @@ namespace IWantICan.Core.Helpers
             if (!ValidatorHelper.IsValid(user.vkLink, ValidationType.Vk))
                 return user;
 
+			// TODO clone the object properly
             var userNew = user;
 
             try
@@ -34,7 +35,7 @@ namespace IWantICan.Core.Helpers
                     {
                         var contentResp = await response.Content.ReadAsStringAsync();
                         JToken resp = (JToken)JsonConvert.DeserializeObject(contentResp);
-                        var result = resp.Value<JToken>("response")[0].Value<string>("photo_200");
+                        var result = resp.Value<JToken>("response")[0].Value<string>(Constants.VkApiAvatarQuality);
 
                         if (result != null && !result.Contains("images/camera"))
                             userNew.avatar = result;

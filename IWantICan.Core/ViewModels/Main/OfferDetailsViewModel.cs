@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Android.Text.Method;
@@ -17,6 +18,7 @@ namespace IWantICan.Core.ViewModels
 
 		private OfferModel _offer;
 		private UserModel _user;
+		private List<ContactsEntry> _contacts;
 
 		public OfferModel Offer
 		{
@@ -47,8 +49,22 @@ namespace IWantICan.Core.ViewModels
 		private async void LoadData(string offer)
 		{
 			Offer = offer.Deserialize<OfferModel>();
+
 			User = await _userService.GetUser(Offer.UserModelId);
-		}
+
+            _contacts = new List<ContactsEntry>
+            {
+                new ContactsEntry(
+                    "res:ic_call_black_24dp",
+                    User.phone),
+                new ContactsEntry(
+                    "res:ic_email_black_24dp",
+                    User.email),
+                new ContactsEntry(
+                    "res:ic_vk_black_24dp",
+                    User.vkLink)
+            };
+        }
 
 		public IMvxCommand GoProfileViewCommand
 		{
@@ -68,7 +84,7 @@ namespace IWantICan.Core.ViewModels
 
 		public ICommand ShowContactsCommand
 		{
-			get { return new MvxCommand(() => _dialogService.ContactDialog(User)); }
+			get { return new MvxCommand(() => _dialogService.ContactDialog(_contacts)); }
 		}
 	}
 }

@@ -20,7 +20,6 @@ namespace IWantICan.Core.ViewModels
             IsRefreshing = true;
 
 			Offers = await _wantService.GetWantList(SelectedCategory);
-            IsEmpty = Offers.Count == 0;
 
             IsRefreshing = false;
         }
