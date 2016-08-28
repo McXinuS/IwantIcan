@@ -264,7 +264,7 @@ namespace IWantICan.Core.Services.Api
 			// load items asyncroniously
 			Task[] tasks = new Task[size];
 
-			List<OfferModel> list = new List<OfferModel>();
+			var results = new List<OfferModel>[size];
 
 			for (var i = 0; i < size; i++)
 			{
@@ -274,12 +274,14 @@ namespace IWantICan.Core.Services.Api
 				{
 					var tempList = await ApiService.GetWantListByCategoryAsync(catIds[index], Token);
 
-					MvxMainThreadDispatcher.Instance.RequestMainThreadAction(() => { list.AddRange(tempList); });
+					results[index] = tempList;
 				});
 				tasks[index] = task;
 			}
 
 			await Task.WhenAll(tasks);
+
+			var list = results.SelectMany(x => x).ToList();
 			list = list
 				.OrderByDescending(o => o.createdAt)
 				.Select(c => { c.type = OfferType.Want; return c; })

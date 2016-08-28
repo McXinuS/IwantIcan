@@ -6,6 +6,8 @@ using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using IWantICan.Core.ViewModels;
+using IWantICan.Droid.Fragments;
+using MvvmCross.Droid.Shared.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
@@ -54,7 +56,7 @@ namespace IWantICan.Droid.Activities
             );
 
             drawerToggle.DrawerOpened += (sender, e) => HideSoftKeyboard();
-            drawerLayout.AddDrawerListener(drawerToggle);
+			drawerLayout.AddDrawerListener(drawerToggle);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -62,7 +64,7 @@ namespace IWantICan.Droid.Activities
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    if (ShowHamburgerMenu)
+                    if (ShowHamburgerMenu && !drawerLayout.IsDrawerOpen(GravityCompat.Start))
                         drawerLayout.OpenDrawer(GravityCompat.Start);
                     else
                         OnBackPressed();
@@ -72,7 +74,23 @@ namespace IWantICan.Droid.Activities
             return base.OnOptionsItemSelected(item);
         }
 
-        private void ShowBackButton()
+		public override void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, Android.Support.V4.App.FragmentTransaction transaction)
+		{
+			if (fragmentInfo.ViewModelType == typeof(AllOffersViewModel)
+				|| fragmentInfo.ViewModelType == typeof(MyOffersViewModel))
+			{
+				transaction.SetCustomAnimations(
+					Resource.Animation.abc_fade_in,
+					Resource.Animation.slide_from_center_to_right,
+					Resource.Animation.abc_fade_in,
+					Resource.Animation.slide_from_center_to_right);
+			}
+
+			base.OnBeforeFragmentChanging(fragmentInfo, transaction);
+		}
+
+
+		private void ShowBackButton()
         {
             drawerToggle.DrawerIndicatorEnabled = false;
             //drawerLayout.SetDrawerLockMode(DrawerLayout.LockModeLockedClosed);

@@ -8,6 +8,7 @@ namespace IWantICan.Core.Services
     {
         RestManager _restManager;
         ISharedPreferencesService _sharedPreferencesService;
+		IUserService _userService;
         private bool _isLogged;
 
         public string ErrorMessage { get; private set; }
@@ -40,7 +41,8 @@ namespace IWantICan.Core.Services
         {
             SharedPreferencesService.AuthToken = string.Empty;
             SharedPreferencesService.UserId = 0;
-            IsLogged = false;
+			UserService.OnLogout();
+			IsLogged = false;
             return true;
         }
 
@@ -56,6 +58,15 @@ namespace IWantICan.Core.Services
             {
                 _sharedPreferencesService = _sharedPreferencesService ?? Mvx.Resolve<ISharedPreferencesService>();
                 return _sharedPreferencesService;
+            }
+        }
+
+        IUserService UserService
+		{
+            get
+            {
+				_userService = _userService ?? Mvx.Resolve<IUserService>();
+                return _userService;
             }
         }
     }

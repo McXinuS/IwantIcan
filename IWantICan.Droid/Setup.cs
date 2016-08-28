@@ -1,18 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
 using IWantICan.Core;
 using IWantICan.Core.Interfaces;
 using IWantICan.Droid.Services;
+using IWantICan.Droid.Utilities;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Views;
-using MvvmCross.Localization;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using XPlatformMenus.Droid.Utilities;
 
 namespace IWantICan.Droid
 {
@@ -40,10 +36,10 @@ namespace IWantICan.Droid
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            var mvxFragmentsPresenter = new MvxFragmentsPresenter(AndroidViewAssemblies);
+            var mvxFragmentsPresenter = new CustomPresenter(AndroidViewAssemblies);
             Mvx.RegisterSingleton<IMvxAndroidViewPresenter>(mvxFragmentsPresenter);
 
-            //add a presentation hint handler to listen for pop to root
+			/*//add a presentation hint handler to listen for pop to root
             mvxFragmentsPresenter.AddPresentationHintHandler<MvxPanelPopToRootPresentationHint>(hint =>
             {
                 var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
@@ -58,7 +54,7 @@ namespace IWantICan.Droid
             });
             //register the presentation hint to pop to root
             //picked up in the third view model
-            Mvx.RegisterSingleton<MvxPresentationHint>(() => new MvxPanelPopToRootPresentationHint());
+            Mvx.RegisterSingleton<MvxPresentationHint>(() => new MvxPanelPopToRootPresentationHint());*/
 
             return mvxFragmentsPresenter;
         }

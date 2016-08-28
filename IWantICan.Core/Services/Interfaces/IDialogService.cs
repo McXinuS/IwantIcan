@@ -28,10 +28,5 @@ namespace IWantICan.Core.Interfaces
         /// Shows a dialog with mutliple choice filter (CheckBox).
         /// </summary>
         void Filter(string[] categories, int[] selected, Func<int[], int[]> callback);
-
-		/// <summary>
-		/// Shows a dialog with contact information of the user.
-		/// </summary>
-		void ContactDialog(List<ContactsEntry> contacts);
 	}
 }

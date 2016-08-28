@@ -14,7 +14,6 @@ namespace IWantICan.Core.Models
         public string description { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
-		[JsonIgnore]
 		public OfferType type { get; set; }
 
         public OfferModelWithToken ToTokenedModel(string token)

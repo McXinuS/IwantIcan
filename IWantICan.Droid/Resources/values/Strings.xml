@@ -51,6 +51,7 @@
 			которые хотят получить другие</string>
 
 	<!-- Activity creation & edit strings -->	
+		<string name="activity_creation_type">Тип предложения</string>
 		<string name="activity_creation_title">Название</string>
 		<string name="activity_creation_description">Описание</string>
 		<string name="activity_creation_category">Категория</string>

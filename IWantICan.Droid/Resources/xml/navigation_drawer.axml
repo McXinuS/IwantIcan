@@ -14,7 +14,7 @@ xmlns:local="http://schemas.android.com/apk/res-auto">
         android:title="@string/drawer_item_title_my" />
   </group>
   <group android:id="@+id/nav_footer"
-         android:checkableBehavior="single">
+         android:checkableBehavior="none">
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_account_box_black_24dp"

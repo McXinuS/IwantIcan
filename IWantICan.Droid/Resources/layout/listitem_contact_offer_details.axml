@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:local="http://schemas.android.com/apk/res-auto/IWantICan"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:padding="@dimen/element_margin_small" >
-  <TextView
-      android:id="@+id/value"
-      android:paddingLeft="10dip"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:padding="@dimen/element_padding_small"
-      android:textColor="@color/dark_gray"
-      android:linksClickable="true"
-      local:MvxBind="Text Value, Converter=ContactsFallbackValueConverter" />
-  <MvxImageView
-      android:id="@+id/image"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"
-      android:layout_centerVertical="true"
-      local:MvxBind="DefaultImagePath Image"/>
+    android:padding="@dimen/element_margin_small">
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:linksClickable="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingRight="70dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        local:MvxBind="Text Value, Converter=ContactsFallback" />
+    <MvxImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        local:MvxBind="DefaultImagePath Image" />
 </RelativeLayout>

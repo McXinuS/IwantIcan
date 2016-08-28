@@ -198,8 +198,8 @@
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Helpers\PicassoLoader.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Utilities\CustomPresenter.cs" />
     <Compile Include="Utilities\SimpleDividerItemDecoration.cs" />
-    <Compile Include="Utilities\MvxPanelPopToRootPresentationHint.cs" />
     <Compile Include="Utilities\SimpleItemTouchHelperCallback.cs" />
     <Compile Include="Utilities\OfferRecyclerView.cs" />
     <Compile Include="Utilities\OfferRecyclerViewAdapter.cs" />
@@ -349,9 +349,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\rounded_corners_button.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\circle.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\menu_profile.xml" />
@@ -880,6 +877,23 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\line_divider.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_from_left_to_center.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_from_center_to_right.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\grow_from_right_bottom.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rounded_corners_thumb.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rounded_corners_track.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

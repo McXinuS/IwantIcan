@@ -71,5 +71,9 @@
 		public const string ProfileMobile = "Телефон";
 		public const string ProfileEmail = "Email";
 		public const string ProfileVk = "ВКонтакте";
+
+		// Offer create
+		public const string OfferCreateWant = "Хочу";
+		public const string OfferCreateCan = "Могу";
 	}
 }

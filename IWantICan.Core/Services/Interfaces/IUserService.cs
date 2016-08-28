@@ -32,5 +32,11 @@ namespace IWantICan.Core.Services
         /// </summary>
         /// <returns></returns>
         Task<UserModel> GetCurrentUser();
+
+        /// <summary>
+        /// Remove info about the current user.
+        /// </summary>
+        /// <returns></returns>
+        void OnLogout();
     }
 }

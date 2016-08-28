@@ -12,8 +12,23 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/element_padding_medium"
-            android:paddingTop="50dp">
+            android:padding="@dimen/element_padding_medium">
+          <Switch
+                android:id="@+id/switchType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/element_padding_medium"
+                android:gravity="center_vertical|left"
+                android:paddingBottom="@dimen/element_padding_huge"
+                android:track="@drawable/rounded_corners_track"
+                android:thumb="@drawable/rounded_corners_thumb"
+                android:hint="@string/activity_creation_type"
+                android:textOff="@string/toolbar_tab_I_can"
+                android:textOn="@string/toolbar_tab_i_want"
+                android:switchTextAppearance="@style/SwitchTextAppearance"
+                android:textColor="@android:color/white"
+                android:showText="true"
+                local:MvxBind="Checked OfferTypeToBool(Type)" />
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layoutEditName"
                 android:layout_width="fill_parent"
@@ -49,7 +64,7 @@
                     style="@style/EditTextTheme"
                     android:hint="@string/activity_creation_category"
                     android:focusable="false"
-                    local:MvxBind="Text Offer.subCategoryModelId, Converter=CategoryName; Click ShowFilterCommand; Error Errors[Category]" />
+                    local:MvxBind="Text CategoryName(Category); Click ShowFilterCommand; Error Errors[Category]" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </ScrollView>

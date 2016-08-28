@@ -9,6 +9,7 @@ using IWantICan.Droid.Utilities;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using Android.Graphics;
 
 namespace IWantICan.Droid.Fragments
 {
@@ -25,11 +26,30 @@ namespace IWantICan.Droid.Fragments
 			contactsRecView.HasFixedSize = true;
 			var layoutManager = new LinearLayoutManager(Activity);
 			contactsRecView.SetLayoutManager(layoutManager);
-			
+
+			var offersElv = view.FindViewById<MvxExpandableListView>(Resource.Id.offers);
+			var display = Activity.WindowManager.DefaultDisplay;
+
+			//var width = display.Width;
+			var size = new Point();
+			display.GetSize(size);
+			var width = size.X;
+
+			offersElv.SetIndicatorBoundsRelative(width - GetPixelFromDips(45), width - GetPixelFromDips(15));
+
 			return view;
         }
 
-	    private void ContactsRecViewOnClick(object sender, EventArgs eventArgs)
+		/// <summary>
+		///  Convert the dps to pixels, based on density scale
+		/// </summary>
+		public int GetPixelFromDips(float pixels)
+		{
+			var scale = Resources.DisplayMetrics.Density;
+			return (int)(pixels * scale + 0.5f);
+		}
+
+		private void ContactsRecViewOnClick(object sender, EventArgs eventArgs)
 	    {
 		    throw new NotImplementedException();
 	    }

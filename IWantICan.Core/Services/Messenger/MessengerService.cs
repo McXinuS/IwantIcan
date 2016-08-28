@@ -2,11 +2,11 @@
 
 namespace IWantICan.Core.Services
 {
-    public class FilterMessengerService : IFilterMessengerService
+    public class MessengerService : IMessengerService
     {
         private IMvxMessenger _messenger;
 
-        public FilterMessengerService(IMvxMessenger messenger)
+        public MessengerService(IMvxMessenger messenger)
         {
             _messenger = messenger;
         }
@@ -19,6 +19,11 @@ namespace IWantICan.Core.Services
         public void SendOfferActionSuccessMessage(object sender)
         {
             _messenger.Publish(new OfferActionSuccessMessage(sender));
+        }
+
+        public void SendProfileEditSuccessMessage(object sender)
+        {
+            _messenger.Publish(new ProfileEditSuccessMessage(sender));
         }
     }
 }

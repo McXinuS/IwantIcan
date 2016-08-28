@@ -32,6 +32,12 @@ namespace IWantICan.Core.ViewModels
 			set { _user = value; RaisePropertyChanged(() => User); }
 		}
 
+		public List<ContactsEntry> Contacts
+		{
+			get { return _contacts; }
+			set { _contacts = value; RaisePropertyChanged(() => Contacts); }
+		}
+
 		public OfferDetailsViewModel(
 			IUserService UserService,
 			IDialogService DialogService)
@@ -52,7 +58,7 @@ namespace IWantICan.Core.ViewModels
 
 			User = await _userService.GetUser(Offer.UserModelId);
 
-            _contacts = new List<ContactsEntry>
+            Contacts = new List<ContactsEntry>
             {
                 new ContactsEntry(
                     "res:ic_call_black_24dp",
@@ -80,11 +86,6 @@ namespace IWantICan.Core.ViewModels
 
 			object param = new { user = User.Serialize() };
 			ShowViewModel<OffererProfileViewModel>(param);
-		}
-
-		public ICommand ShowContactsCommand
-		{
-			get { return new MvxCommand(() => _dialogService.ContactDialog(_contacts)); }
 		}
 	}
 }

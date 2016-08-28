@@ -80,5 +80,10 @@ namespace IWantICan.Core.Services
 
 			return null;
         }
+
+	    public void OnLogout()
+	    {
+		    _currentUser = null;
+	    }
     }
 }

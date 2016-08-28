@@ -6,8 +6,8 @@
     android:background="?android:attr/selectableItemBackground"
     android:paddingTop="@dimen/element_padding_small"
     android:paddingBottom="@dimen/element_padding_small"
-    android:paddingLeft="@dimen/element_padding_medium"
-    android:paddingRight="@dimen/element_padding_medium" >
+    android:paddingLeft="@dimen/element_padding_large"
+    android:paddingRight="@dimen/element_padding_large">
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

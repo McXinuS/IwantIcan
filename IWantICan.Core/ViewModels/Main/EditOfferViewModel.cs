@@ -11,47 +11,34 @@ using MvvmCross.Platform;
 
 namespace IWantICan.Core.ViewModels
 {
-    public class EditOfferViewModel : BaseViewModel
-    {
-        private ICanService _canService;
-        private IWantService _wantService;
-        private IDialogService _dialogService;
+    public class EditOfferViewModel : BaseEditOfferViewModel
+	{
+		protected sealed override ICanService CanService { get; set; }
+		protected sealed override IWantService WantService { get; set; }
+		protected sealed override ICategoryService CategoryService { get; set; }
+		protected sealed override IDialogService DialogService { get; set; }
 
-        private ICategoryService _categoryService;
-        private List<CategoryModel> _categories;
-
-	    private OfferModel _offer;
-
-	    public OfferModel Offer
-	    {
-		    get { return _offer; }
-			set { _offer = value; RaisePropertyChanged(() => Offer); }
-	    }
-
-        public EditOfferViewModel(ICanService canService,
+		public EditOfferViewModel(ICanService canService,
             IWantService wantService,
             ICategoryService categoryService,
             IDialogService dialogService)
         {
-            _canService = canService;
-            _wantService = wantService;
-            _categoryService = categoryService;
-            _dialogService = dialogService;
+            CanService = canService;
+            WantService = wantService;
+            CategoryService = categoryService;
+            DialogService = dialogService;
 
             Categories = categoryService.GetCategoryList();
         }
 
-        public void Init(string offer)
+	    public void Init(string offer)
         {
 			Offer = offer.Deserialize<OfferModel>();
+			Type = Offer.type;
+		    Category = Offer.subCategoryModelId;
         }
 
-        public IMvxCommand SaveCommand
-        {
-            get { return new MvxCommand(Save); }
-        }
-
-        private async void Save()
+        protected override async void Save()
         {
             if (!Validate())
                 return;
@@ -59,31 +46,21 @@ namespace IWantICan.Core.ViewModels
             bool ok;
 
             if (Offer.type == OfferType.Can)
-                ok = await _canService.UpdateCan(Offer);
+                ok = await CanService.UpdateCan(Offer);
             else
-                ok = await _wantService.UpdateWant(Offer);
+                ok = await WantService.UpdateWant(Offer);
 
             if (ok)
-                _dialogService.Alert(
+                DialogService.Alert(
 					Constants.DialogSaveSuccess,
                     Constants.DialogTitleSuccess,
                     "ОК",
                     () => Close(this));
             else
-                _dialogService.Alert(
+                DialogService.Alert(
 					Constants.DialogSaveFailed,
                     Constants.DialogTitleError,
                     "ОК");
-        }
-
-        private bool Validate()
-        {
-            var toCheck = new List<Tuple<string, string, ValidationType>>
-            {
-                new Tuple<string, string, ValidationType> (Offer.name, "Name", ValidationType.Common),
-                new Tuple<string, string, ValidationType> (Offer.description, "Description", ValidationType.Common)
-            };
-            return ValidatorHelper.Validate(toCheck, ref _errors);
         }
 
         public IMvxCommand DeleteCommand
@@ -93,7 +70,7 @@ namespace IWantICan.Core.ViewModels
 
         private void DoDeleteCommand()
         {
-            _dialogService.Alert(
+            DialogService.Alert(
 				Constants.DialogDeleteConfirm,
 				Constants.DialogTitleConfirm,
 				Constants.DialogButtonOk,
@@ -106,46 +83,19 @@ namespace IWantICan.Core.ViewModels
             bool ok;
 
 			if (Offer.type == OfferType.Can)
-				ok = await _canService.DeleteCan(Offer.id);
+				ok = await CanService.DeleteCan(Offer.id);
             else
-                ok = await _wantService.DeleteWant(Offer.id);
+                ok = await WantService.DeleteWant(Offer.id);
 
 			if (ok)
-                _dialogService.Alert(Constants.DialogDeleteSuccess,
+                DialogService.Alert(Constants.DialogDeleteSuccess,
                     Constants.DialogTitleSuccess,
                     "ОК",
                     () => Close(this));
             else
-                _dialogService.Alert(Constants.DialogDeleteFailed,
+                DialogService.Alert(Constants.DialogDeleteFailed,
                     Constants.DialogTitleError,
                     "ОК");
         }
-
-        public IMvxCommand ShowFilterCommand
-        {
-            get { return new MvxCommand(ShowFilter); }
-        }
-
-        private void ShowFilter()
-        {
-            var categories = Categories.Select(c => c.name).ToArray();
-            _dialogService.Filter(
-				categories,
-				_categoryService.IndexOf(Offer.subCategoryModelId) + 1,
-				s => Offer.subCategoryModelId = Categories[s - 1].id);
-        }
-
-        public List<CategoryModel> Categories
-        {
-            get { return _categories; }
-            set { _categories = value; RaisePropertyChanged(() => Categories); }
-        }
-
-        private ObservableDictionary<string, string> _errors = new ObservableDictionary<string, string>();
-        public ObservableDictionary<string, string> Errors
-        {
-            get { return _errors; }
-            set { _errors = value; RaisePropertyChanged(() => Errors); }
-        }
-    }
+	}
 }

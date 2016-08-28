@@ -41,6 +41,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Converters\CategoryNameConverter.cs" />
     <Compile Include="Converters\ContactsFallbackValueConverter.cs" />
+    <Compile Include="Converters\OfferTypeConverter.cs" />
     <Compile Include="Converters\StringLengthConverter.cs" />
     <Compile Include="Helpers\ObservableDictionary.cs" />
     <Compile Include="Helpers\Serialization.cs" />
@@ -48,7 +49,7 @@
     <Compile Include="Helpers\ValidatorHelper.cs" />
     <Compile Include="Models\ContactsEntry.cs" />
     <Compile Include="Models\OfferersOfferList.cs" />
-    <Compile Include="Services\Messenger\IFilterMessengerService.cs" />
+    <Compile Include="Services\Messenger\IMessengerService.cs" />
     <Compile Include="Services\Messenger\FilterDoneMessage.cs" />
     <Compile Include="Models\OfferModelWithToken.cs" />
     <Compile Include="Models\CategoryModel.cs" />
@@ -58,8 +59,9 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\Interfaces\ICategoryService.cs" />
     <Compile Include="Services\Interfaces\IDialogService.cs" />
-    <Compile Include="Services\Messenger\FilterMessengerService.cs" />
+    <Compile Include="Services\Messenger\MessengerService.cs" />
     <Compile Include="Services\Messenger\OfferActionSuccessMessage.cs" />
+    <Compile Include="Services\Messenger\ProfileEditSuccessMessage.cs" />
     <Compile Include="Services\RestManager.cs" />
     <Compile Include="Services\Interfaces\ICanService.cs" />
     <Compile Include="Models\OfferModel.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Services\SharedPreferencesService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\WantService.cs" />
+    <Compile Include="ViewModels\Base\BaseEditOfferViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseOfferViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Main\EditOfferViewModel.cs" />

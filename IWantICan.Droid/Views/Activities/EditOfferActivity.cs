@@ -1,6 +1,7 @@
 using Android.App;
 using Android.OS;
 using Android.Views;
+using Android.Widget;
 using IWantICan.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
@@ -18,6 +19,9 @@ namespace IWantICan.Droid.Activities
             base.OnCreate(bundle);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			SetContentView(Resource.Layout.activity_offer_create);
+			
+			var switchType = FindViewById<Switch>(Resource.Id.switchType);
+	        switchType.Enabled = false;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

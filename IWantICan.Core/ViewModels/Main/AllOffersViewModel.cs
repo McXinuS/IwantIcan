@@ -14,11 +14,11 @@ namespace IWantICan.Core.ViewModels
     {
         ICategoryService _categoryService;
         IDialogService _dialogService = Mvx.Resolve<IDialogService>();
-        IFilterMessengerService _fmService;
+        IMessengerService _fmService;
 
         public AllOffersViewModel(ICategoryService dategoryService,
             IDialogService dialogService,
-            IFilterMessengerService fmService)
+            IMessengerService fmService)
         {
             _categoryService = dategoryService;
             _dialogService = dialogService;
@@ -33,10 +33,7 @@ namespace IWantICan.Core.ViewModels
         public int[] FilterSelection
         {
             get { return _categoryService.Selected; }
-            set
-            {
-                _categoryService.Selected = value;
-            }
+            set { _categoryService.Selected = value; }
         }
 
         public IMvxCommand ShowFilterCommand

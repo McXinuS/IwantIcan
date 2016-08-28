@@ -15,15 +15,16 @@ using MvvmCross.Droid.Support.V4;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.BindingContext;
 using Refractored.Controls;
+using Android.Support.V4.App;
 
 namespace IWantICan.Droid.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.navigation_frame)]
-    [Register("iwantican.droid.fragments.MenuFragment")]
-    public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
-    {
-        private NavigationView _navigationView;
-        private IMenuItem _previousMenuItem;
+	[MvxFragment(typeof(MainViewModel), Resource.Id.navigation_frame, false)]
+	[Register("iwantican.droid.fragments.MenuFragment")]
+	public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
+	{
+		private NavigationView _navigationView;
+		//private IMenuItem _previousMenuItem;
 
 		private CircleImageView avatarView;
 
@@ -39,17 +40,17 @@ namespace IWantICan.Droid.Fragments
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            base.OnCreateView(inflater, container, savedInstanceState);
+		{
+			base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.fragment_navigation, null);
+			var view = this.BindingInflate(Resource.Layout.fragment_navigation, null);
 
-            _navigationView = view.FindViewById<NavigationView>(Resource.Id.navigation_view);
-            _navigationView.SetNavigationItemSelectedListener(this);
-            //_navigationView.Menu.FindItem(Resource.Id.nav_all_offers).SetChecked(true);
+			_navigationView = view.FindViewById<NavigationView>(Resource.Id.navigation_view);
+			_navigationView.SetNavigationItemSelectedListener(this);
+			//_navigationView.Menu.FindItem(Resource.Id.nav_all_offers).SetChecked(true);
 
-            avatarView = _navigationView.GetHeaderView(0).FindViewById<CircleImageView>(Resource.Id.avatar);
-            
+			avatarView = _navigationView.GetHeaderView(0).FindViewById<CircleImageView>(Resource.Id.avatar);
+
 			var set = this.CreateBindingSet<MenuFragment, MenuViewModel>();
 			set.Bind(this).For(p => p.User).To(vm => vm.User);
 			set.Apply();
@@ -61,53 +62,76 @@ namespace IWantICan.Droid.Fragments
 				User = ViewModel.User;
 			}
 
-			return view;
-        }
+			Activity.SupportFragmentManager.BackStackChanged += SupportFragmentManagerOnBackStackChanged;
 
-        private void UpdateAvatar(string url)
+			return view;
+		}
+
+		private void UpdateAvatar(string url)
 		{
 			avatarView.LoadWithPicasso(url, Resource.Drawable.avatar_placeholder);
 		}
 
+		private void SupportFragmentManagerOnBackStackChanged(object sender, EventArgs eventArgs)
+		{
+			var fm = sender as FragmentManager;
+			
+			var allOffers = fm?.FindFragmentByTag(typeof(AllOffersViewModel).FullName);
+			var myOffers = fm?.FindFragmentByTag(typeof(MyOffersViewModel).FullName);
+
+			if (allOffers != null && allOffers.IsVisible)
+				_navigationView.SetCheckedItem(Resource.Id.nav_all_offers);
+			else if (myOffers != null && myOffers.IsVisible)
+				_navigationView.SetCheckedItem(Resource.Id.nav_my_offers);
+		}
+
 		public bool OnNavigationItemSelected(IMenuItem item)
-        {
-            if (item != _previousMenuItem)
-            {
-                _previousMenuItem?.SetChecked(false);
-            }
+		{
+			//SelectedNavigationItem(item);
 
-            item.SetCheckable(true);
-            item.SetChecked(true);
+			var itemId = item.ItemId;
+			Navigate(itemId);
 
-            _previousMenuItem = item;
+			return true;
+		}
 
-            Navigate(item.ItemId);
+		public bool SelectedNavigationItem(IMenuItem item)
+		{
+			/*if (item != _previousMenuItem)
+			{
+				_previousMenuItem?.SetChecked(false);
+			}*/
 
-            return true;
-        }
+			var itemId = item.ItemId;
+			if (itemId == Resource.Id.nav_all_offers || itemId == Resource.Id.nav_my_offers)
+			{
+				item.SetCheckable(true);
+				item.SetChecked(true);
+				//_previousMenuItem = item;
+			}
 
-        private async void Navigate(int itemId)
-        {
-            ((MainActivity)Activity).drawerLayout.CloseDrawers();
+			return true;
+		}
 
-            // add a small delay to prevent any UI issues
-            await Task.Delay(TimeSpan.FromMilliseconds(250));
+		private async void Navigate(int itemId)
+		{
+			switch (itemId)
+			{
+				case Resource.Id.nav_all_offers:
+					ViewModel.ShowAllOffersCommand.Execute();
+					break;
+				case Resource.Id.nav_my_offers:
+					ViewModel.ShowMyOffersCommand.Execute();
+					break;
+				case Resource.Id.nav_profile:
+					ViewModel.ShowMyProfileCommand.Execute();
+					break;
+				case Resource.Id.nav_logout:
+					ViewModel.LogoutCommand.Execute();
+					break;
+			}
 
-            switch (itemId)
-            {
-                case Resource.Id.nav_all_offers:
-                    ViewModel.ShowAllOffersCommand.Execute();
-                    break;
-                case Resource.Id.nav_my_offers:
-                    ViewModel.ShowMyOffersCommand.Execute();
-                    break;
-                case Resource.Id.nav_profile:
-                    ViewModel.ShowMyProfileCommand.Execute();
-                    break;
-                case Resource.Id.nav_logout:
-                    ViewModel.LogoutCommand.Execute();
-                    break;
-            }
-        }
-    }
+			((MainActivity)Activity).drawerLayout.CloseDrawers();
+		}
+	}
 }

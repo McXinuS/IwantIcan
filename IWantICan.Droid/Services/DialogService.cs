@@ -154,28 +154,5 @@ namespace IWantICan.Droid.Services
 
             return selectedInt.ToArray();
         }
-
-		public void ContactDialog(List<ContactsEntry> contacts)
-		{
-			if (contacts == null)
-				return;
-
-			var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
-			var act = top.Activity;
-
-			var adb = new Dialog(act);
-			// adb.SetTitle($"Связаться с {user.name} {user.surname}"); // layout width issue
-			adb.SetTitle("Связаться");
-			adb.SetCancelable(true);
-			adb.SetContentView(Resource.Layout.dialog_contact);
-
-			var contactsRecycler = (MvxRecyclerView)adb.FindViewById(Resource.Id.contactsRecycler);
-			//contactsRecycler.ItemsSource = contacts;
-
-			// close button
-			((Button)adb.FindViewById(Resource.Id.closeButton)).Click += (sender, args) => { adb.Dismiss(); };
-
-			adb.Show();
-		}
 	}
 }

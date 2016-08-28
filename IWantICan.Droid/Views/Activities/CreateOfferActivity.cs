@@ -1,9 +1,9 @@
 using Android.App;
 using Android.OS;
 using Android.Views;
+using Android.Widget;
 using IWantICan.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace IWantICan.Droid.Activities
 {
@@ -18,7 +18,7 @@ namespace IWantICan.Droid.Activities
             base.OnCreate(bundle);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SetContentView(Resource.Layout.activity_offer_create);
-        }
+		}
         
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
