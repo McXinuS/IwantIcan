@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services;
+using IWantICan.Core.Services.Messenger;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Plugins.Messenger;
 
 namespace IWantICan.Core.ViewModels
 {
@@ -14,15 +14,15 @@ namespace IWantICan.Core.ViewModels
     {
         ICategoryService _categoryService;
         IDialogService _dialogService = Mvx.Resolve<IDialogService>();
-        IMessengerService _fmService;
+        IMessengerService _messenger;
 
-        public AllOffersViewModel(ICategoryService dategoryService,
+        public AllOffersViewModel(ICategoryService categoryService,
             IDialogService dialogService,
-            IMessengerService fmService)
+            IMessengerService messenger)
         {
-            _categoryService = dategoryService;
+            _categoryService = categoryService;
             _dialogService = dialogService;
-            _fmService = fmService;
+			_messenger = messenger;
         }
 
         public List<CategoryModel> Categories
@@ -66,7 +66,7 @@ namespace IWantICan.Core.ViewModels
             for (var i = 0; i < indexes.Length; i++)
                 FilterSelection[i] = Categories[indexes[i]-1].id;
 
-            _fmService.SendFilterDoneMessage(this);
+			_messenger.SendOfferActionMessage(this, MessengerOfferActionType.FilterDone);
 
             return FilterSelection;
         }

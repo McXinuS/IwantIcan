@@ -11,11 +11,10 @@ namespace IWantICan.Core.ViewModels
         {
             _wantService = wantService;
 
-            Task t = new Task(LoadData);
-            t.Start();
-        }
+			Task.Run(LoadData);
+		}
 
-        protected override async void LoadData()
+        protected override async Task LoadData()
         {
             IsRefreshing = true;
 

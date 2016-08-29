@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Plugins.Messenger;
 
-namespace IWantICan.Core.Services
+namespace IWantICan.Core.Services.Messenger
 {
     public class MessengerService : IMessengerService
     {
@@ -11,17 +11,12 @@ namespace IWantICan.Core.Services
             _messenger = messenger;
         }
 
-        public void SendFilterDoneMessage(object sender)
-        {
-            _messenger.Publish(new FilterDoneMessage(sender));
-        }
+		public void SendOfferActionMessage(object sender, MessengerOfferActionType type)
+		{
+			_messenger.Publish(new OfferActionMessage(sender, type));
+		}
 
-        public void SendOfferActionSuccessMessage(object sender)
-        {
-            _messenger.Publish(new OfferActionSuccessMessage(sender));
-        }
-
-        public void SendProfileEditSuccessMessage(object sender)
+		public void SendProfileEditSuccessMessage(object sender)
         {
             _messenger.Publish(new ProfileEditSuccessMessage(sender));
         }

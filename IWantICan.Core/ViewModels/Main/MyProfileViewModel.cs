@@ -5,6 +5,7 @@ using IWantICan.Core.Helpers;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services;
+using IWantICan.Core.Services.Messenger;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
@@ -14,19 +15,22 @@ namespace IWantICan.Core.ViewModels
 	public class MyProfileViewModel : BaseViewModel
 	{
 		private UserModel _user;
-		IUserService _userService;
-		IDialogService _dialogService;
+		private readonly IUserService _userService;
+		private readonly IDialogService _dialogService;
+		private readonly IMessengerService _messenger;
 
-		public MyProfileViewModel(IUserService UserService, IDialogService DialogService)
+		public MyProfileViewModel(IUserService userService,
+			IDialogService dialogService,
+			IMessengerService messenger)
 		{
-			_userService = UserService;
-			_dialogService = DialogService;
+			_userService = userService;
+			_dialogService = dialogService;
+			_messenger = messenger;
 
-			Task t = new Task(LoadUser);
-			t.Start();
+			Task.Run(LoadUser);
 		}
 
-		private async void LoadUser()
+		private async Task LoadUser()
 		{
 			User = await _userService.GetCurrentUser();
 
@@ -68,14 +72,19 @@ namespace IWantICan.Core.ViewModels
 			{
 				var ok = await _userService.UpdateUser(User);
 				if (ok)
+				{
+					_messenger.SendProfileEditSuccessMessage(this);
 					_dialogService.Alert(Constants.DialogSaveSuccess,
 						Constants.DialogTitleSuccess,
 						"ОК",
 						() => Close(this));
+				}
 				else
+				{
 					_dialogService.Alert(Constants.DialogSaveFailed,
 						Constants.DialogTitleError,
 						"ОК");
+				}
 			}
 		}
 

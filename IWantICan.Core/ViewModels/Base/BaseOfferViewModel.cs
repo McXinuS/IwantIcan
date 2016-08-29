@@ -6,6 +6,7 @@ using IWantICan.Core.Helpers;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services;
+using IWantICan.Core.Services.Messenger;
 using MvvmCross.Platform;
 using MvvmCross.Plugins.Messenger;
 
@@ -25,35 +26,36 @@ namespace IWantICan.Core.ViewModels
 
 		protected int MyId;
 
-        protected BaseOfferViewModel()
-        {
-            _categoryService = Mvx.Resolve<ICategoryService>();
+		protected BaseOfferViewModel()
+		{
+			_categoryService = Mvx.Resolve<ICategoryService>();
 
 			_messenger = Mvx.Resolve<IMvxMessenger>();
-            _token = _messenger.Subscribe<FilterDoneMessage>(ReloadCommand.Execute);
+			_token = _messenger.Subscribe<OfferActionMessage>(OnOfferMessage);
 
 			Task.Run(LoadUserId);
 
 			IsEmpty = true;
-        }
+		}
 
-	    private async Task LoadUserId()
+		protected virtual void OnOfferMessage(OfferActionMessage message)
+		{
+			LoadData();
+		}
+
+		private async Task LoadUserId()
 		{
 			var us = Mvx.Resolve<IUserService>();
 			var curUser = await us.GetCurrentUser();
 			MyId = curUser.id;
 		}
 
-        protected abstract void LoadData();
+        protected abstract Task LoadData();
         public ICommand ReloadCommand
         {
             get
             {
-                return new MvxCommand(() =>
-                {
-                    Task t = new Task(LoadData);
-                    t.Start();
-                });
+                return new MvxCommand(() => Task.Run(LoadData));
             }
 		}
 
@@ -108,7 +110,7 @@ namespace IWantICan.Core.ViewModels
 
 		public ICommand MessengerUnsibscribeCommand
 		{
-			get { return new MvxCommand(() => _messenger.Unsubscribe<FilterDoneMessage>(_token)); }
+			get { return new MvxCommand(() => _messenger.Unsubscribe<OfferActionMessage>(_token)); }
 		}
 	}
 }

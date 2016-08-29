@@ -50,7 +50,6 @@
     <Compile Include="Models\ContactsEntry.cs" />
     <Compile Include="Models\OfferersOfferList.cs" />
     <Compile Include="Services\Messenger\IMessengerService.cs" />
-    <Compile Include="Services\Messenger\FilterDoneMessage.cs" />
     <Compile Include="Models\OfferModelWithToken.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\OfferType.cs" />
@@ -59,8 +58,9 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\Interfaces\ICategoryService.cs" />
     <Compile Include="Services\Interfaces\IDialogService.cs" />
+    <Compile Include="Services\Messenger\MessengerOfferActionType.cs" />
     <Compile Include="Services\Messenger\MessengerService.cs" />
-    <Compile Include="Services\Messenger\OfferActionSuccessMessage.cs" />
+    <Compile Include="Services\Messenger\OfferActionMessage.cs" />
     <Compile Include="Services\Messenger\ProfileEditSuccessMessage.cs" />
     <Compile Include="Services\RestManager.cs" />
     <Compile Include="Services\Interfaces\ICanService.cs" />

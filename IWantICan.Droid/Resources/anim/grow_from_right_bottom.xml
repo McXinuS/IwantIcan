@@ -2,7 +2,7 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
      android:shareInterpolator="false"
      android:interpolator="@android:anim/decelerate_interpolator"
-          android:duration="@android:integer/config_fastAnimTime">
+          android:duration="@android:integer/config_shortAnimTime">
   <alpha 	android:fromAlpha="0.0"
           android:toAlpha="1.0" />
   <scale 	

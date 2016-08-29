@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using IWantICan.Core.Services;
+using IWantICan.Core.Services.Messenger;
 
 namespace IWantICan.Core.ViewModels
 {
@@ -11,11 +12,10 @@ namespace IWantICan.Core.ViewModels
         {
             _canService = canService;
 
-            Task t = new Task(LoadData);
-            t.Start();
-        }
+			Task.Run(LoadData);
+		}
 		
-        protected override async void LoadData()
+        protected override async Task LoadData()
         {
             IsRefreshing = true;
 

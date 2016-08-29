@@ -1,9 +1,8 @@
-﻿namespace IWantICan.Core.Services
+﻿namespace IWantICan.Core.Services.Messenger
 {
-    public interface IMessengerService
-    {
-        void SendFilterDoneMessage(object sender);
-        void SendOfferActionSuccessMessage(object sender);
-        void SendProfileEditSuccessMessage(object sender);
-    }
+	public interface IMessengerService
+	{
+		void SendOfferActionMessage(object sender, MessengerOfferActionType type);
+		void SendProfileEditSuccessMessage(object sender);
+	}
 }

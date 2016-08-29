@@ -1,35 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using IWantICan.Core.Helpers;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services;
+using IWantICan.Core.Services.Messenger;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 
 namespace IWantICan.Core.ViewModels
 {
     public class EditOfferViewModel : BaseEditOfferViewModel
 	{
-		protected sealed override ICanService CanService { get; set; }
-		protected sealed override IWantService WantService { get; set; }
-		protected sealed override ICategoryService CategoryService { get; set; }
-		protected sealed override IDialogService DialogService { get; set; }
-
 		public EditOfferViewModel(ICanService canService,
             IWantService wantService,
             ICategoryService categoryService,
-            IDialogService dialogService)
-        {
-            CanService = canService;
-            WantService = wantService;
-            CategoryService = categoryService;
-            DialogService = dialogService;
-
-            Categories = categoryService.GetCategoryList();
-        }
+            IDialogService dialogService,
+			IMessengerService messenger) 
+			: base(canService, wantService, categoryService, dialogService, messenger)
+		{ }
 
 	    public void Init(string offer)
         {
@@ -38,64 +25,46 @@ namespace IWantICan.Core.ViewModels
 		    Category = Offer.subCategoryModelId;
         }
 
-        protected override async void Save()
-        {
-            if (!Validate())
-                return;
+	    protected override async Task<bool> OnSave(OfferModel offer)
+	    {
+		    bool ok;
 
-            bool ok;
+		    if (Offer.type.Equals(OfferType.Can))
+		    {
+			    ok = await CanService.UpdateCan(Offer);
+		    }
+		    else
+		    {
+			    ok = await WantService.UpdateWant(Offer);
+		    }
 
-            if (Offer.type == OfferType.Can)
-                ok = await CanService.UpdateCan(Offer);
-            else
-                ok = await WantService.UpdateWant(Offer);
+		    if (ok)
+		    {
+			    SendOfferActionMessage(MessengerOfferActionType.Update);
+		    }
 
-            if (ok)
-                DialogService.Alert(
-					Constants.DialogSaveSuccess,
-                    Constants.DialogTitleSuccess,
-                    "ОК",
-                    () => Close(this));
-            else
-                DialogService.Alert(
-					Constants.DialogSaveFailed,
-                    Constants.DialogTitleError,
-                    "ОК");
-        }
+			return ok;
+		}
 
-        public IMvxCommand DeleteCommand
-        {
-            get { return new MvxCommand(DoDeleteCommand); }
-        }
+	    protected override async Task<bool> OnDelete(OfferModel offer)
+	    {
+		    bool ok;
 
-        private void DoDeleteCommand()
-        {
-            DialogService.Alert(
-				Constants.DialogDeleteConfirm,
-				Constants.DialogTitleConfirm,
-				Constants.DialogButtonOk,
-				Constants.DialogButtonCancel, 
-				Delete);
-        }
-
-        private async void Delete()
-        {
-            bool ok;
-
-			if (Offer.type == OfferType.Can)
-				ok = await CanService.DeleteCan(Offer.id);
-            else
-                ok = await WantService.DeleteWant(Offer.id);
+		    if (Offer.type == OfferType.Can)
+		    {
+			    ok = await CanService.DeleteCan(Offer.id);
+		    }
+		    else
+		    {
+			    ok = await WantService.DeleteWant(Offer.id);
+			}
 
 			if (ok)
-                DialogService.Alert(Constants.DialogDeleteSuccess,
-                    Constants.DialogTitleSuccess,
-                    "ОК",
-                    () => Close(this));
-            else
-                DialogService.Alert(Constants.DialogDeleteFailed,
-                    Constants.DialogTitleError,
-                    "ОК");
-        }
+			{
+				SendOfferActionMessage(MessengerOfferActionType.Delete);
+			}
+
+			return ok;
+	    }
 	}
 }

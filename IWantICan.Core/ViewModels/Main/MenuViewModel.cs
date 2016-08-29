@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services;
+using IWantICan.Core.Services.Messenger;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace IWantICan.Core.ViewModels
 {
@@ -11,18 +13,25 @@ namespace IWantICan.Core.ViewModels
         IAuthService _authService;
         IUserService _userService;
 
-        UserModel _user;
-        
-        public MenuViewModel(IAuthService AuthService,
-            IUserService UserService)
-        {
-            _authService = AuthService;
-            _userService = UserService;
+	    IMvxMessenger _messenger;
+		private readonly MvxSubscriptionToken _token;
 
-            ReloadUserCommand.Execute();
+		UserModel _user;
+        
+        public MenuViewModel(IAuthService authService,
+            IUserService userService,
+			IMvxMessenger messenger)
+        {
+            _authService = authService;
+            _userService = userService;
+			
+			_messenger = messenger;
+			_token = _messenger.Subscribe<ProfileEditSuccessMessage>(async message => await LoadHeader());
+
+	        Task.Run(LoadHeader);
         }
 
-        async void LoadHeader()
+        async Task LoadHeader()
         {
             User = await _userService.GetCurrentUser();
         }
@@ -65,11 +74,7 @@ namespace IWantICan.Core.ViewModels
 
         public IMvxCommand ReloadUserCommand
         {
-            get { return new MvxCommand(() =>
-            {
-                Task t = new Task(LoadHeader);
-                t.Start();
-            } ); }
+            get { return new MvxCommand(() => Task.Run(LoadHeader)); }
         }
     }
 }

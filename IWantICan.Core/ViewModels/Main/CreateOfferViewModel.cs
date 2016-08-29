@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using IWantICan.Core.Helpers;
+using System.Threading.Tasks;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services;
-using MvvmCross.Core.ViewModels;
+using IWantICan.Core.Services.Messenger;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 
@@ -13,24 +11,14 @@ namespace IWantICan.Core.ViewModels
 {
 	public class CreateOfferViewModel : BaseEditOfferViewModel
 	{
-		protected sealed override ICanService CanService { get; set; }
-		protected sealed override IWantService WantService { get; set; }
-		protected sealed override ICategoryService CategoryService { get; set; }
-		protected sealed override IDialogService DialogService { get; set; }
-
 		public CreateOfferViewModel(ICanService canService,
 			IWantService wantService,
 			ICategoryService categoryService,
-			IDialogService dialogService)
+			IDialogService dialogService,
+			IMessengerService messenger)
+			: base(canService, wantService, categoryService, dialogService, messenger)
 		{
-			CanService = canService;
-			WantService = wantService;
-			CategoryService = categoryService;
-			DialogService = dialogService;
-
 			Offer = new OfferModel();
-
-			Categories = categoryService.GetCategoryList();
 
 			if (Categories == null || Categories.Count == 0)
 			{
@@ -54,29 +42,28 @@ namespace IWantICan.Core.ViewModels
 			Type = (OfferType)type;
 		}
 
-		protected override async void Save()
+		protected override async Task<bool> OnSave(OfferModel offer)
 		{
-			if (!Validate())
-				return;
-
 			var img = Constants.ImagePlaceholderUrl + new Random().Next(1, 1000);
 			Offer.imgurl = img;
-			
+
 			bool ok;
+
 			if (Offer.type.Equals(OfferType.Can))
+			{
 				ok = await CanService.CreateCan(Offer);
+			}
 			else
+			{
 				ok = await WantService.CreateWant(Offer);
+			}
 
 			if (ok)
-				DialogService.Alert(Constants.DialogSaveSuccess,
-					Constants.DialogTitleSuccess,
-					Constants.DialogButtonOk,
-					() => Close(this));
-			else
-				DialogService.Alert(Constants.DialogSaveFailed,
-					Constants.DialogTitleError,
-					Constants.DialogButtonOk);
+			{
+				SendOfferActionMessage(MessengerOfferActionType.Create);
+			}
+
+			return ok;
 		}
 	}
 }

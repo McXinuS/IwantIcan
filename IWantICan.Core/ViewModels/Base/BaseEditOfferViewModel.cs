@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using IWantICan.Core.Helpers;
 using IWantICan.Core.Interfaces;
 using IWantICan.Core.Models;
 using IWantICan.Core.Services;
+using IWantICan.Core.Services.Messenger;
 using MvvmCross.Core.ViewModels;
 
 namespace IWantICan.Core.ViewModels
 {
 	public abstract class BaseEditOfferViewModel : BaseViewModel
 	{
-		protected abstract ICanService CanService { get; set; }
-		protected abstract IWantService WantService { get; set; }
-		protected abstract IDialogService DialogService { get; set; }
-		protected abstract ICategoryService CategoryService { get; set; }
+		protected readonly ICanService CanService;
+		protected readonly IWantService WantService;
+		protected readonly IDialogService DialogService;
+		protected readonly ICategoryService CategoryService;
+		protected readonly IMessengerService Messenger;
 
 		private OfferModel _offer;
 		private int _category;
@@ -24,6 +25,21 @@ namespace IWantICan.Core.ViewModels
 		private List<CategoryModel> _categories;
 
 		private ObservableDictionary<string, string> _errors = new ObservableDictionary<string, string>();
+
+		protected BaseEditOfferViewModel(ICanService canService,
+			IWantService wantService,
+			ICategoryService categoryService,
+			IDialogService dialogService,
+			IMessengerService messenger)
+		{
+			CanService = canService;
+			WantService = wantService;
+			CategoryService = categoryService;
+			DialogService = dialogService;
+			Messenger = messenger;
+
+			Categories = categoryService.GetCategoryList();
+		}
 
 		public OfferModel Offer
 		{
@@ -65,13 +81,84 @@ namespace IWantICan.Core.ViewModels
 			set { _errors = value; RaisePropertyChanged(() => Errors); }
 		}
 
+		protected virtual void SendOfferActionMessage(MessengerOfferActionType type)
+		{
+			Messenger.SendOfferActionMessage(this, type);
+		}
+
 		public IMvxCommand SaveCommand
 		{
 			get { return new MvxCommand(Save); }
 		}
 
-		protected abstract void Save();
+		protected virtual async void Save()
+		{
+			if (!Validate())
+				return;
+
+			var ok = await OnSave(Offer);
+
+			if (ok)
+			{
+				DialogService.Alert(
+					Constants.DialogSaveSuccess,
+					Constants.DialogTitleSuccess,
+					"ОК",
+					() => Close(this));
+			}
+			else
+			{
+				DialogService.Alert(
+					Constants.DialogSaveFailed,
+					Constants.DialogTitleError,
+					"ОК");
+			}
+		}
 		
+		protected virtual Task<bool> OnSave(OfferModel offer)
+		{
+			return Task.FromResult(false);
+		}
+
+		public IMvxCommand DeleteCommand
+		{
+			get { return new MvxCommand(DoDeleteCommand); }
+		}
+
+		private void DoDeleteCommand()
+		{
+			DialogService.Alert(
+				Constants.DialogDeleteConfirm,
+				Constants.DialogTitleConfirm,
+				Constants.DialogButtonOk,
+				Constants.DialogButtonCancel,
+				Delete);
+		}
+
+		private async void Delete()
+		{
+			var ok = await OnDelete(Offer);
+
+			if (ok)
+			{
+				DialogService.Alert(Constants.DialogDeleteSuccess,
+					Constants.DialogTitleSuccess,
+					"ОК",
+					() => Close(this));
+			}
+			else
+			{
+				DialogService.Alert(Constants.DialogDeleteFailed,
+					Constants.DialogTitleError,
+					"ОК");
+			}
+		}
+
+		protected virtual Task<bool> OnDelete(OfferModel offer)
+		{
+			return Task.FromResult(false);
+		}
+
 		protected bool Validate()
 		{
 			var toCheck = new List<Tuple<string, string, ValidationType>>

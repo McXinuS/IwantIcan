@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Plugins.Messenger;
 
-namespace IWantICan.Core.Services
+namespace IWantICan.Core.Services.Messenger
 {
 	public class ProfileEditSuccessMessage : MvxMessage
 	{
