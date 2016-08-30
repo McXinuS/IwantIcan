@@ -10,8 +10,6 @@
 
   <!-- Semantic definitions -->
 
-  <dimen name="button_login_height">50dp</dimen>
-
   <dimen name="element_margin_smallest">1dp</dimen>
   <dimen name="element_margin_tinier">3dp</dimen>
   <dimen name="element_margin_tiny">5dp</dimen>
@@ -28,9 +26,11 @@
   <dimen name="element_padding_large">20dp</dimen>
   <dimen name="element_padding_huge">25dp</dimen>
 
+  <dimen name="button_login_height">50dp</dimen>
   <dimen name="navigation_drawer_width">290dp</dimen>
   <dimen name="header_image_height">192dp</dimen>
   <dimen name="header_image_height_land">132dp</dimen>
+  <dimen name="offerer_profile_offers_list_height">400dp</dimen>
 
   <!-- font definitions -->
 

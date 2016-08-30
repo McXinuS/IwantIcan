@@ -1732,8 +1732,8 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f060007
 			public const int abc_text_size_title_material_toolbar = 2131099655;
 			
-			// aapt resource value: 0x7f060070
-			public const int button_login_height = 2131099760;
+			// aapt resource value: 0x7f06007e
+			public const int button_login_height = 2131099774;
 			
 			// aapt resource value: 0x7f060056
 			public const int design_appbar_elevation = 2131099734;
@@ -1828,47 +1828,47 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f060047
 			public const int disabled_alpha_material_light = 2131099719;
 			
-			// aapt resource value: 0x7f060077
-			public const int element_margin_huge = 2131099767;
-			
 			// aapt resource value: 0x7f060076
-			public const int element_margin_large = 2131099766;
+			public const int element_margin_huge = 2131099766;
 			
 			// aapt resource value: 0x7f060075
-			public const int element_margin_medium = 2131099765;
+			public const int element_margin_large = 2131099765;
 			
 			// aapt resource value: 0x7f060074
-			public const int element_margin_small = 2131099764;
-			
-			// aapt resource value: 0x7f060071
-			public const int element_margin_smallest = 2131099761;
-			
-			// aapt resource value: 0x7f060072
-			public const int element_margin_tinier = 2131099762;
+			public const int element_margin_medium = 2131099764;
 			
 			// aapt resource value: 0x7f060073
-			public const int element_margin_tiny = 2131099763;
+			public const int element_margin_small = 2131099763;
 			
-			// aapt resource value: 0x7f06007e
-			public const int element_padding_huge = 2131099774;
+			// aapt resource value: 0x7f060070
+			public const int element_margin_smallest = 2131099760;
+			
+			// aapt resource value: 0x7f060071
+			public const int element_margin_tinier = 2131099761;
+			
+			// aapt resource value: 0x7f060072
+			public const int element_margin_tiny = 2131099762;
 			
 			// aapt resource value: 0x7f06007d
-			public const int element_padding_large = 2131099773;
+			public const int element_padding_huge = 2131099773;
 			
 			// aapt resource value: 0x7f06007c
-			public const int element_padding_medium = 2131099772;
+			public const int element_padding_large = 2131099772;
 			
 			// aapt resource value: 0x7f06007b
-			public const int element_padding_small = 2131099771;
-			
-			// aapt resource value: 0x7f060078
-			public const int element_padding_smallest = 2131099768;
-			
-			// aapt resource value: 0x7f060079
-			public const int element_padding_tinier = 2131099769;
+			public const int element_padding_medium = 2131099771;
 			
 			// aapt resource value: 0x7f06007a
-			public const int element_padding_tiny = 2131099770;
+			public const int element_padding_small = 2131099770;
+			
+			// aapt resource value: 0x7f060077
+			public const int element_padding_smallest = 2131099767;
+			
+			// aapt resource value: 0x7f060078
+			public const int element_padding_tinier = 2131099768;
+			
+			// aapt resource value: 0x7f060079
+			public const int element_padding_tiny = 2131099769;
 			
 			// aapt resource value: 0x7f060080
 			public const int header_image_height = 2131099776;
@@ -1921,29 +1921,32 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f06004d
 			public const int notification_subtext_size = 2131099725;
 			
-			// aapt resource value: 0x7f060087
-			public const int text_huge = 2131099783;
-			
-			// aapt resource value: 0x7f060086
-			public const int text_large = 2131099782;
-			
-			// aapt resource value: 0x7f060085
-			public const int text_medium = 2131099781;
-			
-			// aapt resource value: 0x7f060084
-			public const int text_small = 2131099780;
-			
 			// aapt resource value: 0x7f060082
-			public const int text_tinier = 2131099778;
-			
-			// aapt resource value: 0x7f060083
-			public const int text_tiny = 2131099779;
-			
-			// aapt resource value: 0x7f060089
-			public const int text_title = 2131099785;
+			public const int offerer_profile_offers_list_height = 2131099778;
 			
 			// aapt resource value: 0x7f060088
-			public const int text_very_huge = 2131099784;
+			public const int text_huge = 2131099784;
+			
+			// aapt resource value: 0x7f060087
+			public const int text_large = 2131099783;
+			
+			// aapt resource value: 0x7f060086
+			public const int text_medium = 2131099782;
+			
+			// aapt resource value: 0x7f060085
+			public const int text_small = 2131099781;
+			
+			// aapt resource value: 0x7f060083
+			public const int text_tinier = 2131099779;
+			
+			// aapt resource value: 0x7f060084
+			public const int text_tiny = 2131099780;
+			
+			// aapt resource value: 0x7f06008a
+			public const int text_title = 2131099786;
+			
+			// aapt resource value: 0x7f060089
+			public const int text_very_huge = 2131099785;
 			
 			static Dimension()
 			{

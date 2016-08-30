@@ -22,22 +22,21 @@ namespace IWantICan.Droid.Fragments
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
 			var contactsRecView = view.FindViewById<MvxRecyclerView>(Resource.Id.contactsRecycler);
-			//contactsRecView.Click += ContactsRecViewOnClick;
+            //contactsRecView.Click += ContactsRecViewOnClick;
 			contactsRecView.HasFixedSize = true;
 			var layoutManager = new LinearLayoutManager(Activity);
 			contactsRecView.SetLayoutManager(layoutManager);
 
-			var offersElv = view.FindViewById<MvxExpandableListView>(Resource.Id.offers);
+            var offersElv = view.FindViewById<MvxExpandableListView>(Resource.Id.offers);
 			var display = Activity.WindowManager.DefaultDisplay;
-
-			//var width = display.Width;
 			var size = new Point();
 			display.GetSize(size);
 			var width = size.X;
-
 			offersElv.SetIndicatorBoundsRelative(width - GetPixelFromDips(45), width - GetPixelFromDips(15));
+            offersElv.NestedScrollingEnabled = true;
+            //offersElv.Focusable = false;
 
-			return view;
+            return view;
         }
 
 		/// <summary>
