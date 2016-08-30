@@ -19,6 +19,8 @@ namespace IWantICan.Core.ViewModels
 		private readonly IDialogService _dialogService;
 		private readonly IMessengerService _messenger;
 
+		private ObservableDictionary<string, string> _errors = new ObservableDictionary<string, string>();
+
 		public MyProfileViewModel(IUserService userService,
 			IDialogService dialogService,
 			IMessengerService messenger)
@@ -58,14 +60,11 @@ namespace IWantICan.Core.ViewModels
 			var toCheck = new List<Tuple<string, string, ValidationType>>
 			{
 				new Tuple<string, string, ValidationType> (User.name, "Name", ValidationType.Common),
-				new Tuple<string, string, ValidationType> (User.surname, "Surname", ValidationType.Common)
+				new Tuple<string, string, ValidationType> (User.surname, "Surname", ValidationType.Common),
+				new Tuple<string, string, ValidationType> (User.phone, "Phone", ValidationType.Phone),
+				new Tuple<string, string, ValidationType> (User.email, "Email", ValidationType.Email),
+				new Tuple<string, string, ValidationType> (User.vkLink, "Vk", ValidationType.Vk)
 			};
-			if (!string.IsNullOrWhiteSpace(User.phone))
-				toCheck.Add(new Tuple<string, string, ValidationType>(User.phone, "Phone", ValidationType.Phone));
-			if (!string.IsNullOrWhiteSpace(User.email))
-				toCheck.Add(new Tuple<string, string, ValidationType>(User.email, "Email", ValidationType.Email));
-			if (!string.IsNullOrWhiteSpace(User.vkLink))
-				toCheck.Add(new Tuple<string, string, ValidationType>(User.vkLink, "Vk", ValidationType.Vk));
 
 			var validated = ValidatorHelper.Validate(toCheck, ref _errors);
 			if (validated)
@@ -94,7 +93,6 @@ namespace IWantICan.Core.ViewModels
 			set { _user = value; RaisePropertyChanged(() => User); }
 		}
 
-		private ObservableDictionary<string, string> _errors = new ObservableDictionary<string, string>();
 		public ObservableDictionary<string, string> Errors
 		{
 			get { return _errors; }

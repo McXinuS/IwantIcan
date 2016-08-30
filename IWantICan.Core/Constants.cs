@@ -32,8 +32,10 @@
         public const string PhoneInvalid = "Неверный формат телефона";
         public const string EmailInvalid = "Неверный формат адреса";
         public const string VkLinkInvalid = "Неверный формат ссылки";
+        public const string CategoryEmpty = FieldIsRequired;
 
-        public const string LoginOrPasswordWarning = "Имя или пароль введены неверно";
+
+		public const string LoginOrPasswordWarning = "Имя или пароль введены неверно";
         public const string FieldWarning = "Проверьте это поле неверно";
         public const string OperationFailed = "Произошла ошибка. Проверьте введенные данные и попробуйте еще раз.";
 

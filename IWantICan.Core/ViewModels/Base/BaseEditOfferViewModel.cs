@@ -164,7 +164,8 @@ namespace IWantICan.Core.ViewModels
 			var toCheck = new List<Tuple<string, string, ValidationType>>
 			{
 				new Tuple<string, string, ValidationType> (Offer.name, "Name", ValidationType.Common),
-				new Tuple<string, string, ValidationType> (Offer.description, "Description", ValidationType.Common)
+				new Tuple<string, string, ValidationType> (Offer.description, "Description", ValidationType.Common),
+				new Tuple<string, string, ValidationType> (Offer.subCategoryModelId.ToString(), "Category", ValidationType.Category)
 			};
 			return ValidatorHelper.Validate(toCheck, ref _errors);
 		}

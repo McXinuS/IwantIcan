@@ -34,7 +34,7 @@ namespace IWantICan.Core.ViewModels
 				return;
 			}
 
-			//Category = Categories[0].id;
+			Category = -1;
 		}
 
 		public void Init(int type)
