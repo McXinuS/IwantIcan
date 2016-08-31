@@ -199,6 +199,7 @@
     <Compile Include="Helpers\PicassoLoader.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Utilities\CustomPresenter.cs" />
+    <Compile Include="Utilities\MvxRecyclerViewContactsAdapter.cs" />
     <Compile Include="Utilities\SimpleDividerItemDecoration.cs" />
     <Compile Include="Utilities\SimpleItemTouchHelperCallback.cs" />
     <Compile Include="Utilities\OfferRecyclerView.cs" />
@@ -305,16 +306,10 @@
     <AndroidResource Include="Resources\layout\listitem_contact.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout-land\fragment_offer_details.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\listitem_header_offerer_profile.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\listitem_contact_offer_details.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout-land\fragment_offerer_profile.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -358,6 +353,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Resources\layout-land\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logo.png" />
@@ -893,10 +889,16 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rounded_corners_thumb.xml" />
+    <AndroidResource Include="Resources\drawable\switch_thumb_enabled.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rounded_corners_track.xml" />
+    <AndroidResource Include="Resources\drawable\switch_track.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\switch_thumb_selector.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\switch_thumb_disabled.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

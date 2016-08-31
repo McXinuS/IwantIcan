@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:paddingStart="@dimen/element_padding_large"
-    android:textSize="@dimen/text_title"
+    android:textSize="@dimen/text_very_huge"
     android:gravity="center_vertical"
     android:textAlignment="viewStart"
     local:MvxBind="Text Header" />

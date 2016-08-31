@@ -70,9 +70,13 @@
 		public const string ProfilePassword = "Пароль";
 		public const string ProfileName = "Имя";
 		public const string ProfileSurname = "Фамилия";
-		public const string ProfileMobile = "Телефон";
+
+		public const string ProfilePhone = "Телефон";
+		public const string ProfilePhoneImage = "res:ic_call_black_24dp";
 		public const string ProfileEmail = "Email";
+		public const string ProfileEmailImage = "res:ic_email_black_24dp";
 		public const string ProfileVk = "ВКонтакте";
+		public const string ProfileVkImage = "res:ic_vk_black_24dp";
 
 		// Offer create
 		public const string OfferCreateWant = "Хочу";

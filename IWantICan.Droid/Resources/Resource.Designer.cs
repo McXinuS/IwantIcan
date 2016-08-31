@@ -2309,8 +2309,8 @@ namespace IWantICan.Droid
 			// aapt resource value: 0x7f020073
 			public const int logo_login = 2130837619;
 			
-			// aapt resource value: 0x7f020078
-			public const int notification_template_icon_bg = 2130837624;
+			// aapt resource value: 0x7f02007a
+			public const int notification_template_icon_bg = 2130837626;
 			
 			// aapt resource value: 0x7f020074
 			public const int preference_list_divider_material = 2130837620;
@@ -2319,10 +2319,16 @@ namespace IWantICan.Droid
 			public const int rounded_corners_button = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int rounded_corners_thumb = 2130837622;
+			public const int switch_thumb_disabled = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int rounded_corners_track = 2130837623;
+			public const int switch_thumb_enabled = 2130837623;
+			
+			// aapt resource value: 0x7f020078
+			public const int switch_thumb_selector = 2130837624;
+			
+			// aapt resource value: 0x7f020079
+			public const int switch_track = 2130837625;
 			
 			static Drawable()
 			{

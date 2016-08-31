@@ -49,18 +49,9 @@ namespace IWantICan.Core.ViewModels
 			if (User == null) return;
 			Contacts = new List<ContactsEntry>
 			{
-				new ContactsEntry(
-					"res:ic_call_black_24dp",
-					User.phone,
-					Constants.ProfileMobile),
-				new ContactsEntry(
-					"res:ic_email_black_24dp",
-					User.email,
-					Constants.ProfileEmail),
-				new ContactsEntry(
-					"res:ic_vk_black_24dp",
-					User.vkLink,
-					Constants.ProfileVk)
+				new ContactsEntry(ContactType.Phone, User.phone),
+				new ContactsEntry(ContactType.Email, User.email),
+				new ContactsEntry(ContactType.VkLink, User.vkLink)
 			};
 
 
@@ -100,6 +91,11 @@ namespace IWantICan.Core.ViewModels
 			{
 				offer = item.Serialize()
 			});
+		}
+
+		public ICommand ContactSelectedCommand
+		{
+			get { return new MvxCommand<ContactsEntry>(contact => { return; }); }
 		}
 	}
 }

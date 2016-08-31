@@ -30,7 +30,7 @@
   <dimen name="navigation_drawer_width">290dp</dimen>
   <dimen name="header_image_height">192dp</dimen>
   <dimen name="header_image_height_land">132dp</dimen>
-  <dimen name="offerer_profile_offers_list_height">400dp</dimen>
+  <dimen name="offerer_profile_offers_list_height">300dp</dimen>
 
   <!-- font definitions -->
 

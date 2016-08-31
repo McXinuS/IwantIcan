@@ -19,9 +19,6 @@ namespace IWantICan.Droid.Activities
             base.OnCreate(bundle);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			SetContentView(Resource.Layout.activity_offer_create);
-			
-			var switchType = FindViewById<Switch>(Resource.Id.switchType);
-	        switchType.Enabled = false;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

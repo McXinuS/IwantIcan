@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Android.Support.V4.App;
+using Android.Views;
 using MvvmCross.Droid.Shared.Presenter;
 
 namespace IWantICan.Droid.Utilities
@@ -15,14 +17,23 @@ namespace IWantICan.Droid.Utilities
 		{
 			if (Activity == null) return;
 
-			Activity.StartActivity(intent);
-
-			if (intent.Component.ClassName.Contains("CreateOfferActivity"))
+			/*if (intent.Component.ClassName.Contains("OfferDetailsActivity"))
 			{
-				Activity.OverridePendingTransition(
-					Resource.Animation.grow_from_right_bottom,
-					Resource.Animation.abc_shrink_fade_out_from_bottom);
+				ActivityOptionsCompat options = ActivityOptionsCompat.MakeSceneTransitionAnimation(this, (View)ivProfile, "profile");
+
+				Activity.StartActivity(intent, options.ToBundle());
 			}
+			else
+			{*/
+				Activity.StartActivity(intent);
+
+				if (intent.Component.ClassName.Contains("CreateOfferActivity"))
+				{
+					Activity.OverridePendingTransition(
+						Resource.Animation.grow_from_right_bottom,
+						Resource.Animation.abc_shrink_fade_out_from_bottom);
+				}
+			//}
 		}
 	}
 }

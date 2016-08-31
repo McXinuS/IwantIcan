@@ -17,7 +17,6 @@ using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using Refractored.Controls;
-using Square.Picasso;
 
 namespace IWantICan.Droid.Fragments
 {
@@ -80,7 +79,7 @@ namespace IWantICan.Droid.Fragments
 			adb.SetContentView(Resource.Layout.dialog_contact);
 
 			var contactsRecycler = (MvxRecyclerView)adb.FindViewById(Resource.Id.contactsRecycler);
-			contactsRecycler.Adapter = new OfferRecyclerViewAdapter(BindingContext as IMvxAndroidBindingContext);
+			contactsRecycler.Adapter = new MvxRecyclerViewContactsAdapter(Activity, BindingContext as IMvxAndroidBindingContext);
 			var set = this.CreateBindingSet<OfferDetailsFragment, OfferDetailsViewModel>();
 			set.Bind(contactsRecycler).For(p => p.ItemsSource).To(vm => vm.Contacts);
 			set.Apply();

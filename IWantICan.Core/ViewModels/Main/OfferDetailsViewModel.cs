@@ -14,7 +14,6 @@ namespace IWantICan.Core.ViewModels
 	public class OfferDetailsViewModel : BaseViewModel
 	{
 		IUserService _userService;
-		IDialogService _dialogService;
 
 		private OfferModel _offer;
 		private UserModel _user;
@@ -39,11 +38,9 @@ namespace IWantICan.Core.ViewModels
 		}
 
 		public OfferDetailsViewModel(
-			IUserService UserService,
-			IDialogService DialogService)
+			IUserService userService)
 		{
-			_userService = UserService;
-			_dialogService = DialogService;
+			_userService = userService;
 		}
 
 		public void Init(string offer)
@@ -58,19 +55,13 @@ namespace IWantICan.Core.ViewModels
 
 			User = await _userService.GetUser(Offer.UserModelId);
 
-            Contacts = new List<ContactsEntry>
-            {
-                new ContactsEntry(
-                    "res:ic_call_black_24dp",
-                    User.phone),
-                new ContactsEntry(
-                    "res:ic_email_black_24dp",
-                    User.email),
-                new ContactsEntry(
-                    "res:ic_vk_black_24dp",
-                    User.vkLink)
-            };
-        }
+			Contacts = new List<ContactsEntry>
+			{
+				new ContactsEntry(ContactType.Phone, User.phone),
+				new ContactsEntry(ContactType.Email, User.email),
+				new ContactsEntry(ContactType.VkLink, User.vkLink)
+			};
+		}
 
 		public IMvxCommand GoProfileViewCommand
 		{

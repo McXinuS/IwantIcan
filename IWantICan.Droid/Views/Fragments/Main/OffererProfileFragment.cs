@@ -10,6 +10,8 @@ using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using Android.Graphics;
+using Android.Support.Design.Widget;
+using MvvmCross.Binding.Droid.BindingContext;
 
 namespace IWantICan.Droid.Fragments
 {
@@ -22,21 +24,28 @@ namespace IWantICan.Droid.Fragments
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
 			var contactsRecView = view.FindViewById<MvxRecyclerView>(Resource.Id.contactsRecycler);
-            //contactsRecView.Click += ContactsRecViewOnClick;
 			contactsRecView.HasFixedSize = true;
 			var layoutManager = new LinearLayoutManager(Activity);
 			contactsRecView.SetLayoutManager(layoutManager);
+            contactsRecView.Adapter = new MvxRecyclerViewContactsAdapter(Activity, BindingContext as IMvxAndroidBindingContext);
 
-            var offersElv = view.FindViewById<MvxExpandableListView>(Resource.Id.offers);
+			// screen size
 			var display = Activity.WindowManager.DefaultDisplay;
 			var size = new Point();
 			display.GetSize(size);
 			var width = size.X;
+			var height = size.Y;
+
+            var offersElv = view.FindViewById<MvxExpandableListView>(Resource.Id.offers);
 			offersElv.SetIndicatorBoundsRelative(width - GetPixelFromDips(45), width - GetPixelFromDips(15));
             offersElv.NestedScrollingEnabled = true;
-            //offersElv.Focusable = false;
+			//offersElv.Focusable = false;
 
-            return view;
+			var appbar = view.FindViewById<AppBarLayout>(Resource.Id.appbar);
+			CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)appbar.LayoutParameters;
+			lp.Height = (int)(height/2.5);
+
+			return view;
         }
 
 		/// <summary>
@@ -47,11 +56,6 @@ namespace IWantICan.Droid.Fragments
 			var scale = Resources.DisplayMetrics.Density;
 			return (int)(pixels * scale + 0.5f);
 		}
-
-		private void ContactsRecViewOnClick(object sender, EventArgs eventArgs)
-	    {
-		    throw new NotImplementedException();
-	    }
 
 	    protected override int FragmentId => Resource.Layout.fragment_offerer_profile;
     }

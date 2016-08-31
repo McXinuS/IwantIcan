@@ -10,7 +10,7 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        local:MvxItemTemplate="@layout/listitem_contact_offer_details"/>
+        local:MvxItemTemplate="@layout/listitem_contact_offer_details" />
     <Button
         android:id="@+id/closeButton"
         android:layout_width="match_parent"

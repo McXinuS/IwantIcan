@@ -8,7 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/header_image_height"
+        android:layout_height="match_parent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:fitsSystemWindows="true">
         <android.support.design.widget.CollapsingToolbarLayout
@@ -38,8 +38,8 @@
                 local:layout_collapseMode="pin" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-  <android.support.v4.widget.NestedScrollView
-      android:layout_width="match_parent"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         local:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:background="@color/light_gray">
@@ -51,11 +51,12 @@
                 android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/element_padding_small"
+                android:paddingTop="@dimen/element_margin_small"
+                android:paddingBottom="@dimen/element_margin_small"
                 android:layout_marginBottom="@dimen/element_margin_small"
                 android:background="@color/white"
                 local:MvxItemTemplate="@layout/listitem_contact"
-                local:MvxBind="ItemsSource Contacts; ItemClick ItemSelectedCommand" />
+                local:MvxBind="ItemsSource Contacts; ItemClick ContactSelectedCommand" />
             <MvxExpandableListView
                 android:id="@+id/offers"
                 android:layout_below="@id/contactsRecycler"
@@ -68,5 +69,5 @@
                 local:MvxItemTemplate="@layout/listitem_offer_offerer_profile"
                 local:MvxBind="ItemsSource Offers; ItemClick OfferSelectedCommand" />
         </RelativeLayout>
-      </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
