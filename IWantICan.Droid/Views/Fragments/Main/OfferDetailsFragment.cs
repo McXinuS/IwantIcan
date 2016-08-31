@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Android.App;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -56,7 +57,17 @@ namespace IWantICan.Droid.Fragments
 				set.Apply();
 			}
 
-			return view;
+            // screen size
+            var display = Activity.WindowManager.DefaultDisplay;
+            var size = new Point();
+            display.GetSize(size);
+            var height = size.Y;
+
+            var appbar = view.FindViewById<AppBarLayout>(Resource.Id.appbar);
+            CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)appbar.LayoutParameters;
+            lp.Height = (int)(height / 2.5);
+
+            return view;
 		}
 
 		private void UpdateAvatar(string url)

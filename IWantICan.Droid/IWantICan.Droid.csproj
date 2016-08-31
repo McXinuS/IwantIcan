@@ -199,6 +199,7 @@
     <Compile Include="Helpers\PicassoLoader.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Utilities\CustomPresenter.cs" />
+    <Compile Include="Utilities\MvxExpandableListViewDynamicHeight.cs" />
     <Compile Include="Utilities\MvxRecyclerViewContactsAdapter.cs" />
     <Compile Include="Utilities\SimpleDividerItemDecoration.cs" />
     <Compile Include="Utilities\SimpleItemTouchHelperCallback.cs" />

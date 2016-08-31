@@ -23,11 +23,13 @@
             local:expandedTitleMarginEnd="64dp"
             local:MvxBind="Title User.name+' '+User.surname">
             <Mvx.MvxImageView
-                android:id="@+id/avatar"
+                android:id="@+id/profileAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
+                android:transitionName="profileAvatar"
+                android:background="@color/light_gray"
                 local:layout_collapseMode="parallax"
                 local:MvxBind="ImageUrl User.avatar" />
             <android.support.v7.widget.Toolbar
@@ -57,12 +59,13 @@
                 android:background="@color/white"
                 local:MvxItemTemplate="@layout/listitem_contact"
                 local:MvxBind="ItemsSource Contacts; ItemClick ContactSelectedCommand" />
-            <MvxExpandableListView
+            <MvxExpandableListViewDynamicHeight
                 android:id="@+id/offers"
                 android:layout_below="@id/contactsRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/offerer_profile_offers_list_height"
                 android:layout_marginBottom="@dimen/element_margin_small"
+                android:nestedScrollingEnabled="true"
                 android:divider="@drawable/line_divider"
                 android:background="@color/white"
                 local:MvxGroupItemTemplate="@layout/listitem_header_offerer_profile"
