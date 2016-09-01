@@ -21,8 +21,12 @@ namespace IWantICan.Droid.Converters
             var difference = (DateTime.UtcNow - when).TotalSeconds;
             string whichFormat;
             int valueToFormat;
-            
-            if (difference < 100.0)
+
+	        if (difference < 2.0)
+			{
+				return "Только что";
+			}
+            else if (difference < 100.0)
             {
                 whichFormat = "{0} с";
                 valueToFormat = (int)difference;
@@ -35,7 +39,7 @@ namespace IWantICan.Droid.Converters
             else if (difference < 24 * 3600)
             {
                 whichFormat = "{0} ч";
-                valueToFormat = (int)(difference / (3600));
+                valueToFormat = (int)(difference / 3600);
             }
             else
             {

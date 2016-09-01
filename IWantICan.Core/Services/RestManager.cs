@@ -22,6 +22,16 @@ namespace IWantICan.Core.Services.Api
                 return _apiService;
             }
         }
+		
+		ISharedPreferencesService _sharedPreferencesService;
+        ISharedPreferencesService SharedPreferencesService
+        {
+            get
+            {
+                _sharedPreferencesService = _sharedPreferencesService ?? Mvx.Resolve<ISharedPreferencesService>();
+                return _sharedPreferencesService;
+            }
+        }
         
 		string _token;
         /// <summary>
@@ -31,12 +41,7 @@ namespace IWantICan.Core.Services.Api
         {
             get
             {
-                if (String.IsNullOrEmpty(_token))
-                {
-                    var sharedPreferencesService = Mvx.Resolve<ISharedPreferencesService>();
-                    _token = sharedPreferencesService.AuthToken;
-                }
-                return _token;
+                return SharedPreferencesService.AuthToken;
             }
         }
 

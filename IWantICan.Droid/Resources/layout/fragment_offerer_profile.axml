@@ -29,7 +29,7 @@
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
                 android:transitionName="profileAvatar"
-                android:background="@color/light_gray"
+                android:background="@drawable/avatar_placeholder"
                 local:layout_collapseMode="parallax"
                 local:MvxBind="ImageUrl User.avatar" />
             <android.support.v7.widget.Toolbar

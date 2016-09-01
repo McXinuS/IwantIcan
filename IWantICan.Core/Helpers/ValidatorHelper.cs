@@ -167,6 +167,9 @@ namespace IWantICan.Core.Helpers
 
 		private static ValidationStatus ValidatePassword(string source)
 		{
+			if (string.IsNullOrWhiteSpace(source))
+				return ValidationStatus.Empty;
+
 			if (source.Length < Constants.PasswordMinLength)
 				return ValidationStatus.PasswordShort;
 
@@ -175,6 +178,9 @@ namespace IWantICan.Core.Helpers
 
 		private static ValidationStatus ValidatePhone(string source)
 		{
+			if (string.IsNullOrWhiteSpace(source))
+				return ValidationStatus.Ok;
+			
 			var regex = new Regex(@"^(\+[1-9]{1})?[0-9]{10,11}$");
 			var match = regex.Match(source);
 
@@ -186,6 +192,9 @@ namespace IWantICan.Core.Helpers
 
 		private static ValidationStatus ValidateEmail(string source)
 		{
+			if (string.IsNullOrWhiteSpace(source))
+				return ValidationStatus.Ok;
+			
 			var regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
 			var match = regex.Match(source);
 
@@ -197,10 +206,12 @@ namespace IWantICan.Core.Helpers
 
 		private static ValidationStatus ValidateVkLink(string source)
 		{
+			if (string.IsNullOrWhiteSpace(source))
+				return ValidationStatus.Ok;
+
 			var linkLower = source.ToLower();
 
-			if (string.IsNullOrWhiteSpace(linkLower)
-			    || linkLower.StartsWith("http://vk.com/")
+			if (linkLower.StartsWith("http://vk.com/")
 			    || linkLower.StartsWith("https://vk.com/")
 			    || linkLower.StartsWith("vk.com/")
 			    || linkLower.Split('/').Length == 2)
